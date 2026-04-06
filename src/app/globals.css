@@ -2,7 +2,22 @@
 
 :root {
   --background: #fbf8f2;
+  --surface: #f4efe6;
+  --card: #fffdf9;
   --text: #2f3426;
+  --muted: #625d4f;
+  --accent: #556b4f;
+  --accent-strong: #3f523a;
+  --line: #ddd3bf;
+  --shadow-soft: 0 22px 54px rgba(47, 52, 38, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -10,5 +25,36 @@ body {
   min-height: 100vh;
   background: var(--background);
   color: var(--text);
-  font-family: Arial, sans-serif;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+}
+
+::selection {
+  background: rgba(85, 107, 79, 0.2);
+}
+
+.page-shell {
+  margin: 0 auto;
+  max-width: 72rem;
+  padding: 1.5rem 1rem 4rem;
+}
+
+@media (min-width: 640px) {
+  .page-shell {
+    padding-inline: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .page-shell {
+    padding-inline: 2rem;
+  }
 }
