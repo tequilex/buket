@@ -1,9 +1,20 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { bouquets, categories } from '@/lib/content/catalog';
+import { buildMetadata } from '@/lib/seo/metadata';
 
 const featuredBouquets = bouquets.filter((bouquet) => bouquet.featured).slice(0, 4);
+
+export function generateMetadata(): Metadata {
+  return buildMetadata({
+    title: 'Каталог съедобных букетов',
+    description:
+      'Каталог мясных, рыбных, сладких и фруктовых съедобных букетов с доставкой по Краснодару и Яблоновскому.',
+    path: '/catalog',
+  });
+}
 
 export default function CatalogPage() {
   return (

@@ -4,9 +4,10 @@ import Script from 'next/script';
 import { MobileContactBar } from '@/components/layout/mobile-contact-bar';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
+import { getBaseUrl } from '@/lib/utils';
 import './globals.css';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+const siteUrl = getBaseUrl();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
+import { getBaseUrl } from '@/lib/utils';
 
-function getBaseUrl() {
-  return process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+function normalizeTitle(title: string) {
+  return title.replace(/(?:\s*\|\s*Buket Studio)+$/, '');
 }
 
 export function buildMetadata(input: {
@@ -10,7 +11,7 @@ export function buildMetadata(input: {
   path: string;
 }): Metadata {
   return {
-    title: input.title,
+    title: normalizeTitle(input.title),
     description: input.description,
     alternates: {
       canonical: `${getBaseUrl()}${input.path}`,

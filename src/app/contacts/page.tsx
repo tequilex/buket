@@ -1,5 +1,16 @@
+import type { Metadata } from 'next';
 import { ContactButtons } from '@/components/cta/contact-buttons';
 import { SectionHeading } from '@/components/shared/section-heading';
+import { buildMetadata } from '@/lib/seo/metadata';
+
+export function generateMetadata(): Metadata {
+  return buildMetadata({
+    title: 'Контакты и заказ съедобных букетов',
+    description:
+      'Контакты для заказа съедобных букетов в Краснодаре и Яблоновском: WhatsApp, Telegram и Avito.',
+    path: '/contacts',
+  });
+}
 
 export default function ContactsPage() {
   return (

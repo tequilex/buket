@@ -1,7 +1,18 @@
+import type { Metadata } from 'next';
 import { ContactButtons } from '@/components/cta/contact-buttons';
 import { FaqList } from '@/components/shared/faq-list';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { faqs, locations } from '@/lib/content/catalog';
+import { buildMetadata } from '@/lib/seo/metadata';
+
+export function generateMetadata(): Metadata {
+  return buildMetadata({
+    title: 'Доставка съедобных букетов',
+    description:
+      'Условия доставки съедобных букетов по Краснодару и Яблоновскому, заказ через WhatsApp, Telegram и Avito.',
+    path: '/delivery',
+  });
+}
 
 export default function DeliveryPage() {
   return (

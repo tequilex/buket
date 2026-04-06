@@ -1,8 +1,10 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { categories, getBouquetsByCategory } from '@/lib/content/catalog';
+import { buildMetadata } from '@/lib/seo/metadata';
 
 interface CategoryPageProps {
   params: Promise<{ category: string }>;
@@ -22,6 +24,27 @@ const contextualLocationLinks = [
 
 export async function generateStaticParams() {
   return categories.map((category) => ({ category: category.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: CategoryPageProps): Promise<Metadata> {
+  const { category } = await params;
+  const categoryEntry = categories.find((entry) => entry.slug === category);
+
+  if (!categoryEntry) {
+    return buildMetadata({
+      title: 'Категория не найдена',
+      description: 'Запрошенная категория съедобных букетов не найдена.',
+      path: `/catalog/${category}`,
+    });
+  }
+
+  return buildMetadata({
+    title: `${categoryEntry.title} в Краснодаре и Яблоновском`,
+    description: `${categoryEntry.heroDescription} Доставка по Краснодару и Яблоновскому.`,
+    path: `/catalog/${categoryEntry.slug}`,
+  });
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {

@@ -5,10 +5,7 @@ import {
   occasions,
 } from '@/lib/content/catalog';
 import { getAllBlogPosts } from '@/lib/content/blog';
-
-function getBaseUrl() {
-  return process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
-}
+import { getBaseUrl } from '@/lib/utils';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getBaseUrl();

@@ -12,7 +12,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 3400,
     images: [
       {
-        src: '/images/bouquets/muzhskoy-hit-1.jpg',
+        src: '/images/bouquets/placeholder-myasnye.svg',
         alt: 'Мясной съедобный букет Мужской хит',
       },
     ],
@@ -37,7 +37,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 4200,
     images: [
       {
-        src: '/images/bouquets/kolbasnyy-premium-1.jpg',
+        src: '/images/bouquets/placeholder-myasnye.svg',
         alt: 'Подарочный мясной букет Колбасный премиум',
       },
     ],
@@ -61,7 +61,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 3100,
     images: [
       {
-        src: '/images/bouquets/sytnyy-podarok-1.jpg',
+        src: '/images/bouquets/placeholder-myasnye.svg',
         alt: 'Сытный мясной букет с сыром и снеками',
       },
     ],
@@ -85,7 +85,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 3600,
     images: [
       {
-        src: '/images/bouquets/rybnyy-ulov-1.jpg',
+        src: '/images/bouquets/placeholder-rybnye.svg',
         alt: 'Рыбный букет Рыбный улов',
       },
     ],
@@ -109,7 +109,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 3950,
     images: [
       {
-        src: '/images/bouquets/morskoy-vkus-1.jpg',
+        src: '/images/bouquets/placeholder-rybnye.svg',
         alt: 'Подарочный рыбный букет Морской вкус',
       },
     ],
@@ -133,7 +133,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 3300,
     images: [
       {
-        src: '/images/bouquets/pennyy-vecher-1.jpg',
+        src: '/images/bouquets/placeholder-rybnye.svg',
         alt: 'Рыбный букет с орехами Пенный вечер',
       },
     ],
@@ -157,7 +157,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 2400,
     images: [
       {
-        src: '/images/bouquets/sladkiy-kompliment-1.jpg',
+        src: '/images/bouquets/placeholder-sladkie.svg',
         alt: 'Сладкий букет Сладкий комплимент',
       },
     ],
@@ -181,7 +181,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 2900,
     images: [
       {
-        src: '/images/bouquets/shokoladnyy-miks-1.jpg',
+        src: '/images/bouquets/placeholder-sladkie.svg',
         alt: 'Праздничный сладкий букет Шоколадный микс',
       },
     ],
@@ -205,7 +205,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 2800,
     images: [
       {
-        src: '/images/bouquets/fruktovaya-svezhest-1.jpg',
+        src: '/images/bouquets/placeholder-fruktovye.svg',
         alt: 'Фруктовый букет Фруктовая свежесть',
       },
     ],
@@ -229,7 +229,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 3200,
     images: [
       {
-        src: '/images/bouquets/yagodnyy-akcent-1.jpg',
+        src: '/images/bouquets/placeholder-fruktovye.svg',
         alt: 'Фруктовый букет с ягодами Ягодный акцент',
       },
     ],

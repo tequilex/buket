@@ -1,6 +1,17 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { getAllBlogPosts } from '@/lib/content/blog';
+import { buildMetadata } from '@/lib/seo/metadata';
+
+export function generateMetadata(): Metadata {
+  return buildMetadata({
+    title: 'Блог о съедобных букетах',
+    description:
+      'Раздел под будущие SEO-статьи о съедобных букетах, подарках по поводам и локальной доставке.',
+    path: '/blog',
+  });
+}
 
 export default async function BlogPage() {
   const posts = await getAllBlogPosts();
