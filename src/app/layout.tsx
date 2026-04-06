@@ -6,9 +6,23 @@ import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
 import './globals.css';
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
+
 export const metadata: Metadata = {
-  title: 'Buket',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Buket Studio',
+    template: '%s | Buket Studio',
+  },
   description: 'Съедобные букеты в Краснодаре и Яблоновском',
+  openGraph: {
+    title: 'Buket Studio',
+    description: 'Съедобные букеты в Краснодаре и Яблоновском',
+    url: siteUrl,
+    siteName: 'Buket Studio',
+    locale: 'ru_RU',
+    type: 'website',
+  },
 };
 
 interface RootLayoutProps {
