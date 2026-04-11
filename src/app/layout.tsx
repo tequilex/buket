@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/next';
 import { MobileContactBar } from '@/components/layout/mobile-contact-bar';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
@@ -58,6 +59,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <SiteFooter />
           <MobileContactBar />
         </div>
+        <Analytics />
       </body>
     </html>
   );
