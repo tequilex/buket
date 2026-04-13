@@ -7,6 +7,8 @@ import {
 import { getAllBlogPosts } from '@/lib/content/blog';
 import { getBaseUrl } from '@/lib/utils';
 
+export const dynamic = 'force-static';
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = getBaseUrl();
   const blogPosts = await getAllBlogPosts();
