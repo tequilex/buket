@@ -1,4 +1,5 @@
 import {
+  buildTrackedPageUrl,
   buildMetricaInitScript,
   trackCtaClick,
   trackPageView,
@@ -13,6 +14,13 @@ test('buildMetricaInitScript enables SPA-safe initialization options', () => {
   expect(script).toContain('clickmap: true');
   expect(script).toContain('trackLinks: true');
   expect(script).toContain('accurateTrackBounce: true');
+});
+
+test('buildTrackedPageUrl appends search string when it exists', () => {
+  expect(buildTrackedPageUrl('/catalog/myasnye', '?utm_source=yandex')).toBe(
+    '/catalog/myasnye?utm_source=yandex',
+  );
+  expect(buildTrackedPageUrl('/catalog/myasnye', '')).toBe('/catalog/myasnye');
 });
 
 test('trackPageView sends a hit when Metrica is available', () => {

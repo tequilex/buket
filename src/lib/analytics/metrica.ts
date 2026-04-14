@@ -52,6 +52,10 @@ export function buildMetricaInitScript(counterId: number) {
   `;
 }
 
+export function buildTrackedPageUrl(pathname: string, search: string) {
+  return search ? `${pathname}${search}` : pathname;
+}
+
 export function trackPageView(url: string, options?: MetricaHitOptions) {
   if (typeof window === 'undefined' || typeof window.ym !== 'function') {
     return;
