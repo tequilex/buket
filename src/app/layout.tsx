@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Script from 'next/script';
+import { YandexMetricaPageView } from '@/components/analytics/yandex-metrica-page-view';
 import { MobileContactBar } from '@/components/layout/mobile-contact-bar';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
+import { buildMetricaInitScript } from '@/lib/analytics/metrica';
 import { getBaseUrl } from '@/lib/utils';
 import './globals.css';
 
@@ -31,26 +33,32 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
-  const metricaId = process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID;
+  const metricaId = Number(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID);
+  const hasMetrica = Number.isFinite(metricaId) && metricaId > 0;
 
   return (
     <html lang="ru">
       <body>
-        {metricaId ? (
+        {hasMetrica ? (
           <Script
             id="yandex-metrica-init"
-            strategy="afterInteractive"
-          >{`
-            window.ym = window.ym || function() {
-              (window.ym.a = window.ym.a || []).push(arguments);
-            };
-            window.ym.l = new Date().getTime();
-            window.ym(${metricaId}, 'init', {
-              clickmap: true,
-              trackLinks: true,
-              accurateTrackBounce: true
-            });
-          `}</Script>
+            strategy="beforeInteractive"
+          >
+            {buildMetricaInitScript(metricaId)}
+          </Script>
+        ) : null}
+        {hasMetrica ? <YandexMetricaPageView /> : null}
+        {hasMetrica ? (
+          <noscript>
+            <div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`https://mc.yandex.ru/watch/${metricaId}`}
+                style={{ position: 'absolute', left: '-9999px' }}
+                alt=""
+              />
+            </div>
+          </noscript>
         ) : null}
         <div className="min-h-screen bg-[var(--background)] text-[var(--text)]">
           <SiteHeader />
