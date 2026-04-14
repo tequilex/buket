@@ -1,0 +1,28 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="64"
+  height="64"
+  viewBox="0 0 64 64"
+  fill="none"
+>
+  <rect width="64" height="64" rx="18" fill="#2F3426" />
+  <circle cx="18" cy="20" r="8" fill="#FFFDF9" />
+  <circle cx="32" cy="12" r="8" fill="#FFFDF9" />
+  <circle cx="46" cy="21" r="8" fill="#FFFDF9" />
+  <circle cx="26" cy="34" r="7" fill="#8F805F" />
+  <circle cx="40" cy="37" r="7" fill="#8F805F" />
+  <rect x="29" y="40" width="6" height="11" rx="3" fill="#FFFDF9" />
+  <path
+    d="M31.3071 54.6L20.6 49.1L32.0929 27.25L43.4 49.1L32.6929 54.6C32.2563 54.8245 31.7437 54.8245 31.3071 54.6Z"
+    fill="#DDD3BF"
+  />
+  <rect
+    x="26.8"
+    y="44.9"
+    width="10.4"
+    height="3.4"
+    rx="1.7"
+    transform="rotate(-15 26.8 44.9)"
+    fill="#FFFDF9"
+  />
+</svg>
