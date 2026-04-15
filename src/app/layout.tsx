@@ -18,6 +18,18 @@ export const metadata: Metadata = {
     template: '%s | Buket Studio',
   },
   description: 'Съедобные букеты в Краснодаре и Яблоновском',
+  icons: {
+    icon: [
+      {
+        url: '/favicon.ico',
+        type: 'image/x-icon',
+      },
+      {
+        url: '/icon.svg',
+        type: 'image/svg+xml',
+      },
+    ],
+  },
   openGraph: {
     title: 'Buket Studio',
     description: 'Съедобные букеты в Краснодаре и Яблоновском',
