@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { getBaseUrl } from '@/lib/utils';
 
 function normalizeTitle(title: string) {
-  return title.replace(/(?:\s*\|\s*Buket Studio)+$/, '');
+  return title.replace(/(?:\s*\|\s*Gastro Buket)+$/, '');
 }
 
 export function buildMetadata(input: {

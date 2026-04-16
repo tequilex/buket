@@ -42,7 +42,7 @@ export default function HomePage() {
             </p>
             <div className="space-y-2">
               <p className="text-sm uppercase tracking-[0.24em] text-white/80">
-                Buket Studio
+                Gastro Buket
               </p>
               <p className="text-2xl font-semibold leading-tight sm:text-3xl">
                 Современный локальный бренд подарков со вкусом

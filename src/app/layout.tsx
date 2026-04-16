@@ -14,8 +14,8 @@ const siteUrl = getBaseUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Buket Studio',
-    template: '%s | Buket Studio',
+    default: 'Gastro Buket',
+    template: '%s | Gastro Buket',
   },
   description: 'Съедобные букеты в Краснодаре и Яблоновском',
   icons: {
@@ -31,10 +31,10 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: 'Buket Studio',
+    title: 'Gastro Buket',
     description: 'Съедобные букеты в Краснодаре и Яблоновском',
     url: siteUrl,
-    siteName: 'Buket Studio',
+    siteName: 'Gastro Buket',
     locale: 'ru_RU',
     type: 'website',
   },

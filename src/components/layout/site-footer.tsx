@@ -6,7 +6,7 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.4fr_1fr_1fr] lg:px-8">
         <div className="space-y-3">
           <p className="text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
-            Buket Studio
+            Gastro Buket
           </p>
           <p className="max-w-md text-sm leading-6 text-[var(--muted)]">
             Съедобные букеты с доставкой по Краснодару и Яблоновскому. Быстрый

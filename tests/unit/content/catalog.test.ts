@@ -1,6 +1,7 @@
-import { bouquets, categories, locations, occasions } from '@/lib/content/catalog';
+import { bouquets, categories, locations, occasions, siteConfig } from '@/lib/content/catalog';
 
 test('launch content covers the required catalog surface', () => {
+  expect(siteConfig.siteName).toBe('Gastro Buket');
   expect(categories.map((item) => item.slug)).toEqual([
     'myasnye',
     'rybnye',

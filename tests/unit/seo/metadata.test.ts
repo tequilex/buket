@@ -12,7 +12,7 @@ test('buildMetadata returns canonical URL for route path', () => {
 
 test('buildMetadata strips the site name suffix before applying the layout template', () => {
   const metadata = buildMetadata({
-    title: 'Съедобные букеты в Краснодаре | Buket Studio',
+    title: 'Съедобные букеты в Краснодаре | Gastro Buket',
     description: 'Локальная выдача для Краснодара',
     path: '/locations/krasnodar',
   });

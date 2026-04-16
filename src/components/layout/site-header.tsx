@@ -14,7 +14,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
         <Link href="/" className="min-w-0">
           <span className="block text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
-            Buket Studio
+            Gastro Buket
           </span>
           <span className="block text-base font-semibold text-[var(--text)]">
             Съедобные букеты
