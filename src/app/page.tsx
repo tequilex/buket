@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
 import { ContactButtons } from '@/components/cta/contact-buttons';
+import { HeroFeaturedCarousel } from '@/components/home/hero-featured-carousel';
 import { FaqList } from '@/components/shared/faq-list';
 import { ReviewList } from '@/components/shared/review-list';
 import { SectionHeading } from '@/components/shared/section-heading';
@@ -17,7 +18,7 @@ const orderSteps = [
 export default function HomePage() {
   return (
     <div className="page-shell space-y-20 py-10 sm:py-14">
-      <section className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+      <section className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
         <div className="space-y-6">
           <p className="text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
             Краснодар • Яблоновский
@@ -35,35 +36,7 @@ export default function HomePage() {
           <ContactButtons source="hero" />
         </div>
 
-        <div className="rounded-[32px] border border-[var(--line)] bg-[linear-gradient(135deg,#556b4f_0%,#b59a66_100%)] p-6 text-white shadow-[var(--shadow-soft)]">
-          <div className="space-y-5">
-            <p className="inline-flex rounded-full bg-white/15 px-3 py-1 text-xs uppercase tracking-[0.24em]">
-              Доставка сегодня
-            </p>
-            <div className="space-y-2">
-              <p className="text-sm uppercase tracking-[0.24em] text-white/80">
-                Gastro Buket
-              </p>
-              <p className="text-2xl font-semibold leading-tight sm:text-3xl">
-                Современный локальный бренд подарков со вкусом
-              </p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-[24px] bg-white/12 p-4">
-                <p className="text-xs uppercase tracking-[0.24em] text-white/70">
-                  От
-                </p>
-                <p className="mt-2 text-2xl font-semibold">2400 ₽</p>
-              </div>
-              <div className="rounded-[24px] bg-white/12 p-4">
-                <p className="text-xs uppercase tracking-[0.24em] text-white/70">
-                  Категории
-                </p>
-                <p className="mt-2 text-2xl font-semibold">{categories.length}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <HeroFeaturedCarousel bouquets={featuredBouquets} />
       </section>
 
       <section className="space-y-8">

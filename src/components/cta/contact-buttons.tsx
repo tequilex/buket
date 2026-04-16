@@ -9,14 +9,89 @@ interface ContactButtonsProps {
   className?: string;
 }
 
-function getChannelClassName(channelId: string, compact: boolean) {
-  const sizeClass = compact ? 'px-3 py-2 text-sm' : 'px-4 py-3 text-sm';
+function ChannelIcon({ channelId, label }: { channelId: string; label: string }) {
+  const sharedProps = {
+    'aria-label': `Иконка ${label}`,
+    className: 'h-4 w-4 shrink-0',
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    xmlns: 'http://www.w3.org/2000/svg',
+  };
 
   if (channelId === 'whatsapp') {
-    return `${sizeClass} rounded-full bg-[var(--accent)] text-white transition hover:bg-[var(--accent-strong)]`;
+    return (
+      <svg {...sharedProps}>
+        <path
+          d="M12 21a8.94 8.94 0 0 1-4.58-1.25L3 21l1.34-4.3A9 9 0 1 1 12 21Z"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M9.2 8.8c.18-.4.36-.41.53-.42h.44c.15 0 .4.06.6.53.2.47.68 1.63.74 1.75.06.12.1.27.02.43-.08.16-.12.26-.24.4-.12.14-.25.31-.36.42-.12.12-.25.25-.1.49.14.24.63 1.03 1.35 1.67.93.82 1.72 1.08 1.97 1.2.24.12.39.1.53-.06.14-.16.6-.7.76-.94.16-.24.32-.2.54-.12.22.08 1.4.66 1.64.78.24.12.4.18.46.28.06.1.06.6-.14 1.18-.2.58-1.14 1.11-1.57 1.17-.43.06-.97.09-1.57-.1-.36-.12-.81-.27-1.4-.52-2.46-1.06-4.06-3.6-4.18-3.77-.12-.16-1-1.34-1-2.56 0-1.22.64-1.82.87-2.08Z"
+          fill="currentColor"
+        />
+      </svg>
+    );
   }
 
-  return `${sizeClass} rounded-full border border-[var(--line)] bg-white text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent-strong)]`;
+  if (channelId === 'telegram') {
+    return (
+      <svg {...sharedProps}>
+        <path
+          d="M21 4 3.8 10.63c-.72.29-.7 1.33.03 1.58l4.35 1.47 1.63 5.04c.22.7 1.12.85 1.56.27l2.5-3.3 4.9 3.6c.6.44 1.45.11 1.6-.63L22.5 5.2C22.66 4.47 21.73 3.72 21 4Z"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="m8.18 13.68 9.9-7.03-7.15 8.5"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...sharedProps}>
+      <rect
+        x="4"
+        y="4"
+        width="16"
+        height="16"
+        rx="4.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M8.5 9.25h7M8.5 12h7M8.5 14.75h4.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function getChannelClassName(channelId: string, compact: boolean) {
+  const sizeClass = compact
+    ? 'min-h-11 px-3.5 py-2.5 text-sm'
+    : 'min-h-12 px-4.5 py-3 text-sm';
+
+  if (channelId === 'whatsapp') {
+    return `${sizeClass} inline-flex items-center gap-2 rounded-full bg-[#2f8f57] font-medium text-white shadow-[0_10px_24px_rgba(47,143,87,0.22)] transition hover:bg-[#25754a]`;
+  }
+
+  if (channelId === 'telegram') {
+    return `${sizeClass} inline-flex items-center gap-2 rounded-full border border-[#b9d8e8] bg-[#eef7fb] font-medium text-[#185b7d] transition hover:border-[#8cbfd8] hover:bg-[#e4f2f9]`;
+  }
+
+  return `${sizeClass} inline-flex items-center gap-2 rounded-full border border-[#d9d5ef] bg-[#f5f2ff] font-medium text-[#5b4a96] transition hover:border-[#c3bbe8] hover:bg-[#eee9ff]`;
 }
 
 export function ContactButtons({
@@ -43,6 +118,7 @@ export function ContactButtons({
           className={getChannelClassName(channel.id, compact)}
           onClick={() => trackCtaClick(channel.id, source)}
         >
+          <ChannelIcon channelId={channel.id} label={channel.label} />
           {channel.label}
         </a>
       ))}
