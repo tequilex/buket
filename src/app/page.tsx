@@ -24,12 +24,12 @@ export default function HomePage() {
           </p>
           <div className="space-y-4">
             <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-[var(--text)] sm:text-5xl lg:text-6xl">
-              Съедобные букеты с доставкой без лишних шагов
+              Съедобные букеты с доставкой в Краснодаре и Яблоновском
             </h1>
             <p className="max-w-2xl text-base leading-7 text-[var(--muted)] sm:text-lg">
               Мясные, рыбные, сладкие и фруктовые букеты с аккуратной
-              подарочной подачей. Быстрый заказ через WhatsApp, Telegram или
-              Avito.
+              подарочной подачей. Удобно заказать через WhatsApp, Telegram или
+              Avito и быстро согласовать детали доставки.
             </p>
           </div>
           <ContactButtons source="hero" />
@@ -70,7 +70,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="Каталог"
           title="Подберите букет по составу"
-          description="Основной каталог строим по составу, чтобы пользователю было проще быстро выбрать подходящий вариант."
+          description="Мясные, рыбные, сладкие и фруктовые букеты собраны по категориям, чтобы выбрать подходящий подарок было проще."
         />
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {categories.map((category) => (
@@ -96,8 +96,8 @@ export default function HomePage() {
       <section className="space-y-8">
         <SectionHeading
           eyebrow="Популярное"
-          title="Хиты первой выдачи"
-          description="Подборка букетов, которые хорошо работают как первый выбор на мобильном."
+          title="Популярные букеты"
+          description="Подборка вариантов, с которых удобно начать выбор, если вы заказываете съедобный букет впервые."
         />
         <div className="grid gap-6 xl:grid-cols-2">
           {featuredBouquets.map((bouquet) => (
@@ -110,8 +110,8 @@ export default function HomePage() {
         <div className="space-y-4">
           <SectionHeading
             eyebrow="Как заказать"
-            title="Простой сценарий без корзины"
-            description="Сайт не заставляет проходить checkout: ты сразу пишешь в удобный канал и уточняешь детали заказа."
+            title="Как проходит заказ"
+            description="Вы выбираете букет на сайте, а детали заказа и доставки удобно согласовать в мессенджере."
           />
         </div>
         <div className="grid gap-4">
@@ -133,7 +133,7 @@ export default function HomePage() {
         <SectionHeading
           eyebrow="FAQ"
           title="Частые вопросы"
-          description="Блок для быстрых ответов по доставке, составу и заказу через мессенджеры."
+          description="Коротко отвечаем на частые вопросы по составу, доставке и оформлению заказа."
         />
         <FaqList items={faqs} />
       </section>
@@ -141,8 +141,8 @@ export default function HomePage() {
       <section className="space-y-8">
         <SectionHeading
           eyebrow="Отзывы"
-          title="Отзывы добавим без выдумки"
-          description="На запуске здесь останутся только реальные отзывы клиентов, без искусственных заготовок."
+          title="Отзывы клиентов"
+          description="Здесь будут только реальные отзывы и фото после вручения, когда соберем первые материалы от покупателей."
         />
         <ReviewList items={reviews} />
       </section>

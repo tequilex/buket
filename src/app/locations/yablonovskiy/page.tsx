@@ -51,13 +51,11 @@ export default function YablonovskiyLocationPage() {
 
       <section className="rounded-[28px] border border-[var(--line)] bg-[var(--card)] p-6">
         <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
-          Для локального SEO
+          Что удобно выбрать
         </p>
         <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--text)]">
-          Здесь делаем отдельный акцент на Яблоновский как самостоятельную зону
-          доставки, а не просто приписку к Краснодару. Это помогает не терять
-          локальную релевантность в поиске и делает страницу полезной для
-          жителей поселка.
+          Для Яблоновского особенно удобно выбирать универсальные подарочные
+          варианты, которые легко согласовать по составу и времени доставки.
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link

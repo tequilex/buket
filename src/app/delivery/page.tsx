@@ -9,7 +9,7 @@ export function generateMetadata(): Metadata {
   return buildMetadata({
     title: 'Доставка съедобных букетов',
     description:
-      'Условия доставки съедобных букетов по Краснодару и Яблоновскому, заказ через WhatsApp, Telegram и Avito.',
+      'Условия доставки съедобных букетов по Краснодару и Яблоновскому: как оформить заказ и согласовать удобное время вручения.',
     path: '/delivery',
   });
 }
@@ -20,7 +20,7 @@ export default function DeliveryPage() {
       <SectionHeading
         eyebrow="Доставка"
         title="Как устроена доставка и заказ"
-        description="Объясняем процесс коротко и по делу: где доставляем, как быстро можно согласовать заказ и что можно поменять в составе."
+        description="Коротко рассказываем, как оформить заказ, согласовать состав и выбрать удобное время доставки."
       />
 
       <section className="grid gap-4 lg:grid-cols-2">
@@ -44,9 +44,9 @@ export default function DeliveryPage() {
           Как проходит заказ
         </p>
         <ol className="mt-4 grid gap-4 text-base leading-7 text-[var(--text)] lg:grid-cols-3">
-          <li className="rounded-[24px] bg-white p-5">1. Выбираете букет или отправляете референс.</li>
-          <li className="rounded-[24px] bg-white p-5">2. Пишете в удобный канал и уточняете детали.</li>
-          <li className="rounded-[24px] bg-white p-5">3. Согласуем состав, время и адрес доставки.</li>
+          <li className="rounded-[24px] bg-white p-5">1. Выбираете букет на сайте или присылаете пример того, что нравится.</li>
+          <li className="rounded-[24px] bg-white p-5">2. Пишете в WhatsApp, Telegram или Avito и уточняете детали заказа.</li>
+          <li className="rounded-[24px] bg-white p-5">3. Согласуем состав, стоимость, время и адрес доставки.</li>
         </ol>
         <div className="mt-6">
           <ContactButtons source="delivery_page" />

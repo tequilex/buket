@@ -10,7 +10,7 @@ export function SiteFooter() {
           </p>
           <p className="max-w-md text-sm leading-6 text-[var(--muted)]">
             Съедобные букеты с доставкой по Краснодару и Яблоновскому. Быстрый
-            заказ без корзины через WhatsApp, Telegram и Avito.
+            заказ через WhatsApp, Telegram и Avito.
           </p>
         </div>
 

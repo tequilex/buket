@@ -8,7 +8,7 @@ export function generateMetadata(): Metadata {
   return buildMetadata({
     title: 'Блог о съедобных букетах',
     description:
-      'Раздел под будущие SEO-статьи о съедобных букетах, подарках по поводам и локальной доставке.',
+      'Материалы о съедобных букетах, вариантах подарков и полезных идеях для выбора.',
     path: '/blog',
   });
 }
@@ -20,15 +20,14 @@ export default async function BlogPage() {
     <div className="page-shell space-y-12 py-10 sm:py-14">
       <SectionHeading
         eyebrow="Блог"
-        title="SEO-статьи будут добавлены позже"
-        description="Структура блога уже есть, но первую версию сайта запускаем без искусственного наполнения."
+        title="Полезные материалы о букетах и подарках"
+        description="Раздел уже готов, а статьи будем добавлять по мере появления действительно полезного контента."
       />
 
       {posts.length === 0 ? (
         <div className="rounded-[28px] border border-dashed border-[var(--line)] bg-[var(--card)] p-8 text-base leading-7 text-[var(--muted)]">
-          Пока статей нет. Когда появится реальный контент под SEO, здесь
-          появятся статьи про выбор букетов, подарки по поводам и локальные
-          подборки.
+          Пока статей нет. Позже здесь появятся материалы о выборе съедобных
+          букетов, идеях подарков и сезонных подборках.
         </div>
       ) : (
         <div className="grid gap-4">

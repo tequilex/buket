@@ -22,7 +22,7 @@ export default function CatalogPage() {
       <SectionHeading
         eyebrow="Каталог"
         title="Съедобные букеты по составу"
-        description="Основной вход в каталог: мясные, рыбные, сладкие и фруктовые подборки с отдельными страницами под SEO."
+        description="Основной каталог по составу: мясные, рыбные, сладкие и фруктовые букеты для разных поводов и настроения подарка."
       />
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -49,7 +49,7 @@ export default function CatalogPage() {
         <SectionHeading
           eyebrow="Хиты"
           title="С чего начать выбор"
-          description="Выделяем несколько букетов как быстрый вход для пользователя, который пришел с рекламы или локального поиска."
+          description="Несколько букетов, которые помогают быстро понять формат, подачу и примерный бюджет."
         />
         <div className="grid gap-6 xl:grid-cols-2">
           {featuredBouquets.map((bouquet) => (

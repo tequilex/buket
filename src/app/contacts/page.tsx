@@ -7,7 +7,7 @@ export function generateMetadata(): Metadata {
   return buildMetadata({
     title: 'Контакты и заказ съедобных букетов',
     description:
-      'Контакты для заказа съедобных букетов в Краснодаре и Яблоновском: WhatsApp, Telegram и Avito.',
+      'Контакты для заказа съедобных букетов в Краснодаре и Яблоновском: WhatsApp, Telegram, Avito и быстрый ответ по доставке.',
     path: '/contacts',
   });
 }
@@ -17,8 +17,8 @@ export default function ContactsPage() {
     <div className="page-shell space-y-12 py-10 sm:py-14">
       <SectionHeading
         eyebrow="Контакты"
-        title="Связь без публичного адреса"
-        description="На первом этапе работаем как доставка + мессенджеры. Удобный канал связи важнее длинной формы и фиктивного офлайн-адреса."
+        title="Как быстро связаться и оформить заказ"
+        description="Работаем через WhatsApp, Telegram и Avito, чтобы быстро согласовать состав, бюджет, дату и адрес доставки."
       />
 
       <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
@@ -37,9 +37,9 @@ export default function ContactsPage() {
             География
           </p>
           <p className="mt-3 text-base leading-7 text-[var(--text)]">
-            Работаем по Краснодару и Яблоновскому. Домашний адрес на сайте не
-            публикуем: формат сайта строится вокруг доставки и связи в
-            мессенджерах.
+            Работаем по Краснодару и Яблоновскому. Сайт построен как удобная
+            витрина и быстрый канал для заказа с доставкой, поэтому связаться
+            проще всего напрямую в мессенджере.
           </p>
         </div>
       </section>

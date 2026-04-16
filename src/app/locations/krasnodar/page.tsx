@@ -50,12 +50,12 @@ export default function KrasnodarLocationPage() {
 
       <section className="rounded-[28px] border border-[var(--line)] bg-[var(--card)] p-6">
         <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
-          Для локального SEO
+          Что удобно выбрать
         </p>
         <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--text)]">
-          Эта страница нужна для локального спроса по Краснодару: тут отдельно
-          подчеркиваем город доставки, удобные окна вручения и подборки букетов,
-          которые чаще заказывают именно с городской доставкой.
+          По Краснодару чаще выбирают мясные, рыбные и сладкие букеты. Ниже
+          можно быстро перейти в подходящую категорию и посмотреть варианты с
+          доставкой по городу.
         </p>
         <div className="mt-5 flex flex-wrap gap-3">
           <Link
