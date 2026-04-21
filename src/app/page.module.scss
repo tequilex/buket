@@ -58,6 +58,11 @@
   font-weight: 700;
   letter-spacing: -0.02em;
   text-wrap: pretty;
+
+  em {
+    color: var(--accent);
+    font-style: italic;
+  }
 }
 
 .heroDescription {

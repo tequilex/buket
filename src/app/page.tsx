@@ -30,7 +30,7 @@ export default function HomePage() {
           <div className={styles.heroTag}>пгт. Яблоновский · Краснодар</div>
           <div className={styles.heroBody}>
             <h1 className={styles.heroTitle}>
-              Съедобные букеты с доставкой в Краснодаре и Яблоновском
+              Съедобные букеты с доставкой в <em>Краснодаре и Яблоновском</em>
             </h1>
             <p className={styles.heroDescription}>
               Мясные, рыбные, сладкие и фруктовые букеты с аккуратной
