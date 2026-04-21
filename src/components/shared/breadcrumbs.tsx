@@ -16,7 +16,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
       <ol className={styles.list}>
         {items.map((item, index) => (
           <li key={`${item.label}-${index}`} className={styles.item}>
-            {index > 0 ? <span>/</span> : null}
+            {index > 0 ? <span className={styles.separator}>/</span> : null}
             {item.href ? (
               <Link href={item.href} className={styles.link}>
                 {item.label}

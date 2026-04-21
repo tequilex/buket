@@ -1,3 +1,5 @@
+import { render, screen } from '@testing-library/react';
+import CatalogPage from '@/app/catalog/page';
 import { generateStaticParams as generateCategoryParams } from '@/app/catalog/[category]/page';
 import { generateStaticParams as generateBouquetParams } from '@/app/bouquets/[slug]/page';
 import { generateStaticParams as generateOccasionParams } from '@/app/occasions/[slug]/page';
@@ -23,4 +25,15 @@ test('occasion route generates one param per occasion page', async () => {
   await expect(generateOccasionParams()).resolves.toEqual(
     occasions.map((item) => ({ slug: item.slug })),
   );
+});
+
+test('catalog page renders a storefront heading and popular bouquet shelf', () => {
+  render(CatalogPage());
+
+  expect(
+    screen.getByRole('heading', { name: /каталог съедобных букетов/i }),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole('heading', { name: /популярные букеты/i }),
+  ).toBeInTheDocument();
 });

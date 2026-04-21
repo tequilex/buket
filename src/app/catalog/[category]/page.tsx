@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
+import { Breadcrumbs } from '@/components/shared/breadcrumbs';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { categories, getBouquetsByCategory } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -60,15 +61,47 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <div className={`page-shell ${styles.page}`}>
-      <SectionHeading
-        eyebrow="Категория"
-        title={categoryEntry.title}
-        description={categoryEntry.heroDescription}
+      <Breadcrumbs
+        items={[
+          { label: 'Главная', href: '/' },
+          { label: 'Каталог', href: '/catalog' },
+          { label: categoryEntry.title },
+        ]}
       />
+
+      <section className={styles.introPanel}>
+        <div className={styles.introCopy}>
+          <SectionHeading
+            eyebrow="Категория"
+            title={categoryEntry.title}
+            description={categoryEntry.heroDescription}
+          />
+          <p className={styles.introText}>
+            В этой подборке собраны букеты с похожим настроением и составом,
+            чтобы выбрать подходящий вариант было проще.
+          </p>
+        </div>
+
+        <div className={styles.categoryNav}>
+          <p className={styles.panelTitle}>Другие разделы</p>
+          <div className={styles.pillLinks}>
+            {categories.map((item) => (
+              <Link
+                key={item.slug}
+                href={`/catalog/${item.slug}`}
+                className={styles.softPillLink}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <div className={`${styles.surfacePanel} ${styles.infoGrid}`}>
         <div>
-          <p className={styles.panelTitle}>Поводы</p>
+          <p className={styles.panelEyebrow}>Подходит для</p>
+          <p className={styles.panelTitle}>Поводы и сценарии</p>
           <div className={styles.pillLinks}>
             {contextualOccasionLinks.map((item) => (
               <Link
@@ -82,6 +115,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           </div>
         </div>
         <div>
+          <p className={styles.panelEyebrow}>Доставка</p>
           <p className={styles.panelTitle}>Где доставляем</p>
           <div className={styles.pillLinks}>
             {contextualLocationLinks.map((item) => (

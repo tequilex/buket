@@ -1,13 +1,13 @@
 .page {
   display: grid;
-  gap: 3rem;
+  gap: 2.25rem;
   padding-top: 2.5rem;
   padding-bottom: 3.5rem;
 }
 
 .section {
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .split {
@@ -22,16 +22,42 @@
 
 .cardPanel {
   border: 1px solid var(--line);
-  border-radius: 1.75rem;
-  background: var(--card);
-  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.86);
+  padding: 1.25rem;
 }
 
 .surfacePanel {
   border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: rgba(255, 250, 240, 0.62);
+  padding: 1.125rem;
+}
+
+.introPanel {
+  display: grid;
+  gap: 1.25rem;
+  border: 1px solid var(--line);
   border-radius: 1.75rem;
-  background: var(--surface);
-  padding: 1.5rem;
+  background: linear-gradient(180deg, rgba(255, 250, 240, 0.94), rgba(247, 242, 232, 0.72));
+  padding: 1.25rem;
+}
+
+.introCopy {
+  display: grid;
+  gap: 0.875rem;
+}
+
+.introText {
+  max-width: 43rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.6rem;
+}
+
+.categoryNav {
+  display: grid;
+  gap: 0.875rem;
 }
 
 .emptyState {
@@ -46,102 +72,123 @@
 
 .panelEyebrow {
   color: var(--muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.24em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
 .panelTitle {
   margin: 0;
   color: var(--text);
-  font-size: 1.5rem;
+  font-size: 1.125rem;
   font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .panelText {
-  margin-top: 0.75rem;
-  color: var(--text);
-  font-size: 1rem;
-  line-height: 1.75rem;
+  margin-top: 0.625rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.6rem;
 }
 
 .mutedText {
-  margin-top: 0.75rem;
+  margin-top: 0.625rem;
   color: var(--muted);
-  font-size: 0.875rem;
-  line-height: 1.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.45rem;
 }
 
 .pillLinks {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
+  gap: 0.625rem;
+  margin-top: 1rem;
 }
 
 .pillLink {
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: #fff;
-  padding: 0.625rem 1rem;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 0.625rem 0.875rem;
   color: var(--muted);
-  font-size: 0.875rem;
-  transition: color 160ms ease;
+  font-size: 0.8125rem;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease;
 
   &:hover {
     color: var(--text);
+    border-color: rgba(47, 106, 73, 0.18);
+    background: rgba(255, 250, 240, 0.94);
   }
 }
 
 .softPillLink {
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: var(--surface);
-  padding: 0.625rem 1rem;
+  background: rgba(255, 250, 240, 0.86);
+  padding: 0.625rem 0.875rem;
   color: var(--muted);
-  font-size: 0.875rem;
-  transition: color 160ms ease;
+  font-size: 0.8125rem;
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background-color 160ms ease;
 
   &:hover {
     color: var(--text);
+    border-color: rgba(47, 106, 73, 0.18);
+    background: rgba(255, 255, 255, 0.9);
   }
 }
 
 .categoryGrid {
   display: grid;
-  gap: 1rem;
+  gap: 0.875rem;
 }
 
 .categoryCard {
   border: 1px solid var(--line);
-  border-radius: 1.75rem;
-  background: var(--card);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-soft);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 1.125rem;
+  transition:
+    transform 180ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+
+  &:hover {
+    transform: translateY(-0.15rem);
+    border-color: rgba(47, 106, 73, 0.18);
+    box-shadow: 0 10px 24px rgba(35, 31, 23, 0.05);
+  }
 }
 
 .categoryTitle {
-  margin-top: 0.75rem;
+  margin-top: 0.625rem;
   color: var(--text);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .categoryDescription {
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
   color: var(--muted);
-  font-size: 0.875rem;
-  line-height: 1.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.45rem;
 }
 
 .bouquetGridDense {
   display: grid;
-  gap: 1rem;
+  gap: 0.875rem;
 }
 
 .bouquetGridStandard {
   display: grid;
-  gap: 1rem;
+  gap: 0.875rem;
 }
 
 .stepsGrid {
@@ -214,6 +261,10 @@
   .categoryGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .introPanel {
+    padding: 1.375rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -231,6 +282,11 @@
 
   .articleList {
     gap: 1rem;
+  }
+
+  .introPanel {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
   }
 }
 
