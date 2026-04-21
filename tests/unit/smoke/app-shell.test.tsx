@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import HomePage from '@/app/page';
 
@@ -9,11 +8,8 @@ test('renders the launch heading', () => {
   ).toBeInTheDocument();
 });
 
-test('renders the popular bouquets carousel in the homepage hero', () => {
+test('renders the catalog section in the homepage', () => {
   render(<HomePage />);
 
-  expect(screen.getAllByText('Популярные букеты').length).toBeGreaterThan(0);
-  expect(
-    screen.getByRole('button', { name: /показать следующие букеты/i }),
-  ).toBeInTheDocument();
+  expect(screen.getByText('Подберите букет по составу')).toBeInTheDocument();
 });
