@@ -6,9 +6,7 @@ export function SiteFooter() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.brandBlock}>
-          <p className={styles.eyebrow}>
-            Gastro Buket
-          </p>
+          <p className={styles.eyebrow}>Gastro Buket</p>
           <p className={styles.description}>
             Съедобные букеты с доставкой по Краснодару и Яблоновскому. Быстрый
             заказ через WhatsApp, Telegram и Avito.

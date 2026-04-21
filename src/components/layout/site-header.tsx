@@ -14,15 +14,11 @@ export function SiteHeader() {
     <header className={styles.header}>
       <div className={styles.inner}>
         <Link href="/" className={styles.brand}>
-          <span className={styles.eyebrow}>
-            Gastro Buket
-          </span>
-          <span className={styles.title}>
-            Съедобные букеты
-          </span>
+          <span className={styles.eyebrow}>Gastro Buket</span>
+          <span className={styles.title}>Съедобные букеты</span>
         </Link>
 
-        <nav className={styles.nav}>
+        <nav className={styles.nav} aria-label="Основная навигация">
           {navItems.map((item) => (
             <Link key={item.href} href={item.href} className={styles.navLink}>
               {item.label}

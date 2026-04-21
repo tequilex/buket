@@ -3,8 +3,10 @@ import styles from './mobile-contact-bar.module.scss';
 
 export function MobileContactBar() {
   return (
-    <div className={styles.bar}>
-      <ContactButtons source="mobile_bar" compact />
-    </div>
+    <nav className={styles.bar} aria-label="Быстрые контакты">
+      <div className={styles.inner}>
+        <ContactButtons source="mobile_bar" compact />
+      </div>
+    </nav>
   );
 }

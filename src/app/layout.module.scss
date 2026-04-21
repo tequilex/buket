@@ -1,10 +1,14 @@
 .appRoot {
-  min-height: 100vh;
-  background: var(--background);
+  display: flex;
+  min-height: 100dvh;
+  flex-direction: column;
+  background: var(--bg);
   color: var(--text);
 }
 
 .main {
+  flex: 1;
+  padding-top: var(--shell-header-offset);
   padding-bottom: 7rem;
 }
 

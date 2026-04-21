@@ -1,13 +1,18 @@
 :root {
-  --background: #fbf8f2;
-  --surface: #f4efe6;
-  --card: #fffdf9;
-  --text: #2f3426;
-  --muted: #625d4f;
-  --accent: #556b4f;
-  --accent-strong: #3f523a;
-  --line: #ddd3bf;
-  --shadow-soft: 0 22px 54px rgba(47, 52, 38, 0.08);
+  --bg: #fffdf8;
+  --bg-soft: #f7f2e8;
+  --surface: #fffaf0;
+  --surface-muted: #f1eadb;
+  --text: #231f17;
+  --muted: rgba(50, 42, 29, 0.72);
+  --line: rgba(121, 104, 73, 0.14);
+  --accent: #2f6a49;
+  --accent-soft: #efe3cd;
+  --shadow-soft: 0 18px 44px rgba(27, 20, 11, 0.08);
+  --background: var(--bg);
+  --card: var(--surface);
+  --accent-strong: var(--accent);
+  --shell-header-offset: 4.75rem;
 }
 
 * {
@@ -21,8 +26,9 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--background);
+  background: var(--bg);
   color: var(--text);
+  color-scheme: light;
   font-family: "Avenir Next", "Segoe UI", sans-serif;
 }
 
@@ -43,13 +49,13 @@ img {
 }
 
 ::selection {
-  background: rgba(85, 107, 79, 0.2);
+  background: rgba(47, 106, 73, 0.18);
 }
 
 .page-shell {
   margin: 0 auto;
   max-width: 72rem;
-  padding: 1.5rem 1rem 4rem;
+  padding: 1rem 1rem 4rem;
 }
 
 @media (min-width: 640px) {

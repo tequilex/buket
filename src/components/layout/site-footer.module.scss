@@ -1,6 +1,6 @@
 .footer {
   border-top: 1px solid var(--line);
-  background: var(--surface);
+  background: var(--bg-soft);
 }
 
 .inner {
@@ -8,7 +8,7 @@
   gap: 2rem;
   margin: 0 auto;
   max-width: 72rem;
-  padding: 2.5rem 1rem;
+  padding: 2rem 1rem 2.5rem;
 }
 
 .brandBlock {
@@ -18,8 +18,8 @@
 
 .eyebrow {
   color: var(--muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.28em;
+  font-size: 0.7rem;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
 }
 
@@ -27,14 +27,16 @@
   max-width: 32rem;
   color: var(--muted);
   font-size: 0.875rem;
-  line-height: 1.5rem;
+  line-height: 1.65rem;
 }
 
 .title {
   margin: 0 0 0.75rem;
   color: var(--text);
-  font-size: 0.875rem;
+  font-size: 0.8rem;
   font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .list {
@@ -51,7 +53,7 @@
   transition: color 160ms ease;
 
   &:hover {
-    color: var(--text);
+    color: var(--accent);
   }
 }
 
