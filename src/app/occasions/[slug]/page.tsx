@@ -11,6 +11,7 @@ import {
   occasions,
 } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
+import styles from '@/app/internal-page.module.scss';
 
 interface OccasionPageProps {
   params: Promise<{ slug: string }>;
@@ -54,7 +55,7 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
     .filter((item) => Boolean(item));
 
   return (
-    <div className="page-shell space-y-12 py-10 sm:py-14">
+    <div className={`page-shell ${styles.page}`}>
       <Breadcrumbs
         items={[
           { label: 'Главная', href: '/' },
@@ -63,33 +64,33 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
         ]}
       />
 
-      <section className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+      <section className={styles.split}>
         <SectionHeading
           eyebrow="Повод"
           title={occasion.title}
           description={occasion.intro}
         />
 
-        <div className="rounded-[28px] border border-[var(--line)] bg-[var(--surface)] p-6">
-          <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
+        <div className={styles.surfacePanel}>
+          <p className={styles.panelEyebrow}>
             Полезные переходы
           </p>
-          <div className="mt-4 flex flex-wrap gap-3">
+          <div className={styles.pillLinks}>
             <Link
               href="/catalog"
-              className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-sm text-[var(--muted)]"
+              className={styles.pillLink}
             >
               Весь каталог
             </Link>
             <Link
               href="/locations/krasnodar"
-              className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-sm text-[var(--muted)]"
+              className={styles.pillLink}
             >
               Краснодар
             </Link>
             <Link
               href="/locations/yablonovskiy"
-              className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-sm text-[var(--muted)]"
+              className={styles.pillLink}
             >
               Яблоновский
             </Link>
@@ -97,14 +98,14 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
         </div>
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-2">
+      <section className={styles.bouquetGridStandard}>
         {relatedBouquets.map((bouquet) =>
           bouquet ? <BouquetCard key={bouquet.slug} bouquet={bouquet} /> : null,
         )}
       </section>
 
       {occasion.faqItems ? (
-        <section className="space-y-8">
+        <section className={styles.section}>
           <SectionHeading
             eyebrow="FAQ"
             title="Что часто уточняют перед заказом"

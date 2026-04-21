@@ -4,6 +4,7 @@ import { FaqList } from '@/components/shared/faq-list';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { faqs, locations } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
+import styles from '@/app/internal-page.module.scss';
 
 export function generateMetadata(): Metadata {
   return buildMetadata({
@@ -16,44 +17,42 @@ export function generateMetadata(): Metadata {
 
 export default function DeliveryPage() {
   return (
-    <div className="page-shell space-y-12 py-10 sm:py-14">
+    <div className={`page-shell ${styles.page}`}>
       <SectionHeading
         eyebrow="Доставка"
         title="Как устроена доставка и заказ"
         description="Коротко рассказываем, как оформить заказ, согласовать состав и выбрать удобное время доставки."
       />
 
-      <section className="grid gap-4 lg:grid-cols-2">
+      <section className={styles.infoGrid}>
         {locations.map((location) => (
           <article
             key={location.slug}
-            className="rounded-[28px] border border-[var(--line)] bg-[var(--card)] p-6"
+            className={styles.cardPanel}
           >
-            <h2 className="text-2xl font-semibold text-[var(--text)]">
-              {location.title}
-            </h2>
-            <p className="mt-3 text-base leading-7 text-[var(--muted)]">
+            <h2 className={styles.panelTitle}>{location.title}</h2>
+            <p className={styles.mutedText}>
               {location.deliveryLead}
             </p>
           </article>
         ))}
       </section>
 
-      <section className="rounded-[28px] border border-[var(--line)] bg-[var(--surface)] p-6">
-        <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
+      <section className={styles.surfacePanel}>
+        <p className={styles.panelEyebrow}>
           Как проходит заказ
         </p>
-        <ol className="mt-4 grid gap-4 text-base leading-7 text-[var(--text)] lg:grid-cols-3">
-          <li className="rounded-[24px] bg-white p-5">1. Выбираете букет на сайте или присылаете пример того, что нравится.</li>
-          <li className="rounded-[24px] bg-white p-5">2. Пишете в WhatsApp, Telegram или Avito и уточняете детали заказа.</li>
-          <li className="rounded-[24px] bg-white p-5">3. Согласуем состав, стоимость, время и адрес доставки.</li>
+        <ol className={styles.stepsGrid}>
+          <li className={styles.stepCard}>1. Выбираете букет на сайте или присылаете пример того, что нравится.</li>
+          <li className={styles.stepCard}>2. Пишете в WhatsApp, Telegram или Avito и уточняете детали заказа.</li>
+          <li className={styles.stepCard}>3. Согласуем состав, стоимость, время и адрес доставки.</li>
         </ol>
-        <div className="mt-6">
+        <div className={styles.actionRow}>
           <ContactButtons source="delivery_page" />
         </div>
       </section>
 
-      <section className="space-y-8">
+      <section className={styles.section}>
         <SectionHeading
           eyebrow="FAQ"
           title="Что чаще всего спрашивают перед доставкой"

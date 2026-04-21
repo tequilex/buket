@@ -1,34 +1,35 @@
 import Link from 'next/link';
+import styles from './site-footer.module.scss';
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-[var(--line)] bg-[var(--surface)]">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[1.4fr_1fr_1fr] lg:px-8">
-        <div className="space-y-3">
-          <p className="text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
+    <footer className={styles.footer}>
+      <div className={styles.inner}>
+        <div className={styles.brandBlock}>
+          <p className={styles.eyebrow}>
             Gastro Buket
           </p>
-          <p className="max-w-md text-sm leading-6 text-[var(--muted)]">
+          <p className={styles.description}>
             Съедобные букеты с доставкой по Краснодару и Яблоновскому. Быстрый
             заказ через WhatsApp, Telegram и Avito.
           </p>
         </div>
 
         <div>
-          <p className="mb-3 text-sm font-semibold text-[var(--text)]">Разделы</p>
-          <ul className="space-y-2 text-sm text-[var(--muted)]">
+          <p className={styles.title}>Разделы</p>
+          <ul className={styles.list}>
             <li>
-              <Link href="/catalog" className="hover:text-[var(--text)]">
+              <Link href="/catalog" className={styles.link}>
                 Каталог
               </Link>
             </li>
             <li>
-              <Link href="/delivery" className="hover:text-[var(--text)]">
+              <Link href="/delivery" className={styles.link}>
                 Доставка
               </Link>
             </li>
             <li>
-              <Link href="/contacts" className="hover:text-[var(--text)]">
+              <Link href="/contacts" className={styles.link}>
                 Контакты
               </Link>
             </li>
@@ -36,17 +37,17 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <p className="mb-3 text-sm font-semibold text-[var(--text)]">География</p>
-          <ul className="space-y-2 text-sm text-[var(--muted)]">
+          <p className={styles.title}>География</p>
+          <ul className={styles.list}>
             <li>
-              <Link href="/locations/krasnodar" className="hover:text-[var(--text)]">
+              <Link href="/locations/krasnodar" className={styles.link}>
                 Краснодар
               </Link>
             </li>
             <li>
               <Link
                 href="/locations/yablonovskiy"
-                className="hover:text-[var(--text)]"
+                className={styles.link}
               >
                 Яблоновский
               </Link>

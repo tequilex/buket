@@ -1,0 +1,26 @@
+.list {
+  display: grid;
+  gap: 1rem;
+}
+
+.item {
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: var(--card);
+  padding: 1.25rem;
+}
+
+.question {
+  cursor: pointer;
+  list-style: none;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.answer {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}

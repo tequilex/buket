@@ -1,0 +1,47 @@
+.empty {
+  border: 1px dashed var(--line);
+  border-radius: 1.75rem;
+  background: var(--card);
+  padding: 1.5rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.list {
+  display: grid;
+  gap: 1rem;
+}
+
+.item {
+  border: 1px solid var(--line);
+  border-radius: 1.75rem;
+  background: var(--card);
+  padding: 1.5rem;
+}
+
+.text {
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.meta {
+  margin-top: 1rem;
+}
+
+.author {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.details {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+@media (min-width: 1024px) {
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

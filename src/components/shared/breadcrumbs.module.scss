@@ -1,0 +1,30 @@
+.nav {
+  display: block;
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.link {
+  transition: color 160ms ease;
+
+  &:hover {
+    color: var(--text);
+  }
+}
+
+.current {
+  color: var(--text);
+}

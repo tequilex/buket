@@ -6,6 +6,7 @@ import { FaqList } from '@/components/shared/faq-list';
 import { ReviewList } from '@/components/shared/review-list';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { bouquets, categories, faqs, reviews } from '@/lib/content/catalog';
+import styles from './page.module.scss';
 
 const featuredBouquets = bouquets.filter((bouquet) => bouquet.featured).slice(0, 4);
 
@@ -17,17 +18,17 @@ const orderSteps = [
 
 export default function HomePage() {
   return (
-    <div className="page-shell space-y-20 py-10 sm:py-14">
-      <section className="grid gap-8 lg:grid-cols-[1.08fr_0.92fr] lg:items-center">
-        <div className="space-y-6">
-          <p className="text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
+    <div className={`page-shell ${styles.page}`}>
+      <section className={styles.hero}>
+        <div className={styles.heroCopy}>
+          <p className={styles.heroEyebrow}>
             Краснодар • Яблоновский
           </p>
-          <div className="space-y-4">
-            <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-[var(--text)] sm:text-5xl lg:text-6xl">
+          <div className={styles.heroBody}>
+            <h1 className={styles.heroTitle}>
               Съедобные букеты с доставкой в Краснодаре и Яблоновском
             </h1>
-            <p className="max-w-2xl text-base leading-7 text-[var(--muted)] sm:text-lg">
+            <p className={styles.heroDescription}>
               Мясные, рыбные, сладкие и фруктовые букеты с аккуратной
               подарочной подачей. Удобно заказать через WhatsApp, Telegram или
               Avito и быстро согласовать детали доставки.
@@ -39,26 +40,26 @@ export default function HomePage() {
         <HeroFeaturedCarousel bouquets={featuredBouquets} />
       </section>
 
-      <section className="space-y-8">
+      <section className={styles.section}>
         <SectionHeading
           eyebrow="Каталог"
           title="Подберите букет по составу"
           description="Мясные, рыбные, сладкие и фруктовые букеты собраны по категориям, чтобы выбрать подходящий подарок было проще."
         />
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className={styles.categoryGrid}>
           {categories.map((category) => (
             <Link
               key={category.slug}
               href={`/catalog/${category.slug}`}
-              className="rounded-[28px] border border-[var(--line)] bg-[var(--card)] p-6 shadow-[var(--shadow-soft)] transition hover:-translate-y-1"
+              className={styles.categoryLink}
             >
-              <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
+              <p className={styles.categoryEyebrow}>
                 Категория
               </p>
-              <h2 className="mt-3 text-2xl font-semibold text-[var(--text)]">
+              <h2 className={styles.categoryTitle}>
                 {category.title}
               </h2>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+              <p className={styles.categoryDescription}>
                 {category.shortDescription}
               </p>
             </Link>
@@ -66,43 +67,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="space-y-8">
+      <section className={styles.section}>
         <SectionHeading
           eyebrow="Популярное"
           title="Популярные букеты"
           description="Подборка вариантов, с которых удобно начать выбор, если вы заказываете съедобный букет впервые."
         />
-        <div className="grid gap-6 xl:grid-cols-2">
+        <div className={styles.featuredGrid}>
           {featuredBouquets.map((bouquet) => (
             <BouquetCard key={bouquet.slug} bouquet={bouquet} />
           ))}
         </div>
       </section>
 
-      <section className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="space-y-4">
+      <section className={styles.orderSection}>
+        <div className={styles.orderIntro}>
           <SectionHeading
             eyebrow="Как заказать"
             title="Как проходит заказ"
             description="Вы выбираете букет на сайте, а детали заказа и доставки удобно согласовать в мессенджере."
           />
         </div>
-        <div className="grid gap-4">
+        <div className={styles.orderSteps}>
           {orderSteps.map((step, index) => (
             <div
               key={step}
-              className="rounded-[24px] border border-[var(--line)] bg-[var(--card)] p-5"
+              className={styles.orderCard}
             >
-              <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
+              <p className={styles.orderStepLabel}>
                 Шаг {index + 1}
               </p>
-              <p className="mt-2 text-base leading-7 text-[var(--text)]">{step}</p>
+              <p className={styles.orderStepText}>{step}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="space-y-8">
+      <section className={styles.section}>
         <SectionHeading
           eyebrow="FAQ"
           title="Частые вопросы"
@@ -111,7 +112,7 @@ export default function HomePage() {
         <FaqList items={faqs} />
       </section>
 
-      <section className="space-y-8">
+      <section className={styles.section}>
         <SectionHeading
           eyebrow="Отзывы"
           title="Отзывы клиентов"

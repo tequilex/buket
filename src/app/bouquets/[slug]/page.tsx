@@ -15,6 +15,7 @@ import {
 } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { buildBouquetProductJsonLd } from '@/lib/seo/structured-data';
+import styles from '@/app/bouquet-page.module.scss';
 
 interface BouquetPageProps {
   params: Promise<{ slug: string }>;
@@ -59,7 +60,7 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
     .slice(0, 2);
 
   return (
-    <div className="page-shell space-y-12 py-10 sm:py-14">
+    <div className={`page-shell ${styles.page}`}>
       <JsonLd
         id={`bouquet-product-${bouquet.slug}`}
         data={buildBouquetProductJsonLd(bouquet)}
@@ -74,23 +75,23 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
         ].filter((item): item is { label: string; href?: string } => Boolean(item))}
       />
 
-      <section className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="space-y-4">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[32px] border border-[var(--line)] bg-[var(--surface)]">
+      <section className={styles.hero}>
+        <div className={styles.mediaColumn}>
+          <div className={styles.imageWrap}>
             <Image
               src={bouquet.images[0].src}
               alt={bouquet.images[0].alt}
               fill
-              className="object-cover"
+              className={styles.image}
               priority
               sizes="(max-width: 1024px) 100vw, 52vw"
             />
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className={styles.tagGrid}>
             {bouquet.tags.map((tag) => (
               <div
                 key={tag}
-                className="rounded-[20px] border border-[var(--line)] bg-[var(--card)] px-4 py-3 text-sm text-[var(--muted)]"
+                className={styles.tagCard}
               >
                 {tag}
               </div>
@@ -98,87 +99,90 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
           </div>
         </div>
 
-        <div className="space-y-6">
+        <div className={styles.details}>
           <SectionHeading
             eyebrow="Карточка букета"
             title={bouquet.name}
             description={bouquet.fullDescription}
           />
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-[24px] border border-[var(--line)] bg-[var(--card)] p-5">
-              <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
+          <div className={styles.statsGrid}>
+            <div className={styles.statCard}>
+              <p className={styles.statLabel}>
                 Цена
               </p>
-              <p className="mt-2 text-3xl font-semibold text-[var(--text)]">
+              <p className={styles.priceValue}>
                 от {bouquet.priceFrom} ₽
               </p>
             </div>
-            <div className="rounded-[24px] border border-[var(--line)] bg-[var(--card)] p-5">
-              <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
+            <div className={styles.statCard}>
+              <p className={styles.statLabel}>
                 Размер
               </p>
-              <p className="mt-2 text-lg font-semibold text-[var(--text)]">
+              <p className={styles.sizeValue}>
                 {bouquet.weightOrSize}
               </p>
             </div>
           </div>
 
-          <div className="space-y-4 rounded-[28px] border border-[var(--line)] bg-[var(--card)] p-6">
+          <div className={styles.compositionPanel}>
             <div>
-              <h2 className="text-lg font-semibold text-[var(--text)]">Что внутри</h2>
-              <ul className="mt-3 grid gap-2 text-sm leading-6 text-[var(--muted)]">
+              <h2 className={styles.compositionTitle}>Что внутри</h2>
+              <ul className={styles.compositionList}>
                 {bouquet.composition.map((item) => (
-                  <li key={item} className="rounded-[18px] bg-[var(--surface)] px-4 py-2">
+                  <li key={item} className={styles.compositionItem}>
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="rounded-[20px] bg-[var(--surface)] p-4 text-sm leading-6 text-[var(--muted)]">
+            <div className={styles.deliveryNote}>
               {bouquet.deliveryNote}
             </div>
-            <ContactButtons source={`bouquet_${bouquet.slug}_primary`} />
+            <ContactButtons
+              source={`bouquet_${bouquet.slug}_primary`}
+              className={styles.actions}
+            />
           </div>
         </div>
       </section>
 
-      <section className="rounded-[28px] border border-[var(--line)] bg-[var(--surface)] p-6">
-        <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
+      <section className={styles.deliveryPanel}>
+        <p className={styles.statLabel}>
           Доставка
         </p>
-        <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--text)]">
+        <p className={styles.deliveryText}>
           Работаем по Краснодару и Яблоновскому. Для уточнения времени,
           адреса и возможной замены ингредиентов лучше сразу написать в удобный
           канал связи.
         </p>
-        <div className="mt-5 flex flex-wrap gap-3">
+        <div className={styles.locationLinks}>
           <Link
             href="/locations/krasnodar"
-            className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-sm text-[var(--muted)]"
+            className={styles.locationLink}
           >
             Краснодар
           </Link>
           <Link
             href="/locations/yablonovskiy"
-            className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-sm text-[var(--muted)]"
+            className={styles.locationLink}
           >
             Яблоновский
           </Link>
         </div>
-        <div className="mt-5">
+        <div className={styles.secondaryActions}>
           <ContactButtons source={`bouquet_${bouquet.slug}_secondary`} />
         </div>
       </section>
 
       {relatedBouquets.length > 0 ? (
-        <section className="space-y-8">
+        <section className={styles.relatedSection}>
           <SectionHeading
             eyebrow="Похожие букеты"
             title="Еще в этой категории"
             description="Похожие позиции внутри той же категории, чтобы пользователь мог быстро сравнить варианты."
           />
-          <div className="grid gap-6 xl:grid-cols-2">
+          <div className={styles.relatedGrid}>
             {relatedBouquets.map((item) => (
               <BouquetCard key={item.slug} bouquet={item} />
             ))}

@@ -1,0 +1,184 @@
+.page {
+  display: grid;
+  gap: 3rem;
+  padding-top: 2.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.hero {
+  display: grid;
+  gap: 2rem;
+}
+
+.mediaColumn {
+  display: grid;
+  gap: 1rem;
+}
+
+.imageWrap {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 2rem;
+  background: var(--surface);
+}
+
+.image {
+  object-fit: contain;
+  padding: 1rem;
+}
+
+.tagGrid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.tagCard {
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: var(--card);
+  padding: 0.875rem 1rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.details {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.statsGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.statCard {
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: var(--card);
+  padding: 1.25rem;
+}
+
+.statLabel {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.priceValue {
+  margin-top: 0.5rem;
+  color: var(--text);
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.sizeValue {
+  margin-top: 0.5rem;
+  color: var(--text);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.compositionPanel {
+  display: grid;
+  gap: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1.75rem;
+  background: var(--card);
+  padding: 1.5rem;
+}
+
+.compositionTitle {
+  color: var(--text);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.compositionList {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.compositionItem {
+  border-radius: 1.125rem;
+  background: var(--surface);
+  padding: 0.5rem 1rem;
+}
+
+.deliveryNote {
+  border-radius: 1.25rem;
+  background: var(--surface);
+  padding: 1rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.actions {
+  justify-content: flex-start;
+}
+
+.deliveryPanel {
+  border: 1px solid var(--line);
+  border-radius: 1.75rem;
+  background: var(--surface);
+  padding: 1.5rem;
+}
+
+.deliveryText {
+  margin-top: 0.75rem;
+  max-width: 48rem;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.75rem;
+}
+
+.locationLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.locationLink {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  padding: 0.625rem 1rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.secondaryActions {
+  margin-top: 1.25rem;
+}
+
+.relatedSection {
+  display: grid;
+  gap: 2rem;
+}
+
+.relatedGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .tagGrid,
+  .statsGrid,
+  .relatedGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    grid-template-columns: 1.05fr 2fr;
+  }
+}

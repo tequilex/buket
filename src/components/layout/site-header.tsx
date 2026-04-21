@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import styles from './site-header.module.scss';
 
 const navItems = [
   { href: '/catalog', label: 'Каталог' },
@@ -10,20 +11,20 @@ const navItems = [
 
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--line)] bg-[rgba(251,248,242,0.92)] backdrop-blur">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-        <Link href="/" className="min-w-0">
-          <span className="block text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
+    <header className={styles.header}>
+      <div className={styles.inner}>
+        <Link href="/" className={styles.brand}>
+          <span className={styles.eyebrow}>
             Gastro Buket
           </span>
-          <span className="block text-base font-semibold text-[var(--text)]">
+          <span className={styles.title}>
             Съедобные букеты
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-4 text-sm text-[var(--muted)] md:flex">
+        <nav className={styles.nav}>
           {navItems.map((item) => (
-            <Link key={item.href} href={item.href} className="transition hover:text-[var(--text)]">
+            <Link key={item.href} href={item.href} className={styles.navLink}>
               {item.label}
             </Link>
           ))}

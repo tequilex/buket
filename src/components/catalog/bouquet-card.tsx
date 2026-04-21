@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { BouquetEntry } from '@/lib/content/schemas';
 import { ContactButtons } from '@/components/cta/contact-buttons';
+import styles from './bouquet-card.module.scss';
 
 interface BouquetCardProps {
   bouquet: BouquetEntry;
@@ -9,59 +10,63 @@ interface BouquetCardProps {
 
 export function BouquetCard({ bouquet }: BouquetCardProps) {
   return (
-    <article className="overflow-hidden rounded-[28px] border border-[var(--line)] bg-[var(--card)] shadow-[0_18px_40px_rgba(47,52,38,0.08)]">
-      <Link href={`/bouquets/${bouquet.slug}`} className="block">
-        <div className="relative aspect-[4/3] overflow-hidden bg-[var(--surface)]">
+    <article className={styles.card}>
+      <Link href={`/bouquets/${bouquet.slug}`} className={styles.imageLink}>
+        <div className={styles.imageWrap}>
           <Image
             src={bouquet.images[0].src}
             alt={bouquet.images[0].alt}
             fill
-            className="object-cover"
+            className={styles.image}
             sizes="(max-width: 768px) 100vw, 33vw"
           />
         </div>
       </Link>
 
-      <div className="space-y-4 p-5">
-        <div className="space-y-2">
-          <div className="flex flex-wrap gap-2">
-            {bouquet.tags.slice(0, 3).map((tag) => (
+      <div data-testid="bouquet-card-body" className={styles.body}>
+        <div className={styles.copy}>
+          <div className={styles.tags}>
+            {bouquet.tags.slice(0, 2).map((tag) => (
               <span
                 key={tag}
-                className="rounded-full bg-[var(--surface)] px-3 py-1 text-xs font-medium text-[var(--muted)]"
+                className={styles.tag}
               >
                 {tag}
               </span>
             ))}
           </div>
           <Link href={`/bouquets/${bouquet.slug}`}>
-            <h3 className="text-xl font-semibold text-[var(--text)] transition hover:text-[var(--accent-strong)]">
+            <h3 className={styles.title}>
               {bouquet.name}
             </h3>
           </Link>
-          <p className="text-sm leading-6 text-[var(--muted)]">
+          <p className={styles.description}>
             {bouquet.shortDescription}
           </p>
         </div>
 
-        <div className="flex items-end justify-between gap-4">
+        <div className={styles.meta}>
           <div>
-            <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
+            <p className={styles.metaLabel}>
               Цена
             </p>
-            <p className="text-2xl font-semibold text-[var(--text)]">
+            <p className={styles.price}>
               от {bouquet.priceFrom} ₽
             </p>
           </div>
           <Link
             href={`/bouquets/${bouquet.slug}`}
-            className="text-sm font-medium text-[var(--accent-strong)]"
+            className={styles.detailsLink}
           >
             Подробнее
           </Link>
         </div>
 
-        <ContactButtons source={`card_${bouquet.slug}`} />
+        <ContactButtons
+          source={`card_${bouquet.slug}`}
+          compact
+          className={styles.actions}
+        />
       </div>
     </article>
   );

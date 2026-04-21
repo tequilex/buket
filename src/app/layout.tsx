@@ -7,7 +7,8 @@ import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
 import { buildMetricaInitScript } from '@/lib/analytics/metrica';
 import { getBaseUrl } from '@/lib/utils';
-import './globals.css';
+import styles from './layout.module.scss';
+import './globals.scss';
 
 const siteUrl = getBaseUrl();
 
@@ -72,9 +73,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
           </noscript>
         ) : null}
-        <div className="min-h-screen bg-[var(--background)] text-[var(--text)]">
+        <div className={styles.appRoot}>
           <SiteHeader />
-          <main className="pb-28 md:pb-0">{children}</main>
+          <main className={styles.main}>{children}</main>
           <SiteFooter />
           <MobileContactBar />
         </div>

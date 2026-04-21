@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { getAllBlogPosts } from '@/lib/content/blog';
 import { buildMetadata } from '@/lib/seo/metadata';
+import styles from '@/app/internal-page.module.scss';
 
 export function generateMetadata(): Metadata {
   return buildMetadata({
@@ -17,7 +18,7 @@ export default async function BlogPage() {
   const posts = await getAllBlogPosts();
 
   return (
-    <div className="page-shell space-y-12 py-10 sm:py-14">
+    <div className={`page-shell ${styles.page}`}>
       <SectionHeading
         eyebrow="Блог"
         title="Полезные материалы о букетах и подарках"
@@ -25,23 +26,23 @@ export default async function BlogPage() {
       />
 
       {posts.length === 0 ? (
-        <div className="rounded-[28px] border border-dashed border-[var(--line)] bg-[var(--card)] p-8 text-base leading-7 text-[var(--muted)]">
+        <div className={styles.emptyState}>
           Пока статей нет. Позже здесь появятся материалы о выборе съедобных
           букетов, идеях подарков и сезонных подборках.
         </div>
       ) : (
-        <div className="grid gap-4">
+        <div className={styles.articleList}>
           {posts.map((post) => (
             <Link
               key={post.slug}
               href={`/blog/${post.slug}`}
-              className="rounded-[24px] border border-[var(--line)] bg-[var(--card)] p-6"
+              className={styles.articleCard}
             >
-              <h2 className="text-2xl font-semibold text-[var(--text)]">
+              <h2 className={styles.articleTitle}>
                 {post.title}
               </h2>
               {post.description ? (
-                <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+                <p className={styles.articleDescription}>
                   {post.description}
                 </p>
               ) : null}

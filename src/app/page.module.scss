@@ -1,0 +1,173 @@
+.page {
+  display: grid;
+  gap: 5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.hero {
+  display: grid;
+  gap: 2rem;
+}
+
+.heroCopy {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.heroEyebrow {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.heroBody {
+  display: grid;
+  gap: 1rem;
+}
+
+.heroTitle {
+  max-width: 48rem;
+  color: var(--text);
+  font-size: 2.5rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+}
+
+.heroDescription {
+  max-width: 42rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.75rem;
+}
+
+.section {
+  display: grid;
+  gap: 2rem;
+}
+
+.categoryGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.categoryLink {
+  border: 1px solid var(--line);
+  border-radius: 1.75rem;
+  background: var(--card);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-soft);
+  transition: transform 180ms ease;
+
+  &:hover {
+    transform: translateY(-0.25rem);
+  }
+}
+
+.categoryEyebrow {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.categoryTitle {
+  margin-top: 0.75rem;
+  color: var(--text);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.categoryDescription {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.featuredGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.orderSection {
+  display: grid;
+  gap: 2rem;
+}
+
+.orderIntro {
+  display: grid;
+  gap: 1rem;
+}
+
+.orderSteps {
+  display: grid;
+  gap: 1rem;
+}
+
+.orderCard {
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: var(--card);
+  padding: 1.25rem;
+}
+
+.orderStepLabel {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.orderStepText {
+  margin-top: 0.5rem;
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .heroTitle {
+    font-size: 3rem;
+  }
+
+  .heroDescription {
+    font-size: 1.125rem;
+  }
+
+  .categoryGrid,
+  .featuredGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    grid-template-columns: 1.08fr 0.92fr;
+    align-items: center;
+  }
+
+  .orderSection {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+}
+
+@media (min-width: 1280px) {
+  .page {
+    gap: 5.5rem;
+  }
+
+  .heroTitle {
+    font-size: 4.25rem;
+  }
+
+  .categoryGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .featuredGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

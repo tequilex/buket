@@ -9,14 +9,14 @@ const rawBouquets: BouquetEntry[] = [
       'Эффектный мясной букет для дня рождения, 23 февраля и подарка мужчине.',
     category: 'myasnye',
     tags: ['мужской', 'с орехами', 'на 23 февраля'],
-    priceFrom: 3400,
+    priceFrom: 3800,
     images: [
       {
-        src: '/images/bouquets/placeholder-myasnye.svg',
+        src: '/images/bouquets/muzh_hit.PNG',
         alt: 'Мясной съедобный букет Мужской хит',
       },
     ],
-    composition: ['колбасы', 'сыр', 'орехи', 'декор'],
+    composition: ['колбасы', 'сыр', 'декор'],
     weightOrSize: 'Средний размер',
     deliveryNote:
       'Доставка по Краснодару и Яблоновскому в день заказа по согласованию.',
@@ -37,7 +37,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 4200,
     images: [
       {
-        src: '/images/bouquets/placeholder-myasnye.svg',
+        src: '/images/bouquets/IMG_9631.PNG',
         alt: 'Подарочный мясной букет Колбасный премиум',
       },
     ],
@@ -61,7 +61,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 3100,
     images: [
       {
-        src: '/images/bouquets/placeholder-myasnye.svg',
+        src: '/images/bouquets/IMG_9632.PNG',
         alt: 'Сытный мясной букет с сыром и снеками',
       },
     ],
@@ -85,7 +85,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 3600,
     images: [
       {
-        src: '/images/bouquets/placeholder-rybnye.svg',
+        src: '/images/bouquets/IMG_9634.PNG',
         alt: 'Рыбный букет Рыбный улов',
       },
     ],
@@ -125,19 +125,19 @@ const rawBouquets: BouquetEntry[] = [
   {
     slug: 'pennyy-vecher',
     name: 'Букет "Пенный вечер"',
-    shortDescription: 'Рыба, снеки и орехи для подарка с соленым акцентом.',
+    shortDescription: 'Рыба / креветки / раки.',
     fullDescription:
       'Солёный съедобный букет для тех, кто любит рыбные закуски и выразительную подачу.',
     category: 'rybnye',
-    tags: ['рыбный', 'с орехами', 'мужской'],
-    priceFrom: 3300,
+    tags: ['рыбный', 'мужской'],
+    priceFrom: 4000,
     images: [
       {
-        src: '/images/bouquets/placeholder-rybnye.svg',
+        src: '/images/bouquets/IMG_9631.PNG',
         alt: 'Рыбный букет с орехами Пенный вечер',
       },
     ],
-    composition: ['рыбные снеки', 'орехи', 'сухарики', 'декор'],
+    composition: ['рыба/креветки/раки', 'снеки', 'орехи', 'декор'],
     weightOrSize: 'Средний размер',
     deliveryNote: 'Можно адаптировать состав под бюджет и любимые снеки.',
     availableLocations: ['krasnodar', 'yablonovskiy'],
@@ -157,7 +157,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 2400,
     images: [
       {
-        src: '/images/bouquets/placeholder-sladkie.svg',
+        src: '/images/bouquets/IMG_9634.PNG',
         alt: 'Сладкий букет Сладкий комплимент',
       },
     ],
@@ -205,7 +205,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 2800,
     images: [
       {
-        src: '/images/bouquets/placeholder-fruktovye.svg',
+        src: '/images/bouquets/IMG_9632.PNG',
         alt: 'Фруктовый букет Фруктовая свежесть',
       },
     ],

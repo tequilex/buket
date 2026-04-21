@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import styles from './breadcrumbs.module.scss';
 
 interface BreadcrumbItem {
   label: string;
@@ -11,17 +12,17 @@ interface BreadcrumbsProps {
 
 export function Breadcrumbs({ items }: BreadcrumbsProps) {
   return (
-    <nav aria-label="Хлебные крошки">
-      <ol className="flex flex-wrap items-center gap-2 text-sm text-[var(--muted)]">
+    <nav aria-label="Хлебные крошки" className={styles.nav}>
+      <ol className={styles.list}>
         {items.map((item, index) => (
-          <li key={`${item.label}-${index}`} className="flex items-center gap-2">
+          <li key={`${item.label}-${index}`} className={styles.item}>
             {index > 0 ? <span>/</span> : null}
             {item.href ? (
-              <Link href={item.href} className="hover:text-[var(--text)]">
+              <Link href={item.href} className={styles.link}>
                 {item.label}
               </Link>
             ) : (
-              <span className="text-[var(--text)]">{item.label}</span>
+              <span className={styles.current}>{item.label}</span>
             )}
           </li>
         ))}
