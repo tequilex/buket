@@ -64,17 +64,17 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
         ]}
       />
 
-      <section className={styles.split}>
-        <SectionHeading
-          eyebrow="Повод"
-          title={occasion.title}
-          description={occasion.intro}
-        />
+      <section className={styles.introPanel}>
+        <div className={styles.introCopy}>
+          <SectionHeading
+            eyebrow="Повод"
+            title={occasion.title}
+            description={occasion.intro}
+          />
+        </div>
 
-        <div className={styles.surfacePanel}>
-          <p className={styles.panelEyebrow}>
-            Полезные переходы
-          </p>
+        <div className={styles.categoryNav}>
+          <p className={styles.panelTitle}>Полезные переходы</p>
           <div className={styles.pillLinks}>
             <Link
               href="/catalog"

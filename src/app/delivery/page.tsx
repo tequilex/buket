@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ContactButtons } from '@/components/cta/contact-buttons';
+import { Breadcrumbs } from '@/components/shared/breadcrumbs';
 import { FaqList } from '@/components/shared/faq-list';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { faqs, locations } from '@/lib/content/catalog';
@@ -18,11 +19,33 @@ export function generateMetadata(): Metadata {
 export default function DeliveryPage() {
   return (
     <div className={`page-shell ${styles.page}`}>
-      <SectionHeading
-        eyebrow="Доставка"
-        title="Как устроена доставка и заказ"
-        description="Коротко рассказываем, как оформить заказ, согласовать состав и выбрать удобное время доставки."
-      />
+      <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label: 'Доставка' }]} />
+
+      <section className={styles.introPanel}>
+        <div className={styles.introCopy}>
+          <SectionHeading
+            eyebrow="Доставка"
+            title="Как устроена доставка и заказ"
+            description="Коротко рассказываем, как оформить заказ, согласовать состав и выбрать удобное время доставки."
+          />
+          <p className={styles.introText}>
+            Основной сценарий простой: вы выбираете букет на сайте, а детали
+            состава, времени и адреса доставки быстро согласовываются в
+            мессенджере.
+          </p>
+        </div>
+
+        <div className={styles.categoryNav}>
+          <p className={styles.panelTitle}>Где доставляем</p>
+          <div className={styles.pillLinks}>
+            {locations.map((location) => (
+              <span key={location.slug} className={styles.softPillLink}>
+                {location.title}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className={styles.infoGrid}>
         {locations.map((location) => (

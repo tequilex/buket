@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Breadcrumbs } from '@/components/shared/breadcrumbs';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { getAllBlogPosts } from '@/lib/content/blog';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -19,11 +20,21 @@ export default async function BlogPage() {
 
   return (
     <div className={`page-shell ${styles.page}`}>
-      <SectionHeading
-        eyebrow="Блог"
-        title="Полезные материалы о букетах и подарках"
-        description="Раздел уже готов, а статьи будем добавлять по мере появления действительно полезного контента."
-      />
+      <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label: 'Блог' }]} />
+
+      <section className={styles.introPanel}>
+        <div className={styles.introCopy}>
+          <SectionHeading
+            eyebrow="Блог"
+            title="Полезные материалы о букетах и подарках"
+            description="Раздел уже готов, а статьи будем добавлять по мере появления действительно полезного контента."
+          />
+          <p className={styles.introText}>
+            Здесь будут только статьи, которые помогают выбрать подарок,
+            разобраться в форматах букетов и не тратить время на пустые советы.
+          </p>
+        </div>
+      </section>
 
       {posts.length === 0 ? (
         <div className={styles.emptyState}>

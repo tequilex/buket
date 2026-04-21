@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ContactButtons } from '@/components/cta/contact-buttons';
+import { Breadcrumbs } from '@/components/shared/breadcrumbs';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { buildMetadata } from '@/lib/seo/metadata';
 import styles from '@/app/internal-page.module.scss';
@@ -16,11 +17,29 @@ export function generateMetadata(): Metadata {
 export default function ContactsPage() {
   return (
     <div className={`page-shell ${styles.page}`}>
-      <SectionHeading
-        eyebrow="Контакты"
-        title="Как быстро связаться и оформить заказ"
-        description="Работаем через WhatsApp, Telegram и Avito, чтобы быстро согласовать состав, бюджет, дату и адрес доставки."
-      />
+      <Breadcrumbs items={[{ label: 'Главная', href: '/' }, { label: 'Контакты' }]} />
+
+      <section className={styles.introPanel}>
+        <div className={styles.introCopy}>
+          <SectionHeading
+            eyebrow="Контакты"
+            title="Как быстро связаться и оформить заказ"
+            description="Работаем через WhatsApp, Telegram и Avito, чтобы быстро согласовать состав, бюджет, дату и адрес доставки."
+          />
+          <p className={styles.introText}>
+            Если уже выбрали букет, просто напишите в удобный канал. Если
+            сомневаетесь, можно прислать повод, бюджет или пример, и дальше
+            спокойно подобрать подходящий вариант.
+          </p>
+        </div>
+
+        <div className={styles.categoryNav}>
+          <p className={styles.panelTitle}>Быстрый контакт</p>
+          <div className={styles.actionRow}>
+            <ContactButtons source="contacts_page_intro" />
+          </div>
+        </div>
+      </section>
 
       <section className={styles.split}>
         <div className={styles.cardPanel}>

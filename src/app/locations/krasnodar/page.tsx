@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
 import { ContactButtons } from '@/components/cta/contact-buttons';
+import { Breadcrumbs } from '@/components/shared/breadcrumbs';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { bouquets, getLocationBySlug } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -28,21 +29,29 @@ export default function KrasnodarLocationPage() {
 
   return (
     <div className={`page-shell ${styles.page}`}>
-      <section className={styles.split}>
-        <SectionHeading
-          eyebrow="Локация"
-          title={location.title}
-          description={location.shortDescription}
-        />
+      <Breadcrumbs
+        items={[
+          { label: 'Главная', href: '/' },
+          { label: 'Локации', href: '/delivery' },
+          { label: location.title },
+        ]}
+      />
 
-        <div className={styles.surfacePanel}>
-          <p className={styles.panelEyebrow}>
-            Как работаем по Краснодару
-          </p>
-          <p className={styles.panelText}>
+      <section className={styles.introPanel}>
+        <div className={styles.introCopy}>
+          <SectionHeading
+            eyebrow="Локация"
+            title={location.title}
+            description={location.shortDescription}
+          />
+          <p className={styles.introText}>
             {location.deliveryLead} По Краснодару чаще всего доступны удобные
             интервалы для доставки и быстрый заказ в течение дня.
           </p>
+        </div>
+
+        <div className={styles.categoryNav}>
+          <p className={styles.panelTitle}>Быстрый заказ</p>
           <div className={styles.actionRow}>
             <ContactButtons source="location_krasnodar" />
           </div>
@@ -80,10 +89,17 @@ export default function KrasnodarLocationPage() {
         </div>
       </section>
 
-      <section className={styles.bouquetGridStandard}>
+      <section className={styles.section}>
+        <SectionHeading
+          eyebrow="Подборка"
+          title="Популярные букеты для Краснодара"
+          description="Несколько вариантов, которые чаще всего выбирают для доставки по городу."
+        />
+        <div className={styles.bouquetGridStandard}>
         {localBouquets.map((bouquet) => (
           <BouquetCard key={bouquet.slug} bouquet={bouquet} />
         ))}
+        </div>
       </section>
     </div>
   );
