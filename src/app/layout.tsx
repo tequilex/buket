@@ -1,6 +1,14 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { Montserrat } from 'next/font/google';
 import Script from 'next/script';
+
+const montserrat = Montserrat({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
 import { YandexMetricaPageView } from '@/components/analytics/yandex-metrica-page-view';
 import { MobileContactBar } from '@/components/layout/mobile-contact-bar';
 import { SiteFooter } from '@/components/layout/site-footer';
@@ -50,7 +58,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   const hasMetrica = Number.isFinite(metricaId) && metricaId > 0;
 
   return (
-    <html lang="ru">
+    <html lang="ru" className={montserrat.variable}>
       <body>
         {hasMetrica ? (
           <Script

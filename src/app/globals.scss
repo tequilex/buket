@@ -1,13 +1,26 @@
 :root {
-  --background: #fbf8f2;
-  --surface: #f4efe6;
-  --card: #fffdf9;
-  --text: #2f3426;
-  --muted: #625d4f;
-  --accent: #556b4f;
-  --accent-strong: #3f523a;
-  --line: #ddd3bf;
-  --shadow-soft: 0 22px 54px rgba(47, 52, 38, 0.08);
+  /* Новая палитра Fresh Modern */
+  --bg: #ffffff;
+  --bg2: oklch(0.97 0.01 145);
+  --bg3: oklch(0.94 0.02 145);
+  --fg: oklch(0.15 0.02 200);
+  --fg2: oklch(0.45 0.02 200);
+  --accent: oklch(0.55 0.18 145);
+  --accent2: oklch(0.62 0.18 42);
+  --accent-light: oklch(0.94 0.06 145);
+  --card: #ffffff;
+  --border: oklch(0.90 0.02 145);
+  --shadow: 0 2px 16px oklch(0.55 0.18 145 / 0.12);
+  --radius: 12px;
+
+  /* Алиасы — старые имена переменных, чтобы внутренние страницы не сломались */
+  --background: var(--bg);
+  --surface: var(--bg2);
+  --text: var(--fg);
+  --muted: var(--fg2);
+  --line: var(--border);
+  --shadow-soft: var(--shadow);
+  --accent-strong: oklch(0.45 0.18 145);
 }
 
 * {
@@ -23,7 +36,7 @@ body {
   min-height: 100vh;
   background: var(--background);
   color: var(--text);
-  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-family: var(--font-montserrat), 'Segoe UI', sans-serif;
 }
 
 a {
@@ -43,23 +56,17 @@ img {
 }
 
 ::selection {
-  background: rgba(85, 107, 79, 0.2);
+  background: oklch(0.55 0.18 145 / 0.2);
 }
 
 .page-shell {
+  margin: 0;
+  max-width: none;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
   margin: 0 auto;
-  max-width: 72rem;
-  padding: 1.5rem 1rem 4rem;
-}
-
-@media (min-width: 640px) {
-  .page-shell {
-    padding-inline: 1.5rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .page-shell {
-    padding-inline: 2rem;
-  }
+  padding: 0 24px;
 }

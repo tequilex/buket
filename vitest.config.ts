@@ -6,6 +6,11 @@ export default defineConfig({
   esbuild: {
     jsx: 'automatic',
   },
+  resolve: {
+    alias: {
+      'next/font/google': new URL('./src/test/mocks/next-font.ts', import.meta.url).pathname,
+    },
+  },
   test: {
     environment: 'jsdom',
     globals: true,
