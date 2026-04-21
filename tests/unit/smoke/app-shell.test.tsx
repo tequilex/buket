@@ -20,17 +20,20 @@ test('renders the storefront shell sections', () => {
   expect(screen.getByRole('contentinfo')).toBeInTheDocument();
 });
 
-test('renders the launch heading', () => {
+test('homepage hero keeps an indexable h1', () => {
   render(<HomePage />);
   expect(
-    screen.getByRole('heading', { name: /съедобные букеты/i }),
+    screen.getByRole('heading', {
+      level: 1,
+      name: /съедобные букеты с доставкой/i,
+    }),
   ).toBeInTheDocument();
 });
 
 test('renders the popular bouquets carousel in the homepage hero', () => {
   render(<HomePage />);
 
-  expect(screen.getAllByText('Популярные букеты').length).toBeGreaterThan(0);
+  expect(screen.getByTestId('hero-featured-carousel')).toBeInTheDocument();
   expect(
     screen.getByRole('button', { name: /показать следующие букеты/i }),
   ).toBeInTheDocument();

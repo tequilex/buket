@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
 import { ContactButtons } from '@/components/cta/contact-buttons';
@@ -8,7 +9,12 @@ import { SectionHeading } from '@/components/shared/section-heading';
 import { bouquets, categories, faqs, reviews } from '@/lib/content/catalog';
 import styles from './page.module.scss';
 
-const featuredBouquets = bouquets.filter((bouquet) => bouquet.featured).slice(0, 4);
+const featuredBouquets = bouquets
+  .filter((bouquet) => bouquet.featured)
+  .slice(0, 4);
+const heroBouquets = featuredBouquets.length > 0 ? featuredBouquets : bouquets.slice(0, 4);
+const heroBouquet = heroBouquets[0] ?? bouquets[0]!;
+const heroImage = heroBouquet.images[0]!;
 
 const orderSteps = [
   'Выберите букет по составу или поводу.',
@@ -20,24 +26,36 @@ export default function HomePage() {
   return (
     <div className={`page-shell ${styles.page}`}>
       <section className={styles.hero}>
-        <div className={styles.heroCopy}>
-          <p className={styles.heroEyebrow}>
-            Краснодар • Яблоновский
-          </p>
-          <div className={styles.heroBody}>
-            <h1 className={styles.heroTitle}>
-              Съедобные букеты с доставкой в Краснодаре и Яблоновском
-            </h1>
-            <p className={styles.heroDescription}>
-              Мясные, рыбные, сладкие и фруктовые букеты с аккуратной
-              подарочной подачей. Удобно заказать через WhatsApp, Telegram или
-              Avito и быстро согласовать детали доставки.
-            </p>
+        <div className={styles.heroSurface}>
+          <Image
+            src={heroImage.src}
+            alt={heroImage.alt}
+            fill
+            priority
+            sizes="(min-width: 1024px) 72rem, 100vw"
+            className={styles.heroImage}
+          />
+          <div className={styles.heroShade} />
+          <div className={styles.heroContent}>
+            <div className={styles.heroCopy}>
+              <p className={styles.heroEyebrow}>
+                Краснодар • Яблоновский
+              </p>
+              <div className={styles.heroBody}>
+                <h1 className={styles.heroTitle}>
+                  Съедобные букеты с доставкой в Краснодаре и Яблоновском
+                </h1>
+                <p className={styles.heroDescription}>
+                  Мясные, рыбные, сладкие и фруктовые букеты в свежей подарочной
+                  подаче. Удобно выбрать на сайте и быстро согласовать детали в
+                  мессенджере.
+                </p>
+              </div>
+              <ContactButtons source="hero" compact className={styles.heroButtons} />
+            </div>
+            <HeroFeaturedCarousel bouquets={heroBouquets} />
           </div>
-          <ContactButtons source="hero" />
         </div>
-
-        <HeroFeaturedCarousel bouquets={featuredBouquets} />
       </section>
 
       <section className={styles.section}>

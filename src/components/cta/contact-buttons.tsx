@@ -10,6 +10,8 @@ interface ContactButtonsProps {
   className?: string;
 }
 
+const primaryMessengerChannelIds = new Set(['whatsapp', 'telegram']);
+
 function ChannelIcon({ channelId, label }: { channelId: string; label: string }) {
   const sharedProps = {
     'aria-label': `Иконка ${label}`,
@@ -98,17 +100,23 @@ export function ContactButtons({
   compact = false,
   className,
 }: ContactButtonsProps) {
+  const channels =
+    source === 'hero'
+      ? siteConfig.channels.filter((channel) => primaryMessengerChannelIds.has(channel.id))
+      : siteConfig.channels;
+
   return (
     <div
       className={[
         styles.container,
         compact ? styles.compactContainer : '',
+        source === 'hero' && compact ? styles.heroCompactContainer : '',
         className,
       ]
         .filter(Boolean)
         .join(' ')}
     >
-      {siteConfig.channels.map((channel) => (
+      {channels.map((channel) => (
         <a
           key={channel.id}
           href={channel.href}

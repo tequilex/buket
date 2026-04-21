@@ -47,7 +47,8 @@ export function HeroFeaturedCarousel({
               Популярные букеты
             </h2>
             <p className={styles.description}>
-              Подборка букетов, с которых удобно начать выбор.
+              Компактная полка с букетами, которые чаще всего выбирают для
+              подарка.
             </p>
           </div>
         </div>
@@ -97,7 +98,10 @@ export function HeroFeaturedCarousel({
         </div>
       </div>
 
-      <div data-testid="hero-featured-carousel-viewport" className={styles.viewport}>
+      <div
+        data-testid="hero-featured-carousel-viewport"
+        className={styles.viewport}
+      >
         <div
           ref={trackRef}
           className={styles.track}
