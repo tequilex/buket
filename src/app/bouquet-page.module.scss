@@ -1,8 +1,9 @@
 .page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 24px 5rem;
   display: grid;
   gap: 3rem;
-  padding-top: 2.5rem;
-  padding-bottom: 3.5rem;
 }
 
 .hero {
@@ -19,9 +20,10 @@
   position: relative;
   aspect-ratio: 2 / 3;
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 2rem;
-  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg2);
+  box-shadow: var(--shadow);
 }
 
 .image {
@@ -35,11 +37,11 @@
 }
 
 .tagCard {
-  border: 1px solid var(--line);
-  border-radius: 1.25rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
   background: var(--card);
   padding: 0.875rem 1rem;
-  color: var(--muted);
+  color: var(--fg2);
   font-size: 0.875rem;
 }
 
@@ -54,29 +56,31 @@
 }
 
 .statCard {
-  border: 1px solid var(--line);
-  border-radius: 1.5rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
   background: var(--card);
-  padding: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow);
 }
 
 .statLabel {
-  color: var(--muted);
+  color: var(--fg2);
   font-size: 0.75rem;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  font-weight: 600;
 }
 
 .priceValue {
   margin-top: 0.5rem;
-  color: var(--text);
+  color: var(--accent);
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .sizeValue {
   margin-top: 0.5rem;
-  color: var(--text);
+  color: var(--fg);
   font-size: 1.125rem;
   font-weight: 600;
 }
@@ -84,14 +88,15 @@
 .compositionPanel {
   display: grid;
   gap: 1rem;
-  border: 1px solid var(--line);
-  border-radius: 1.75rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
   background: var(--card);
   padding: 1.5rem;
+  box-shadow: var(--shadow);
 }
 
 .compositionTitle {
-  color: var(--text);
+  color: var(--fg);
   font-size: 1.125rem;
   font-weight: 600;
 }
@@ -100,24 +105,25 @@
   display: grid;
   gap: 0.5rem;
   margin-top: 0.75rem;
-  color: var(--muted);
+  color: var(--fg2);
   font-size: 0.875rem;
-  line-height: 1.5rem;
+  line-height: 1.6;
+  list-style: none;
 }
 
 .compositionItem {
-  border-radius: 1.125rem;
-  background: var(--surface);
+  border-radius: 8px;
+  background: var(--bg2);
   padding: 0.5rem 1rem;
 }
 
 .deliveryNote {
-  border-radius: 1.25rem;
-  background: var(--surface);
+  border-radius: var(--radius);
+  background: var(--accent-light);
   padding: 1rem;
-  color: var(--muted);
+  color: var(--fg);
   font-size: 0.875rem;
-  line-height: 1.5rem;
+  line-height: 1.6;
 }
 
 .actions {
@@ -125,18 +131,18 @@
 }
 
 .deliveryPanel {
-  border: 1px solid var(--line);
-  border-radius: 1.75rem;
-  background: var(--surface);
-  padding: 1.5rem;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg2);
+  padding: 1.75rem;
 }
 
 .deliveryText {
   margin-top: 0.75rem;
   max-width: 48rem;
-  color: var(--text);
+  color: var(--fg);
   font-size: 1rem;
-  line-height: 1.75rem;
+  line-height: 1.75;
 }
 
 .locationLinks {
@@ -147,12 +153,19 @@
 }
 
 .locationLink {
-  border: 1px solid var(--line);
+  border: 1.5px solid var(--border);
   border-radius: 999px;
-  background: #fff;
-  padding: 0.625rem 1rem;
-  color: var(--muted);
+  background: var(--card);
+  padding: 0.5rem 1rem;
+  color: var(--fg2);
   font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 160ms ease, border-color 160ms ease;
+
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
 }
 
 .secondaryActions {
@@ -166,7 +179,7 @@
 
 .relatedGrid {
   display: grid;
-  gap: 1rem;
+  gap: 24px;
 }
 
 @media (min-width: 640px) {
@@ -179,6 +192,7 @@
 
 @media (min-width: 1024px) {
   .hero {
-    grid-template-columns: 1.05fr 2fr;
+    grid-template-columns: 1fr 1.8fr;
+    align-items: start;
   }
 }

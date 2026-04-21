@@ -3,7 +3,7 @@ import styles from '@/app/internal-page.module.scss';
 
 export default function NotFound() {
   return (
-    <div className={`page-shell ${styles.page}`}>
+    <div className={styles.page}>
       <div className={styles.cardPanel}>
         <p className={styles.panelEyebrow}>
           404

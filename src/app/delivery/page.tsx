@@ -17,7 +17,7 @@ export function generateMetadata(): Metadata {
 
 export default function DeliveryPage() {
   return (
-    <div className={`page-shell ${styles.page}`}>
+    <div className={styles.page}>
       <SectionHeading
         eyebrow="Доставка"
         title="Как устроена доставка и заказ"

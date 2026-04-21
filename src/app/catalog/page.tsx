@@ -19,7 +19,7 @@ export function generateMetadata(): Metadata {
 
 export default function CatalogPage() {
   return (
-    <div className={`page-shell ${styles.page}`}>
+    <div className={styles.page}>
       <SectionHeading
         eyebrow="Каталог"
         title="Съедобные букеты по составу"

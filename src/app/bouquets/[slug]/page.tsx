@@ -60,7 +60,7 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
     .slice(0, 2);
 
   return (
-    <div className={`page-shell ${styles.page}`}>
+    <div className={styles.page}>
       <JsonLd
         id={`bouquet-product-${bouquet.slug}`}
         data={buildBouquetProductJsonLd(bouquet)}

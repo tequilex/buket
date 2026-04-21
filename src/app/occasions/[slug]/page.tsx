@@ -55,7 +55,7 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
     .filter((item) => Boolean(item));
 
   return (
-    <div className={`page-shell ${styles.page}`}>
+    <div className={styles.page}>
       <Breadcrumbs
         items={[
           { label: 'Главная', href: '/' },

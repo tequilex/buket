@@ -15,7 +15,7 @@ export function generateMetadata(): Metadata {
 
 export default function ContactsPage() {
   return (
-    <div className={`page-shell ${styles.page}`}>
+    <div className={styles.page}>
       <SectionHeading
         eyebrow="Контакты"
         title="Как быстро связаться и оформить заказ"

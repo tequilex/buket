@@ -27,7 +27,7 @@ export default function YablonovskiyLocationPage() {
   }
 
   return (
-    <div className={`page-shell ${styles.page}`}>
+    <div className={styles.page}>
       <section className={styles.split}>
         <SectionHeading
           eyebrow="Локация"

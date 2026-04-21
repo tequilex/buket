@@ -59,7 +59,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const categoryBouquets = getBouquetsByCategory(categoryEntry.slug);
 
   return (
-    <div className={`page-shell ${styles.page}`}>
+    <div className={styles.page}>
       <SectionHeading
         eyebrow="Категория"
         title={categoryEntry.title}

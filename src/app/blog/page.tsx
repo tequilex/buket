@@ -18,7 +18,7 @@ export default async function BlogPage() {
   const posts = await getAllBlogPosts();
 
   return (
-    <div className={`page-shell ${styles.page}`}>
+    <div className={styles.page}>
       <SectionHeading
         eyebrow="Блог"
         title="Полезные материалы о букетах и подарках"
