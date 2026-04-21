@@ -14,12 +14,8 @@ export function SiteHeader() {
     <header className={styles.header}>
       <div className={styles.inner}>
         <Link href="/" className={styles.brand}>
-          <span className={styles.eyebrow}>
-            Gastro Buket
-          </span>
-          <span className={styles.title}>
-            Съедобные букеты
-          </span>
+          <span className={styles.brandMain}>GASTRO BUKET</span>
+          <span className={styles.brandSub}>Искусство вкусных подарков</span>
         </Link>
 
         <nav className={styles.nav}>
@@ -29,6 +25,10 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
+
+        <Link href="/catalog" className={styles.cta}>
+          Заказать букет
+        </Link>
       </div>
     </header>
   );
