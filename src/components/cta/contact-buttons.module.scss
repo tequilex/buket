@@ -14,20 +14,21 @@
   align-items: center;
   gap: 0.5rem;
   min-height: 3rem;
-  border-radius: 999px;
-  padding: 0.75rem 1.125rem;
+  border-radius: var(--radius);
+  padding: 0.75rem 1.25rem;
   font-size: 0.875rem;
-  font-weight: 500;
+  font-weight: 600;
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
     color 160ms ease,
-    box-shadow 160ms ease;
+    box-shadow 160ms ease,
+    transform 160ms ease;
 }
 
 .compact {
   min-height: 2.75rem;
-  padding: 0.625rem 0.875rem;
+  padding: 0.625rem 1rem;
 }
 
 .icon {
@@ -37,33 +38,50 @@
 }
 
 .whatsapp {
-  background: #2f8f57;
+  background: oklch(0.47 0.17 145);
   color: #fff;
-  box-shadow: 0 10px 24px rgba(47, 143, 87, 0.22);
+  box-shadow: 0 4px 16px oklch(0.47 0.17 145 / 0.3);
 
   &:hover {
-    background: #25754a;
+    background: oklch(0.41 0.17 145);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px oklch(0.47 0.17 145 / 0.38);
   }
 }
 
 .telegram {
-  border: 1px solid #b9d8e8;
-  background: #eef7fb;
-  color: #185b7d;
+  border: 1.5px solid oklch(0.72 0.1 220);
+  background: oklch(0.96 0.025 220);
+  color: oklch(0.35 0.13 220);
 
   &:hover {
-    border-color: #8cbfd8;
-    background: #e4f2f9;
+    border-color: oklch(0.55 0.14 220);
+    background: oklch(0.93 0.04 220);
+    transform: translateY(-2px);
   }
 }
 
 .avito {
-  border: 1px solid #d9d5ef;
-  background: #f5f2ff;
-  color: #5b4a96;
+  border: 1.5px solid oklch(0.72 0.08 290);
+  background: oklch(0.96 0.02 290);
+  color: oklch(0.38 0.14 290);
 
   &:hover {
-    border-color: #c3bbe8;
-    background: #eee9ff;
+    border-color: oklch(0.55 0.12 290);
+    background: oklch(0.93 0.04 290);
+    transform: translateY(-2px);
+  }
+}
+
+.heroBtn {
+  background: oklch(1 0 0 / 0.1);
+  color: white;
+  border: 1.5px solid oklch(1 0 0 / 0.55);
+  backdrop-filter: blur(4px);
+
+  &:hover {
+    border-color: white;
+    background: oklch(1 0 0 / 0.2);
+    transform: translateY(-2px);
   }
 }

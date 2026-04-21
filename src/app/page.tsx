@@ -40,7 +40,7 @@ export default function HomePage() {
           </div>
           <div className={styles.heroBtns}>
             <Link href="/catalog" className={styles.btnPrimary}>Смотреть каталог</Link>
-            <ContactButtons source="hero" />
+            <ContactButtons source="hero" variant="hero" />
           </div>
         </div>
         <div className={styles.heroStats}>

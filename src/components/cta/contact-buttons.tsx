@@ -7,6 +7,7 @@ import styles from './contact-buttons.module.scss';
 interface ContactButtonsProps {
   source: string;
   compact?: boolean;
+  variant?: 'default' | 'hero';
   className?: string;
 }
 
@@ -79,7 +80,11 @@ function ChannelIcon({ channelId, label }: { channelId: string; label: string })
   );
 }
 
-function getChannelClassName(channelId: string, compact: boolean) {
+function getChannelClassName(channelId: string, compact: boolean, variant: 'default' | 'hero') {
+  if (variant === 'hero') {
+    return [styles.button, styles.heroBtn, compact ? styles.compact : ''].filter(Boolean).join(' ');
+  }
+
   const classNames = [styles.button, compact ? styles.compact : ''];
 
   if (channelId === 'whatsapp') {
@@ -96,6 +101,7 @@ function getChannelClassName(channelId: string, compact: boolean) {
 export function ContactButtons({
   source,
   compact = false,
+  variant = 'default',
   className,
 }: ContactButtonsProps) {
   return (
@@ -114,7 +120,7 @@ export function ContactButtons({
           href={channel.href}
           target="_blank"
           rel="noreferrer"
-          className={getChannelClassName(channel.id, compact)}
+          className={getChannelClassName(channel.id, compact, variant)}
           onClick={() => trackCtaClick(channel.id, source)}
         >
           <ChannelIcon channelId={channel.id} label={channel.label} />
