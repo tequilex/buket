@@ -1,14 +1,15 @@
 .footer {
-  border-top: 1px solid var(--line);
-  background: var(--surface);
+  background: var(--fg);
+  color: var(--bg);
+  padding: 40px 0;
 }
 
 .inner {
   display: grid;
   gap: 2rem;
+  max-width: 1200px;
   margin: 0 auto;
-  max-width: 72rem;
-  padding: 2.5rem 1rem;
+  padding: 0 24px;
 }
 
 .brandBlock {
@@ -17,22 +18,22 @@
 }
 
 .eyebrow {
-  color: var(--muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--bg);
 }
 
 .description {
   max-width: 32rem;
-  color: var(--muted);
+  color: oklch(1 0 0 / 0.6);
   font-size: 0.875rem;
   line-height: 1.5rem;
 }
 
 .title {
   margin: 0 0 0.75rem;
-  color: var(--text);
+  color: var(--bg);
   font-size: 0.875rem;
   font-weight: 600;
 }
@@ -43,27 +44,20 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  color: var(--muted);
   font-size: 0.875rem;
 }
 
 .link {
+  color: oklch(1 0 0 / 0.6);
   transition: color 160ms ease;
 
   &:hover {
-    color: var(--text);
-  }
-}
-
-@media (min-width: 640px) {
-  .inner {
-    padding-inline: 1.5rem;
+    color: var(--bg);
   }
 }
 
 @media (min-width: 1024px) {
   .inner {
     grid-template-columns: 1.4fr 1fr 1fr;
-    padding-inline: 2rem;
   }
 }
