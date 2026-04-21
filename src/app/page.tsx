@@ -63,25 +63,32 @@ export default function HomePage() {
           eyebrow="Каталог"
           title="Подберите букет по составу"
           description="Мясные, рыбные, сладкие и фруктовые букеты собраны по категориям, чтобы выбрать подходящий подарок было проще."
-        />
-        <div className={styles.categoryGrid}>
-          {categories.map((category) => (
-            <Link
-              key={category.slug}
-              href={`/catalog/${category.slug}`}
-              className={styles.categoryLink}
-            >
-              <p className={styles.categoryEyebrow}>
-                Категория
-              </p>
-              <h2 className={styles.categoryTitle}>
-                {category.title}
-              </h2>
-              <p className={styles.categoryDescription}>
-                {category.shortDescription}
-              </p>
+          action={(
+            <Link href="/catalog" className={styles.sectionAction}>
+              Открыть каталог
             </Link>
-          ))}
+          )}
+        />
+        <div className={styles.sectionSurface}>
+          <div className={styles.categoryGrid}>
+            {categories.map((category) => (
+              <Link
+                key={category.slug}
+                href={`/catalog/${category.slug}`}
+                className={styles.categoryLink}
+              >
+                <p className={styles.categoryEyebrow}>
+                  Категория
+                </p>
+                <h2 className={styles.categoryTitle}>
+                  {category.title}
+                </h2>
+                <p className={styles.categoryDescription}>
+                  {category.shortDescription}
+                </p>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -90,11 +97,18 @@ export default function HomePage() {
           eyebrow="Популярное"
           title="Популярные букеты"
           description="Подборка вариантов, с которых удобно начать выбор, если вы заказываете съедобный букет впервые."
+          action={(
+            <Link href="/catalog" className={styles.sectionAction}>
+              Все букеты
+            </Link>
+          )}
         />
-        <div className={styles.featuredGrid}>
-          {featuredBouquets.map((bouquet) => (
-            <BouquetCard key={bouquet.slug} bouquet={bouquet} />
-          ))}
+        <div className={styles.sectionSurface}>
+          <div className={styles.featuredGrid}>
+            {featuredBouquets.map((bouquet) => (
+              <BouquetCard key={bouquet.slug} bouquet={bouquet} />
+            ))}
+          </div>
         </div>
       </section>
 

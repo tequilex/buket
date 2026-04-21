@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { BouquetEntry } from '@/lib/content/schemas';
-import { ContactButtons } from '@/components/cta/contact-buttons';
+import { categories } from '@/lib/content/catalog';
 import styles from './bouquet-card.module.scss';
 
 interface BouquetCardProps {
@@ -9,6 +9,10 @@ interface BouquetCardProps {
 }
 
 export function BouquetCard({ bouquet }: BouquetCardProps) {
+  const categoryTitle =
+    categories.find((category) => category.slug === bouquet.category)?.title ??
+    'Букет';
+
   return (
     <article className={styles.card}>
       <Link href={`/bouquets/${bouquet.slug}`} className={styles.imageLink}>
@@ -18,55 +22,30 @@ export function BouquetCard({ bouquet }: BouquetCardProps) {
             alt={bouquet.images[0].alt}
             fill
             className={styles.image}
-            sizes="(max-width: 768px) 100vw, 33vw"
+            sizes="(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 25vw"
           />
         </div>
       </Link>
 
       <div data-testid="bouquet-card-body" className={styles.body}>
-        <div className={styles.copy}>
-          <div className={styles.tags}>
-            {bouquet.tags.slice(0, 2).map((tag) => (
-              <span
-                key={tag}
-                className={styles.tag}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-          <Link href={`/bouquets/${bouquet.slug}`}>
-            <h3 className={styles.title}>
-              {bouquet.name}
-            </h3>
-          </Link>
-          <p className={styles.description}>
-            {bouquet.shortDescription}
+        <p className={styles.label}>{categoryTitle}</p>
+        <Link href={`/bouquets/${bouquet.slug}`} className={styles.titleLink}>
+          <h3 className={styles.title}>
+            {bouquet.name}
+          </h3>
+        </Link>
+        <p className={styles.description}>
+          {bouquet.shortDescription}
+        </p>
+
+        <div className={styles.footer}>
+          <p className={styles.price}>
+            от {bouquet.priceFrom} ₽
           </p>
-        </div>
-
-        <div className={styles.meta}>
-          <div>
-            <p className={styles.metaLabel}>
-              Цена
-            </p>
-            <p className={styles.price}>
-              от {bouquet.priceFrom} ₽
-            </p>
-          </div>
-          <Link
-            href={`/bouquets/${bouquet.slug}`}
-            className={styles.detailsLink}
-          >
-            Подробнее
+          <Link href={`/bouquets/${bouquet.slug}`} className={styles.detailsLink}>
+            Смотреть букет
           </Link>
         </div>
-
-        <ContactButtons
-          source={`card_${bouquet.slug}`}
-          compact
-          className={styles.actions}
-        />
       </div>
     </article>
   );

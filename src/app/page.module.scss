@@ -89,51 +89,90 @@
 
 .section {
   display: grid;
-  gap: 2rem;
+  gap: 1.5rem;
+}
+
+.sectionSurface {
+  border: 1px solid rgba(121, 104, 73, 0.12);
+  border-radius: 1.75rem;
+  background: rgba(255, 250, 240, 0.62);
+  padding: 1rem;
+}
+
+.sectionAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  border: 1px solid rgba(47, 106, 73, 0.16);
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.9);
+  padding: 0.625rem 0.875rem;
+  color: var(--accent);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+
+  &:hover {
+    border-color: rgba(47, 106, 73, 0.3);
+    background: rgba(239, 227, 205, 0.72);
+    color: var(--accent-strong);
+  }
 }
 
 .categoryGrid {
   display: grid;
-  gap: 1rem;
+  gap: 0.875rem;
 }
 
 .categoryLink {
   border: 1px solid var(--line);
-  border-radius: 1.75rem;
-  background: var(--card);
-  padding: 1.5rem;
-  box-shadow: var(--shadow-soft);
-  transition: transform 180ms ease;
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 1.125rem;
+  transition:
+    transform 180ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
 
   &:hover {
-    transform: translateY(-0.25rem);
+    transform: translateY(-0.2rem);
+    border-color: rgba(47, 106, 73, 0.18);
+    box-shadow: 0 10px 24px rgba(35, 31, 23, 0.05);
   }
 }
 
 .categoryEyebrow {
   color: var(--muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.24em;
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
 }
 
 .categoryTitle {
-  margin-top: 0.75rem;
+  margin-top: 0.625rem;
   color: var(--text);
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
 .categoryDescription {
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
   color: var(--muted);
-  font-size: 0.875rem;
-  line-height: 1.5rem;
+  font-size: 0.8125rem;
+  line-height: 1.45rem;
 }
 
 .featuredGrid {
   display: grid;
-  gap: 1rem;
+  gap: 0.875rem;
 }
 
 .orderSection {
@@ -185,6 +224,10 @@
   .featuredGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .sectionSurface {
+    padding: 1.125rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -210,6 +253,10 @@
   .orderSection {
     grid-template-columns: 0.9fr 1.1fr;
   }
+
+  .featuredGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 1280px) {
@@ -225,7 +272,7 @@
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .featuredGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .sectionSurface {
+    padding: 1.25rem;
   }
 }

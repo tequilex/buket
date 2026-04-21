@@ -34,6 +34,7 @@ test('renders the popular bouquets carousel in the homepage hero', () => {
   render(<HomePage />);
 
   expect(screen.getByTestId('hero-featured-carousel')).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /все букеты/i })).toBeInTheDocument();
   expect(
     screen.getByRole('button', { name: /показать следующие букеты/i }),
   ).toBeInTheDocument();
