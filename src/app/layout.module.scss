@@ -4,15 +4,19 @@
   flex-direction: column;
   background: var(--bg);
   color: var(--text);
+  padding-bottom: var(--shell-mobile-bar-offset);
 }
 
 .main {
   flex: 1;
   padding-top: var(--shell-header-offset);
-  padding-bottom: calc(var(--shell-mobile-bar-offset) + 1rem);
 }
 
 @media (min-width: 768px) {
+  .appRoot {
+    padding-bottom: 0;
+  }
+
   .main {
     padding-bottom: 0;
   }
