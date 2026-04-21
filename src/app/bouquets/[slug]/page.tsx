@@ -87,24 +87,27 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
               sizes="(max-width: 1024px) 100vw, 52vw"
             />
           </div>
-          <div className={styles.tagGrid}>
-            {bouquet.tags.map((tag) => (
-              <div
-                key={tag}
-                className={styles.tagCard}
-              >
-                {tag}
-              </div>
-            ))}
-          </div>
         </div>
 
         <div className={styles.details}>
-          <SectionHeading
-            eyebrow="Карточка букета"
-            title={bouquet.name}
-            description={bouquet.fullDescription}
-          />
+          <div className={styles.heroCopy}>
+            <p className={styles.eyebrow}>
+              {category?.title ?? 'Букет'}
+            </p>
+            <h1 className={styles.title}>{bouquet.name}</h1>
+            <p className={styles.description}>{bouquet.fullDescription}</p>
+          </div>
+
+          <div className={styles.tagRow}>
+            {bouquet.tags.map((tag) => (
+              <span
+                key={tag}
+                className={styles.tag}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
 
           <div className={styles.statsGrid}>
             <div className={styles.statCard}>
@@ -125,9 +128,19 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
             </div>
           </div>
 
+          <div className={styles.primaryActions}>
+            <ContactButtons
+              source={`bouquet_${bouquet.slug}_primary`}
+              className={styles.actions}
+            />
+          </div>
+
           <div className={styles.compositionPanel}>
-            <div>
-              <h2 className={styles.compositionTitle}>Что внутри</h2>
+            <div className={styles.compositionContent}>
+              <div>
+                <p className={styles.panelEyebrow}>Состав</p>
+                <h2 className={styles.compositionTitle}>Что внутри</h2>
+              </div>
               <ul className={styles.compositionList}>
                 {bouquet.composition.map((item) => (
                   <li key={item} className={styles.compositionItem}>
@@ -137,20 +150,18 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
               </ul>
             </div>
             <div className={styles.deliveryNote}>
-              {bouquet.deliveryNote}
+              <p className={styles.panelEyebrow}>Детали</p>
+              <p className={styles.deliveryNoteText}>{bouquet.deliveryNote}</p>
             </div>
-            <ContactButtons
-              source={`bouquet_${bouquet.slug}_primary`}
-              className={styles.actions}
-            />
           </div>
         </div>
       </section>
 
       <section className={styles.deliveryPanel}>
-        <p className={styles.statLabel}>
+        <p className={styles.panelEyebrow}>
           Доставка
         </p>
+        <h2 className={styles.deliveryTitle}>Как проходит заказ и доставка</h2>
         <p className={styles.deliveryText}>
           Работаем по Краснодару и Яблоновскому. Для уточнения времени,
           адреса и возможной замены ингредиентов лучше сразу написать в удобный

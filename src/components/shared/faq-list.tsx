@@ -14,11 +14,16 @@ export function FaqList({ items }: FaqListProps) {
           className={styles.item}
         >
           <summary className={styles.question}>
-            {item.question}
+            <span className={styles.questionText}>{item.question}</span>
+            <span className={styles.questionIcon} aria-hidden="true">
+              +
+            </span>
           </summary>
-          <p className={styles.answer}>
-            {item.answer}
-          </p>
+          <div className={styles.answerWrap}>
+            <p className={styles.answer}>
+              {item.answer}
+            </p>
+          </div>
         </details>
       ))}
     </div>

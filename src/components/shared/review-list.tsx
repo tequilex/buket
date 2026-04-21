@@ -21,7 +21,10 @@ export function ReviewList({ items }: ReviewListProps) {
           key={`${item.author}-${item.text}`}
           className={styles.item}
         >
-          <p className={styles.text}>“{item.text}”</p>
+          <span className={styles.quoteMark} aria-hidden="true">
+            “
+          </span>
+          <p className={styles.text}>{item.text}</p>
           <div className={styles.meta}>
             <p className={styles.author}>{item.author}</p>
             <p className={styles.details}>
