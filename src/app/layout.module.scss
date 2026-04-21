@@ -9,7 +9,7 @@
 .main {
   flex: 1;
   padding-top: var(--shell-header-offset);
-  padding-bottom: 7rem;
+  padding-bottom: calc(var(--shell-mobile-bar-offset) + 1rem);
 }
 
 @media (min-width: 768px) {

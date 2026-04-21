@@ -12,8 +12,11 @@ test('renders the storefront shell sections', () => {
 
   expect(screen.getByRole('banner')).toBeInTheDocument();
   expect(
-    screen.getAllByRole('heading', { name: /популярные букеты/i }),
-  ).toHaveLength(2);
+    screen.getByRole('navigation', { name: /основная навигация/i }),
+  ).toBeInTheDocument();
+  expect(
+    screen.getByRole('navigation', { name: /быстрые контакты/i }),
+  ).toBeInTheDocument();
   expect(screen.getByRole('contentinfo')).toBeInTheDocument();
 });
 

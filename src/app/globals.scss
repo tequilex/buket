@@ -13,6 +13,7 @@
   --card: var(--surface);
   --accent-strong: var(--accent);
   --shell-header-offset: 4.75rem;
+  --shell-mobile-bar-offset: calc(4.75rem + env(safe-area-inset-bottom));
 }
 
 * {
