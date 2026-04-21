@@ -1,22 +1,19 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import HomePage from '@/app/page';
-import { MobileContactBar } from '@/components/layout/mobile-contact-bar';
-import { SiteFooter } from '@/components/layout/site-footer';
-import { SiteHeader } from '@/components/layout/site-header';
+import { StorefrontShell } from '@/app/layout';
 
 test('renders the storefront shell sections', () => {
   render(
-    <>
-      <SiteHeader />
+    <StorefrontShell>
       <HomePage />
-      <SiteFooter />
-      <MobileContactBar />
-    </>,
+    </StorefrontShell>,
   );
 
   expect(screen.getByRole('banner')).toBeInTheDocument();
-  expect(screen.getAllByRole('heading', { name: /популярные букеты/i })).toHaveLength(2);
+  expect(
+    screen.getAllByRole('heading', { name: /популярные букеты/i }),
+  ).toHaveLength(2);
   expect(screen.getByRole('contentinfo')).toBeInTheDocument();
 });
 

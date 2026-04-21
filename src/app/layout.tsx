@@ -45,6 +45,17 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
+export function StorefrontShell({ children }: RootLayoutProps) {
+  return (
+    <div className={styles.appRoot}>
+      <SiteHeader />
+      <main className={styles.main}>{children}</main>
+      <SiteFooter />
+      <MobileContactBar />
+    </div>
+  );
+}
+
 export default function RootLayout({ children }: RootLayoutProps) {
   const metricaId = Number(process.env.NEXT_PUBLIC_YANDEX_METRIKA_ID);
   const hasMetrica = Number.isFinite(metricaId) && metricaId > 0;
@@ -73,12 +84,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
           </noscript>
         ) : null}
-        <div className={styles.appRoot}>
-          <SiteHeader />
-          <main className={styles.main}>{children}</main>
-          <SiteFooter />
-          <MobileContactBar />
-        </div>
+        <StorefrontShell>{children}</StorefrontShell>
       </body>
     </html>
   );

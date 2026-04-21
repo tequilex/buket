@@ -3,6 +3,7 @@
   inset-inline: 0;
   top: 0;
   z-index: 40;
+  block-size: var(--shell-header-offset);
   border-bottom: 1px solid var(--line);
   background: rgba(255, 253, 248, 0.88);
   backdrop-filter: blur(16px);
@@ -16,8 +17,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  min-height: var(--shell-header-offset);
-  padding: 0.875rem 1rem;
+  block-size: 100%;
+  padding-inline: 1rem;
 }
 
 .brand {
