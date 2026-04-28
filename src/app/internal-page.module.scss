@@ -1,9 +1,16 @@
 .page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 4rem 24px 5rem;
+  padding: 2.5rem 20px 3.5rem;
   display: grid;
-  gap: 3rem;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: 4rem 24px 5rem;
+    gap: 3rem;
+  }
 }
 
 .section {
@@ -241,7 +248,7 @@
   .bouquetGridDense,
   .bouquetGridStandard,
   .categoryGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 

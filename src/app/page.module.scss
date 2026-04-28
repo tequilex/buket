@@ -3,7 +3,8 @@
   position: relative;
   min-height: calc(100vh - 64px);
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   overflow: hidden;
 }
 
@@ -52,7 +53,7 @@
 }
 
 .heroTitle {
-  font-size: clamp(24px, 3.2vw, 46px);
+  font-size: clamp(30px, 6vw, 46px);
   line-height: 1.1;
   color: white;
   font-weight: 700;
@@ -66,7 +67,7 @@
 }
 
 .heroDescription {
-  font-size: 17px;
+  font-size: clamp(15px, 2.5vw, 17px);
   line-height: 1.65;
   color: oklch(1 0 0 / 0.85);
   font-weight: 300;
@@ -75,7 +76,7 @@
 
 .heroBtns {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -83,7 +84,7 @@
 .btnPrimary {
   background: var(--accent);
   color: white;
-  padding: 16px 32px;
+  padding: 14px 28px;
   font-size: 15px;
   font-weight: 600;
   border-radius: var(--radius);
@@ -99,12 +100,12 @@
 }
 
 .heroStats {
-  position: absolute;
-  bottom: 24px;
-  right: max(24px, calc((100vw - 1200px) / 2));
+  position: relative;
   z-index: 2;
   display: flex;
   gap: 32px;
+  margin-left: max(24px, calc((100vw - 1200px) / 2));
+  padding: 0 max(24px, calc((100vw - 1200px) / 2)) 40px;
 }
 
 .heroStat {
@@ -128,23 +129,33 @@
   text-transform: uppercase;
 }
 
-@media (max-width: 768px) {
-  .heroStats {
-    position: static;
-    padding: 0 24px 40px;
-    flex-direction: row;
-    justify-content: flex-start;
+@media (max-width: 480px) {
+  .heroContent {
+    padding: 72px 20px 20px;
   }
 
-  .heroContent {
-    padding: 100px 24px 24px;
+  .heroStats {
+    gap: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 28px;
+  }
+
+  .heroStatNum {
+    font-size: 26px;
   }
 }
 
 /* ===== КАТАЛОГ ===== */
 .catalogSection {
-  padding: 96px 0;
+  padding: 64px 0;
   background: var(--bg2);
+}
+
+@media (min-width: 768px) {
+  .catalogSection {
+    padding: 96px 0;
+  }
 }
 
 .categoryGrid {
@@ -214,8 +225,14 @@
 
 /* ===== О НАС ===== */
 .aboutSection {
-  padding: 96px 0;
+  padding: 64px 0;
   background: var(--bg);
+}
+
+@media (min-width: 768px) {
+  .aboutSection {
+    padding: 96px 0;
+  }
 }
 
 .aboutGrid {
@@ -279,7 +296,7 @@
 }
 
 .sectionTitle {
-  font-size: clamp(28px, 3.5vw, 48px);
+  font-size: clamp(26px, 4vw, 48px);
   line-height: 1.1;
   margin-bottom: 16px;
   font-weight: 700;
@@ -332,50 +349,98 @@
 @media (max-width: 768px) {
   .aboutGrid {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 32px;
+  }
+
+  .aboutImage {
+    aspect-ratio: 3/2;
   }
 }
 
 /* ===== КАК ЗАКАЗАТЬ ===== */
 .orderSection {
-  padding: 96px 0;
+  padding: 64px 0;
   background: var(--bg2);
+}
+
+@media (min-width: 768px) {
+  .orderSection {
+    padding: 96px 0;
+  }
 }
 
 .orderIntro {
   text-align: center;
-  margin-bottom: 56px;
+  margin-bottom: 40px;
+
+  :global(p) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .orderIntro {
+    margin-bottom: 56px;
+  }
 }
 
 .orderSteps {
   display: grid;
-  gap: 32px;
-  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  .orderSteps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .orderSteps {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
 }
 
 .orderCard {
   text-align: center;
-  padding: 24px;
+  padding: 20px 16px;
 }
 
 .orderStepNum {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: var(--accent);
   color: white;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
+  margin: 0 auto 16px;
+}
+
+@media (min-width: 768px) {
+  .orderCard {
+    padding: 24px;
+  }
+
+  .orderStepNum {
+    width: 64px;
+    height: 64px;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
 }
 
 .orderStepTitle {
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .orderStepText {
@@ -385,15 +450,22 @@
 }
 
 .orderCta {
-  margin-top: 60px;
+  margin-top: 48px;
   text-align: center;
   background: var(--accent);
-  padding: 48px;
+  padding: 32px 24px;
   border-radius: var(--radius);
 }
 
+@media (min-width: 768px) {
+  .orderCta {
+    padding: 48px;
+    margin-top: 60px;
+  }
+}
+
 .orderCtaTitle {
-  font-size: 28px;
+  font-size: clamp(22px, 3vw, 28px);
   color: white;
   margin-bottom: 10px;
   font-weight: 700;
@@ -401,7 +473,7 @@
 
 .orderCtaDesc {
   color: oklch(1 0 0 / 0.8);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   font-size: 15px;
 }
 
@@ -421,20 +493,26 @@
   }
 }
 
-@media (min-width: 1024px) {
-  .orderSteps {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 /* ===== FAQ ===== */
 .faqSection {
-  padding: 96px 0;
+  padding: 64px 0;
   background: var(--bg);
+}
+
+@media (min-width: 768px) {
+  .faqSection {
+    padding: 96px 0;
+  }
 }
 
 /* ===== ОТЗЫВЫ ===== */
 .reviewsSection {
-  padding: 96px 0;
+  padding: 64px 0;
   background: var(--bg);
+}
+
+@media (min-width: 768px) {
+  .reviewsSection {
+    padding: 96px 0;
+  }
 }

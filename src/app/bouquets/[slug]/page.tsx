@@ -76,6 +76,7 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
       />
 
       <section className={styles.hero}>
+        {/* Левая колонка — фото */}
         <div className={styles.mediaColumn}>
           <div className={styles.imageWrap}>
             <Image
@@ -84,103 +85,83 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
               fill
               className={styles.image}
               priority
-              sizes="(max-width: 1024px) 100vw, 52vw"
+              sizes="(max-width: 1024px) 100vw, 44vw"
             />
           </div>
-          <div className={styles.tagGrid}>
-            {bouquet.tags.map((tag) => (
-              <div
-                key={tag}
-                className={styles.tagCard}
-              >
-                {tag}
-              </div>
-            ))}
-          </div>
+          {bouquet.tags.length > 0 && (
+            <div className={styles.tags}>
+              {bouquet.tags.map((tag) => (
+                <span key={tag} className={styles.tag}>{tag}</span>
+              ))}
+            </div>
+          )}
         </div>
 
+        {/* Правая колонка — детали */}
         <div className={styles.details}>
-          <SectionHeading
-            eyebrow="Карточка букета"
-            title={bouquet.name}
-            description={bouquet.fullDescription}
-          />
-
-          <div className={styles.statsGrid}>
-            <div className={styles.statCard}>
-              <p className={styles.statLabel}>
-                Цена
-              </p>
-              <p className={styles.priceValue}>
-                от {bouquet.priceFrom} ₽
-              </p>
-            </div>
-            <div className={styles.statCard}>
-              <p className={styles.statLabel}>
-                Размер
-              </p>
-              <p className={styles.sizeValue}>
-                {bouquet.weightOrSize}
-              </p>
-            </div>
-          </div>
-
-          <div className={styles.compositionPanel}>
-            <div>
-              <h2 className={styles.compositionTitle}>Что внутри</h2>
-              <ul className={styles.compositionList}>
-                {bouquet.composition.map((item) => (
-                  <li key={item} className={styles.compositionItem}>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className={styles.deliveryNote}>
-              {bouquet.deliveryNote}
-            </div>
-            <ContactButtons
-              source={`bouquet_${bouquet.slug}_primary`}
-              className={styles.actions}
+          <div>
+            <SectionHeading
+              eyebrow="Карточка букета"
+              title={bouquet.name}
+              description={bouquet.fullDescription}
             />
           </div>
+
+          {/* Цена и размер */}
+          <div className={styles.stats}>
+            <div className={styles.stat}>
+              <span className={styles.statLabel}>Цена</span>
+              <span className={styles.priceValue}>от {bouquet.priceFrom} ₽</span>
+            </div>
+            <div className={styles.statDivider} />
+            <div className={styles.stat}>
+              <span className={styles.statLabel}>Размер / вес</span>
+              <span className={styles.sizeValue}>{bouquet.weightOrSize}</span>
+            </div>
+          </div>
+
+          {/* Состав */}
+          <div className={styles.compositionPanel}>
+            <h2 className={styles.compositionTitle}>Что внутри</h2>
+            <ul className={styles.compositionList}>
+              {bouquet.composition.map((item) => (
+                <li key={item} className={styles.compositionItem}>
+                  <span className={styles.compositionDot} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Заметка о доставке */}
+          <p className={styles.deliveryNote}>{bouquet.deliveryNote}</p>
+
+          {/* Кнопки */}
+          <ContactButtons source={`bouquet_${bouquet.slug}`} />
         </div>
       </section>
 
+      {/* Доставка */}
       <section className={styles.deliveryPanel}>
-        <p className={styles.statLabel}>
-          Доставка
-        </p>
-        <p className={styles.deliveryText}>
-          Работаем по Краснодару и Яблоновскому. Для уточнения времени,
-          адреса и возможной замены ингредиентов лучше сразу написать в удобный
-          канал связи.
-        </p>
-        <div className={styles.locationLinks}>
-          <Link
-            href="/locations/krasnodar"
-            className={styles.locationLink}
-          >
-            Краснодар
-          </Link>
-          <Link
-            href="/locations/yablonovskiy"
-            className={styles.locationLink}
-          >
-            Яблоновский
-          </Link>
-        </div>
-        <div className={styles.secondaryActions}>
-          <ContactButtons source={`bouquet_${bouquet.slug}_secondary`} />
+        <div className={styles.deliveryMeta}>
+          <div>
+            <p className={styles.deliveryTitle}>Доставка по Краснодару и Яблоновскому</p>
+            <p className={styles.deliveryText}>
+              Уточним время, адрес и возможную замену ингредиентов в мессенджере.
+            </p>
+          </div>
+          <div className={styles.locationLinks}>
+            <Link href="/locations/krasnodar" className={styles.locationLink}>Краснодар</Link>
+            <Link href="/locations/yablonovskiy" className={styles.locationLink}>Яблоновский</Link>
+          </div>
         </div>
       </section>
 
-      {relatedBouquets.length > 0 ? (
+      {relatedBouquets.length > 0 && (
         <section className={styles.relatedSection}>
           <SectionHeading
             eyebrow="Похожие букеты"
-            title="Еще в этой категории"
-            description="Похожие позиции внутри той же категории, чтобы пользователь мог быстро сравнить варианты."
+            title="Ещё в этой категории"
           />
           <div className={styles.relatedGrid}>
             {relatedBouquets.map((item) => (
@@ -188,7 +169,7 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
             ))}
           </div>
         </section>
-      ) : null}
+      )}
     </div>
   );
 }
