@@ -124,20 +124,25 @@
 
 .categoryGrid {
   display: grid;
-  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
 
 .categoryCard {
   border: 1.5px solid var(--border);
   border-radius: var(--radius);
   background: var(--card);
-  padding: 1.5rem;
+  padding: 1rem;
   box-shadow: var(--shadow);
   transition: transform 180ms ease, border-color 180ms ease;
 
   &:hover {
     transform: translateY(-4px);
     border-color: var(--accent);
+  }
+
+  @media (min-width: 640px) {
+    padding: 1.5rem;
   }
 }
 

@@ -160,6 +160,7 @@
 
 .categoryGrid {
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   margin-top: 40px;
 }
@@ -168,9 +169,13 @@
   border: 1.5px solid var(--border);
   border-radius: var(--radius);
   background: var(--card);
-  padding: 24px;
+  padding: 16px;
   box-shadow: var(--shadow);
   transition: transform 180ms ease, border-color 180ms ease;
+
+  @media (min-width: 640px) {
+    padding: 24px;
+  }
 
   &:hover {
     transform: translateY(-4px);
@@ -186,10 +191,15 @@
 }
 
 .categoryTitle {
-  margin-top: 0.75rem;
+  margin-top: 0.5rem;
   color: var(--fg);
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   font-weight: 600;
+
+  @media (min-width: 640px) {
+    margin-top: 0.75rem;
+    font-size: 1.5rem;
+  }
 }
 
 .categoryDescription {

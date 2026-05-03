@@ -7,6 +7,16 @@
 
 .compactContainer {
   justify-content: center;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+
+  .compact {
+    flex: 1;
+    justify-content: center;
+    min-width: 0;
+    padding: 0.625rem 0.5rem;
+    font-size: 0.8rem;
+  }
 }
 
 .button {

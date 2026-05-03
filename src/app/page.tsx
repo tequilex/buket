@@ -24,7 +24,7 @@ export default function HomePage() {
       <section className={styles.hero}>
         <div className={styles.heroBg}>
           <Image
-            src="/images/bouquets/1.webp"
+            src="/images/bouquets/hero.webp"
             alt="Съедобные букеты с доставкой"
             fill
             priority
@@ -53,14 +53,14 @@ export default function HomePage() {
         <div className={styles.heroStats}>
           <div className={styles.heroStat}>
             <span className={styles.heroStatNum}>500+</span>
-            <span className={styles.heroStatLabel}>Букетов</span>
+            <span className={styles.heroStatLabel}>Заказов</span>
           </div>
           <div className={styles.heroStat}>
             <span className={styles.heroStatNum}>4</span>
             <span className={styles.heroStatLabel}>Категории</span>
           </div>
           <div className={styles.heroStat}>
-            <span className={styles.heroStatNum}>2–5к</span>
+            <span className={styles.heroStatNum}>3–5к</span>
             <span className={styles.heroStatLabel}>Рублей</span>
           </div>
         </div>
