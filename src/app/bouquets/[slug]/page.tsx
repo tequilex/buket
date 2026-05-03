@@ -137,6 +137,11 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
           {/* Заметка о доставке */}
           <p className={styles.deliveryNote}>{bouquet.deliveryNote}</p>
 
+          {/* Заметка об approximateness */}
+          <p className={styles.approxNote}>
+            Фото и состав букета являются примерными. Окончательный вариант согласовывается при оформлении заказа.
+          </p>
+
           {/* Кнопки */}
           <ContactButtons source={`bouquet_${bouquet.slug}`} />
         </div>

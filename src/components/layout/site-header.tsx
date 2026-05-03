@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { MobileMenu } from './mobile-menu';
 import styles from './site-header.module.scss';
 
 const navItems = [
@@ -29,6 +30,7 @@ export function SiteHeader() {
         <Link href="/catalog" className={styles.cta}>
           Заказать букет
         </Link>
+        <MobileMenu />
       </div>
     </header>
   );
