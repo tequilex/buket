@@ -148,13 +148,13 @@
 
 /* ===== КАТАЛОГ ===== */
 .catalogSection {
-  padding: 64px 0;
+  padding: 40px 0;
   background: var(--bg2);
 }
 
 @media (min-width: 768px) {
   .catalogSection {
-    padding: 96px 0;
+    padding: 72px 0;
   }
 }
 
@@ -235,13 +235,13 @@
 
 /* ===== О НАС ===== */
 .aboutSection {
-  padding: 64px 0;
+  padding: 40px 0;
   background: var(--bg);
 }
 
 @media (min-width: 768px) {
   .aboutSection {
-    padding: 96px 0;
+    padding: 72px 0;
   }
 }
 
@@ -369,13 +369,13 @@
 
 /* ===== КАК ЗАКАЗАТЬ ===== */
 .orderSection {
-  padding: 64px 0;
+  padding: 40px 0;
   background: var(--bg2);
 }
 
 @media (min-width: 768px) {
   .orderSection {
-    padding: 96px 0;
+    padding: 72px 0;
   }
 }
 
@@ -397,13 +397,12 @@
 
 .orderSteps {
   display: grid;
-  gap: 20px;
-  grid-template-columns: 1fr;
+  gap: 16px;
+  grid-template-columns: repeat(2, 1fr);
 }
 
 @media (min-width: 480px) {
   .orderSteps {
-    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
 }
@@ -418,6 +417,9 @@
 .orderCard {
   text-align: center;
   padding: 20px 16px;
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--card);
 }
 
 .orderStepNum {
@@ -454,9 +456,13 @@
 }
 
 .orderStepText {
-  font-size: 14px;
+  font-size: 11px;
   color: var(--fg2);
-  line-height: 1.55;
+  line-height: 1.5;
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
 }
 
 .orderCta {
@@ -505,24 +511,24 @@
 
 /* ===== FAQ ===== */
 .faqSection {
-  padding: 64px 0;
+  padding: 40px 0;
   background: var(--bg);
 }
 
 @media (min-width: 768px) {
   .faqSection {
-    padding: 96px 0;
+    padding: 72px 0;
   }
 }
 
 /* ===== ОТЗЫВЫ ===== */
 .reviewsSection {
-  padding: 64px 0;
+  padding: 40px 0;
   background: var(--bg);
 }
 
 @media (min-width: 768px) {
   .reviewsSection {
-    padding: 96px 0;
+    padding: 72px 0;
   }
 }
