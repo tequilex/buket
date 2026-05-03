@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ContactButtons } from '@/components/cta/contact-buttons';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { buildMetadata } from '@/lib/seo/metadata';
+import styles from '@/app/internal-page.module.scss';
 
 export function generateMetadata(): Metadata {
   return buildMetadata({
@@ -14,29 +15,29 @@ export function generateMetadata(): Metadata {
 
 export default function ContactsPage() {
   return (
-    <div className="page-shell space-y-12 py-10 sm:py-14">
+    <div className={styles.page}>
       <SectionHeading
         eyebrow="Контакты"
         title="Как быстро связаться и оформить заказ"
         description="Работаем через WhatsApp, Telegram и Avito, чтобы быстро согласовать состав, бюджет, дату и адрес доставки."
       />
 
-      <section className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="rounded-[28px] border border-[var(--line)] bg-[var(--card)] p-6">
-          <p className="text-base leading-7 text-[var(--muted)]">
+      <section className={styles.split}>
+        <div className={styles.cardPanel}>
+          <p className={styles.panelText}>
             Лучше всего писать сразу в WhatsApp, Telegram или Avito: так можно
             быстро согласовать состав, бюджет, дату и адрес доставки.
           </p>
-          <div className="mt-6">
+          <div className={styles.actionRow}>
             <ContactButtons source="contacts_page" />
           </div>
         </div>
 
-        <div className="rounded-[28px] border border-[var(--line)] bg-[var(--surface)] p-6">
-          <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
+        <div className={styles.surfacePanel}>
+          <p className={styles.panelEyebrow}>
             География
           </p>
-          <p className="mt-3 text-base leading-7 text-[var(--text)]">
+          <p className={styles.panelText}>
             Работаем по Краснодару и Яблоновскому. Сайт построен как удобная
             витрина и быстрый канал для заказа с доставкой, поэтому связаться
             проще всего напрямую в мессенджере.

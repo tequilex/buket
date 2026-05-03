@@ -1,0 +1,518 @@
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: oklch(0.15 0.02 200 / 0.45);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+  padding: 80px 24px 40px;
+  margin-left: max(24px, calc((100vw - 1200px) / 2));
+  display: grid;
+  gap: 1rem;
+}
+
+.heroTag {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  width: fit-content;
+}
+
+.heroBody {
+  display: grid;
+  gap: 1rem;
+}
+
+.heroTitle {
+  font-size: clamp(30px, 6vw, 46px);
+  line-height: 1.1;
+  color: white;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
+
+  em {
+    color: var(--accent);
+    font-style: italic;
+  }
+}
+
+.heroDescription {
+  font-size: clamp(15px, 2.5vw, 17px);
+  line-height: 1.65;
+  color: oklch(1 0 0 / 0.85);
+  font-weight: 300;
+  max-width: 460px;
+}
+
+.heroBtns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.btnPrimary {
+  background: var(--accent);
+  color: white;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius);
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s, transform 0.15s;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    opacity: 0.88;
+    transform: translateY(-2px);
+  }
+}
+
+.heroStats {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 32px;
+  margin-left: max(24px, calc((100vw - 1200px) / 2));
+  padding: 0 max(24px, calc((100vw - 1200px) / 2)) 40px;
+}
+
+.heroStat {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.heroStatNum {
+  font-size: 32px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+
+.heroStatLabel {
+  font-size: 11px;
+  color: oklch(1 0 0 / 0.7);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 480px) {
+  .heroContent {
+    padding: 72px 20px 20px;
+  }
+
+  .heroStats {
+    gap: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 28px;
+  }
+
+  .heroStatNum {
+    font-size: 26px;
+  }
+}
+
+/* ===== КАТАЛОГ ===== */
+.catalogSection {
+  padding: 64px 0;
+  background: var(--bg2);
+}
+
+@media (min-width: 768px) {
+  .catalogSection {
+    padding: 96px 0;
+  }
+}
+
+.categoryGrid {
+  display: grid;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.categoryLink {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  transition: transform 180ms ease, border-color 180ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+}
+
+.categoryEyebrow {
+  color: var(--fg2);
+  font-size: 0.75rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.categoryTitle {
+  margin-top: 0.75rem;
+  color: var(--fg);
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.categoryDescription {
+  margin-top: 0.75rem;
+  color: var(--fg2);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.featuredGrid {
+  display: grid;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+@media (min-width: 640px) {
+  .categoryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .featuredGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .categoryGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .featuredGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===== О НАС ===== */
+.aboutSection {
+  padding: 64px 0;
+  background: var(--bg);
+}
+
+@media (min-width: 768px) {
+  .aboutSection {
+    padding: 96px 0;
+  }
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.aboutImage {
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4/5;
+  background: var(--bg3);
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.aboutBadge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: var(--accent);
+  padding: 20px 28px;
+  border-radius: var(--radius) 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.aboutBadgeNum {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+
+.aboutBadgeTxt {
+  font-size: 12px;
+  color: oklch(1 0 0 / 0.8);
+  letter-spacing: 0.08em;
+}
+
+.aboutCopy {
+  display: grid;
+  gap: 0;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.sectionTitle {
+  font-size: clamp(26px, 4vw, 48px);
+  line-height: 1.1;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.sectionDesc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--fg2);
+  max-width: 540px;
+}
+
+.aboutFeatures {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 36px;
+}
+
+.feature {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.featureIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.featureTitle {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.featureDesc {
+  font-size: 14px;
+  color: var(--fg2);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .aboutImage {
+    aspect-ratio: 3/2;
+  }
+}
+
+/* ===== КАК ЗАКАЗАТЬ ===== */
+.orderSection {
+  padding: 64px 0;
+  background: var(--bg2);
+}
+
+@media (min-width: 768px) {
+  .orderSection {
+    padding: 96px 0;
+  }
+}
+
+.orderIntro {
+  text-align: center;
+  margin-bottom: 40px;
+
+  :global(p) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .orderIntro {
+    margin-bottom: 56px;
+  }
+}
+
+.orderSteps {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  .orderSteps {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .orderSteps {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+}
+
+.orderCard {
+  text-align: center;
+  padding: 20px 16px;
+}
+
+.orderStepNum {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+@media (min-width: 768px) {
+  .orderCard {
+    padding: 24px;
+  }
+
+  .orderStepNum {
+    width: 64px;
+    height: 64px;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+}
+
+.orderStepTitle {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.orderStepText {
+  font-size: 14px;
+  color: var(--fg2);
+  line-height: 1.55;
+}
+
+.orderCta {
+  margin-top: 48px;
+  text-align: center;
+  background: var(--accent);
+  padding: 32px 24px;
+  border-radius: var(--radius);
+}
+
+@media (min-width: 768px) {
+  .orderCta {
+    padding: 48px;
+    margin-top: 60px;
+  }
+}
+
+.orderCtaTitle {
+  font-size: clamp(22px, 3vw, 28px);
+  color: white;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.orderCtaDesc {
+  color: oklch(1 0 0 / 0.8);
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+.btnWhite {
+  background: white;
+  color: var(--accent);
+  padding: 14px 32px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: var(--radius);
+  transition: opacity 0.2s;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+/* ===== FAQ ===== */
+.faqSection {
+  padding: 64px 0;
+  background: var(--bg);
+}
+
+@media (min-width: 768px) {
+  .faqSection {
+    padding: 96px 0;
+  }
+}
+
+/* ===== ОТЗЫВЫ ===== */
+.reviewsSection {
+  padding: 64px 0;
+  background: var(--bg);
+}
+
+@media (min-width: 768px) {
+  .reviewsSection {
+    padding: 96px 0;
+  }
+}

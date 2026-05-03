@@ -9,14 +9,14 @@ const rawBouquets: BouquetEntry[] = [
       'Эффектный мясной букет для дня рождения, 23 февраля и подарка мужчине.',
     category: 'myasnye',
     tags: ['мужской', 'с орехами', 'на 23 февраля'],
-    priceFrom: 3400,
+    priceFrom: 3800,
     images: [
       {
-        src: '/images/bouquets/placeholder-myasnye.svg',
+        src: '/images/bouquets/5.webp',
         alt: 'Мясной съедобный букет Мужской хит',
       },
     ],
-    composition: ['колбасы', 'сыр', 'орехи', 'декор'],
+    composition: ['колбасы', 'сыр', 'декор'],
     weightOrSize: 'Средний размер',
     deliveryNote:
       'Доставка по Краснодару и Яблоновскому в день заказа по согласованию.',
@@ -34,14 +34,14 @@ const rawBouquets: BouquetEntry[] = [
       'Сбалансированный мясной букет для поздравления, корпоратива и мужского подарка.',
     category: 'myasnye',
     tags: ['мужской', 'подарочный', 'коллеге'],
-    priceFrom: 4200,
+    priceFrom: 4000,
     images: [
       {
-        src: '/images/bouquets/placeholder-myasnye.svg',
+        src: '/images/bouquets/8.webp',
         alt: 'Подарочный мясной букет Колбасный премиум',
       },
     ],
-    composition: ['колбасы', 'сыр', 'снеки', 'зелень'],
+    composition: ['колбасы', 'сыр', 'снеки', 'зелень', 'овощи', 'орехи'],
     weightOrSize: 'Большой размер',
     deliveryNote: 'Удобен для доставки в офис или домой по Краснодару и Яблоновскому.',
     availableLocations: ['krasnodar', 'yablonovskiy'],
@@ -53,19 +53,19 @@ const rawBouquets: BouquetEntry[] = [
   {
     slug: 'sytnyy-podarok',
     name: 'Букет "Сытный подарок"',
-    shortDescription: 'Мясные снеки, сырные акценты и насыщенный вкус.',
+    shortDescription: 'Колбасные снеки, сырные акценты и насыщенный вкус.',
     fullDescription:
       'Практичный мясной букет для тех, кто любит сытные подарки без лишней мишуры.',
     category: 'myasnye',
-    tags: ['мясной', 'на день рождения', 'снеки'],
-    priceFrom: 3100,
+    tags: ['мясной', 'на день рождения'],
+    priceFrom: 3600,
     images: [
       {
-        src: '/images/bouquets/placeholder-myasnye.svg',
+        src: '/images/bouquets/9.webp',
         alt: 'Сытный мясной букет с сыром и снеками',
       },
     ],
-    composition: ['мясные снеки', 'сыр', 'орехи', 'декор'],
+    composition: ['колбасы', 'сыр','хлеб','овощи', 'декор'],
     weightOrSize: 'Средний размер',
     deliveryNote: 'Можно быстро согласовать состав и удобное время доставки.',
     availableLocations: ['krasnodar', 'yablonovskiy'],
@@ -85,7 +85,7 @@ const rawBouquets: BouquetEntry[] = [
     priceFrom: 3600,
     images: [
       {
-        src: '/images/bouquets/placeholder-rybnye.svg',
+        src: '/images/bouquets/6.webp',
         alt: 'Рыбный букет Рыбный улов',
       },
     ],
@@ -101,19 +101,19 @@ const rawBouquets: BouquetEntry[] = [
   {
     slug: 'morskoy-vkus',
     name: 'Букет "Морской вкус"',
-    shortDescription: 'Рыбные снеки и выразительная упаковка для подарка.',
+    shortDescription: 'Рыбный набор и выразительная упаковка для подарка.',
     fullDescription:
       'Насыщенный рыбный букет для дня рождения, встречи друзей и небанального поздравления.',
     category: 'rybnye',
     tags: ['рыбный', 'на день рождения', 'подарочный'],
-    priceFrom: 3950,
+    priceFrom: 3700,
     images: [
       {
-        src: '/images/bouquets/placeholder-rybnye.svg',
+        src: '/images/bouquets/11.webp',
         alt: 'Подарочный рыбный букет Морской вкус',
       },
     ],
-    composition: ['рыбные снеки', 'орехи', 'соленые закуски', 'декор'],
+    composition: ['сушеная рыба', 'копченая рыба', 'декор'],
     weightOrSize: 'Большой размер',
     deliveryNote: 'Подходит для доставки домой и как сюрприз с вручением.',
     availableLocations: ['krasnodar'],
@@ -125,19 +125,19 @@ const rawBouquets: BouquetEntry[] = [
   {
     slug: 'pennyy-vecher',
     name: 'Букет "Пенный вечер"',
-    shortDescription: 'Рыба, снеки и орехи для подарка с соленым акцентом.',
+    shortDescription: 'Рыба / креветки / раки.',
     fullDescription:
       'Солёный съедобный букет для тех, кто любит рыбные закуски и выразительную подачу.',
     category: 'rybnye',
-    tags: ['рыбный', 'с орехами', 'мужской'],
-    priceFrom: 3300,
+    tags: ['рыбный', 'мужской'],
+    priceFrom: 4000,
     images: [
       {
-        src: '/images/bouquets/placeholder-rybnye.svg',
+        src: '/images/bouquets/1.webp',
         alt: 'Рыбный букет с орехами Пенный вечер',
       },
     ],
-    composition: ['рыбные снеки', 'орехи', 'сухарики', 'декор'],
+    composition: ['рыба/креветки/раки', 'зелень', 'декор'],
     weightOrSize: 'Средний размер',
     deliveryNote: 'Можно адаптировать состав под бюджет и любимые снеки.',
     availableLocations: ['krasnodar', 'yablonovskiy'],
@@ -149,26 +149,26 @@ const rawBouquets: BouquetEntry[] = [
   {
     slug: 'sladkiy-kompliment',
     name: 'Букет "Сладкий комплимент"',
-    shortDescription: 'Конфеты и шоколад в аккуратной подарочной упаковке.',
+    shortDescription: 'Мармелад и зефир в аккуратной подарочной упаковке.',
     fullDescription:
       'Сладкий букет для поздравления, подарка коллеге и небольшого праздника.',
     category: 'sladkie',
     tags: ['сладкий', 'коллеге', 'на день рождения'],
-    priceFrom: 2400,
+    priceFrom: 3000,
     images: [
       {
-        src: '/images/bouquets/placeholder-sladkie.svg',
+        src: '/images/bouquets/4.webp',
         alt: 'Сладкий букет Сладкий комплимент',
       },
     ],
-    composition: ['конфеты', 'шоколад', 'батончики', 'декор'],
+    composition: ['мармелад', 'зефир', 'мандарины', 'декор'],
     weightOrSize: 'Компактный размер',
     deliveryNote: 'Удобен для быстрого поздравления и доставки в течение дня.',
     availableLocations: ['krasnodar', 'yablonovskiy'],
     featured: true,
     seoTitle: 'Сладкий букет с доставкой в Краснодаре | Сладкий комплимент',
     seoDescription:
-      'Сладкий букет из конфет и шоколада с доставкой по Краснодару и Яблоновскому.',
+      'Сладкий букет из мармелада и зефира с доставкой по Краснодару и Яблоновскому.',
   },
   {
     slug: 'shokoladnyy-miks',
@@ -178,10 +178,10 @@ const rawBouquets: BouquetEntry[] = [
       'Сладкий букет с более насыщенным наполнением для дня рождения и теплых поздравлений.',
     category: 'sladkie',
     tags: ['сладкий', 'праздничный', 'день рождения'],
-    priceFrom: 2900,
+    priceFrom: 3100,
     images: [
       {
-        src: '/images/bouquets/placeholder-sladkie.svg',
+        src: '/images/bouquets/3.webp',
         alt: 'Праздничный сладкий букет Шоколадный микс',
       },
     ],
@@ -202,14 +202,14 @@ const rawBouquets: BouquetEntry[] = [
       'Свежий фруктовый букет для тех, кто любит легкие подарки и натуральные вкусы.',
     category: 'fruktovye',
     tags: ['фруктовый', 'легкий подарок', 'женский'],
-    priceFrom: 2800,
+    priceFrom: 3800,
     images: [
       {
-        src: '/images/bouquets/placeholder-fruktovye.svg',
+        src: '/images/bouquets/10.webp',
         alt: 'Фруктовый букет Фруктовая свежесть',
       },
     ],
-    composition: ['яблоки', 'цитрусы', 'виноград', 'декор'],
+    composition: ['яблоки', 'цитрусы', 'груши', 'декор'],
     weightOrSize: 'Средний размер',
     deliveryNote: 'Фруктовые букеты лучше доставлять в ближайшие окна после сборки.',
     availableLocations: ['krasnodar'],
@@ -226,14 +226,14 @@ const rawBouquets: BouquetEntry[] = [
       'Легкий фруктовый букет для приятного подарка, сюрприза и праздничного настроения.',
     category: 'fruktovye',
     tags: ['фруктовый', 'ягоды', 'праздничный'],
-    priceFrom: 3200,
+    priceFrom: 3600,
     images: [
       {
-        src: '/images/bouquets/placeholder-fruktovye.svg',
+        src: '/images/bouquets/2.webp',
         alt: 'Фруктовый букет с ягодами Ягодный акцент',
       },
     ],
-    composition: ['ягоды', 'цитрусы', 'виноград', 'декор'],
+    composition: ['ягоды', 'цитрусы', 'гранат', 'декор'],
     weightOrSize: 'Средний размер',
     deliveryNote:
       'Для Яблоновского и Краснодара лучше согласовать удобный интервал доставки заранее.',

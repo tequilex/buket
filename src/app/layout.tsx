@@ -1,13 +1,22 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { Montserrat } from 'next/font/google';
 import Script from 'next/script';
+
+const montserrat = Montserrat({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-montserrat',
+  display: 'swap',
+});
 import { YandexMetricaPageView } from '@/components/analytics/yandex-metrica-page-view';
 import { MobileContactBar } from '@/components/layout/mobile-contact-bar';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
 import { buildMetricaInitScript } from '@/lib/analytics/metrica';
 import { getBaseUrl } from '@/lib/utils';
-import './globals.css';
+import styles from './layout.module.scss';
+import './globals.scss';
 
 const siteUrl = getBaseUrl();
 
@@ -49,12 +58,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
   const hasMetrica = Number.isFinite(metricaId) && metricaId > 0;
 
   return (
-    <html lang="ru">
+    <html lang="ru" className={montserrat.variable}>
       <body>
         {hasMetrica ? (
           <Script
             id="yandex-metrica-init"
-            strategy="beforeInteractive"
+            strategy="afterInteractive"
           >
             {buildMetricaInitScript(metricaId)}
           </Script>
@@ -72,9 +81,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
           </noscript>
         ) : null}
-        <div className="min-h-screen bg-[var(--background)] text-[var(--text)]">
+        <div className={styles.appRoot}>
           <SiteHeader />
-          <main className="pb-28 md:pb-0">{children}</main>
+          <main className={styles.main}>{children}</main>
           <SiteFooter />
           <MobileContactBar />
         </div>

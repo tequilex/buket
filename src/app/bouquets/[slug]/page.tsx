@@ -15,6 +15,7 @@ import {
 } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { buildBouquetProductJsonLd } from '@/lib/seo/structured-data';
+import styles from '@/app/bouquet-page.module.scss';
 
 interface BouquetPageProps {
   params: Promise<{ slug: string }>;
@@ -42,6 +43,7 @@ export async function generateMetadata({
     title: bouquet.seoTitle,
     description: bouquet.seoDescription,
     path: `/bouquets/${bouquet.slug}`,
+    imageUrl: bouquet.images[0]?.src,
   });
 }
 
@@ -59,7 +61,7 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
     .slice(0, 2);
 
   return (
-    <div className="page-shell space-y-12 py-10 sm:py-14">
+    <div className={styles.page}>
       <JsonLd
         id={`bouquet-product-${bouquet.slug}`}
         data={buildBouquetProductJsonLd(bouquet)}
@@ -74,117 +76,106 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
         ].filter((item): item is { label: string; href?: string } => Boolean(item))}
       />
 
-      <section className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="space-y-4">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[32px] border border-[var(--line)] bg-[var(--surface)]">
+      <section className={styles.hero}>
+        {/* Левая колонка — фото */}
+        <div className={styles.mediaColumn}>
+          <div className={styles.imageWrap}>
             <Image
               src={bouquet.images[0].src}
               alt={bouquet.images[0].alt}
               fill
-              className="object-cover"
+              className={styles.image}
               priority
-              sizes="(max-width: 1024px) 100vw, 52vw"
+              sizes="(max-width: 1024px) 100vw, 44vw"
             />
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {bouquet.tags.map((tag) => (
-              <div
-                key={tag}
-                className="rounded-[20px] border border-[var(--line)] bg-[var(--card)] px-4 py-3 text-sm text-[var(--muted)]"
-              >
-                {tag}
-              </div>
-            ))}
-          </div>
+          {bouquet.tags.length > 0 && (
+            <div className={styles.tags}>
+              {bouquet.tags.map((tag) => (
+                <span key={tag} className={styles.tag}>{tag}</span>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="space-y-6">
-          <SectionHeading
-            eyebrow="Карточка букета"
-            title={bouquet.name}
-            description={bouquet.fullDescription}
-          />
+        {/* Правая колонка — детали */}
+        <div className={styles.details}>
+          <div>
+            <SectionHeading
+              eyebrow="Карточка букета"
+              title={bouquet.name}
+              description={bouquet.fullDescription}
+            />
+          </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-[24px] border border-[var(--line)] bg-[var(--card)] p-5">
-              <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
-                Цена
-              </p>
-              <p className="mt-2 text-3xl font-semibold text-[var(--text)]">
-                от {bouquet.priceFrom} ₽
-              </p>
+          {/* Цена и размер */}
+          <div className={styles.stats}>
+            <div className={styles.stat}>
+              <span className={styles.statLabel}>Цена</span>
+              <span className={styles.priceValue}>от {bouquet.priceFrom} ₽</span>
             </div>
-            <div className="rounded-[24px] border border-[var(--line)] bg-[var(--card)] p-5">
-              <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
-                Размер
-              </p>
-              <p className="mt-2 text-lg font-semibold text-[var(--text)]">
-                {bouquet.weightOrSize}
-              </p>
+            <div className={styles.statDivider} />
+            <div className={styles.stat}>
+              <span className={styles.statLabel}>Размер / вес</span>
+              <span className={styles.sizeValue}>{bouquet.weightOrSize}</span>
             </div>
           </div>
 
-          <div className="space-y-4 rounded-[28px] border border-[var(--line)] bg-[var(--card)] p-6">
-            <div>
-              <h2 className="text-lg font-semibold text-[var(--text)]">Что внутри</h2>
-              <ul className="mt-3 grid gap-2 text-sm leading-6 text-[var(--muted)]">
-                {bouquet.composition.map((item) => (
-                  <li key={item} className="rounded-[18px] bg-[var(--surface)] px-4 py-2">
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-[20px] bg-[var(--surface)] p-4 text-sm leading-6 text-[var(--muted)]">
-              {bouquet.deliveryNote}
-            </div>
-            <ContactButtons source={`bouquet_${bouquet.slug}_primary`} />
+          {/* Состав */}
+          <div className={styles.compositionPanel}>
+            <h2 className={styles.compositionTitle}>Что внутри</h2>
+            <ul className={styles.compositionList}>
+              {bouquet.composition.map((item) => (
+                <li key={item} className={styles.compositionItem}>
+                  <span className={styles.compositionDot} />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Заметка о доставке */}
+          <p className={styles.deliveryNote}>{bouquet.deliveryNote}</p>
+
+          {/* Заметка об approximateness */}
+          <p className={styles.approxNote}>
+            Фото и состав букета являются примерными. Окончательный вариант согласовывается при оформлении заказа.
+          </p>
+
+          {/* Кнопки */}
+          <ContactButtons source={`bouquet_${bouquet.slug}`} />
+        </div>
+      </section>
+
+      {/* Доставка */}
+      <section className={styles.deliveryPanel}>
+        <div className={styles.deliveryMeta}>
+          <div>
+            <p className={styles.deliveryTitle}>Доставка по Краснодару и Яблоновскому</p>
+            <p className={styles.deliveryText}>
+              Уточним время, адрес и возможную замену ингредиентов в мессенджере.
+            </p>
+          </div>
+          <div className={styles.locationLinks}>
+            <Link href="/locations/krasnodar" className={styles.locationLink}>Краснодар</Link>
+            <Link href="/locations/yablonovskiy" className={styles.locationLink}>Яблоновский</Link>
           </div>
         </div>
       </section>
 
-      <section className="rounded-[28px] border border-[var(--line)] bg-[var(--surface)] p-6">
-        <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
-          Доставка
-        </p>
-        <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--text)]">
-          Работаем по Краснодару и Яблоновскому. Для уточнения времени,
-          адреса и возможной замены ингредиентов лучше сразу написать в удобный
-          канал связи.
-        </p>
-        <div className="mt-5 flex flex-wrap gap-3">
-          <Link
-            href="/locations/krasnodar"
-            className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-sm text-[var(--muted)]"
-          >
-            Краснодар
-          </Link>
-          <Link
-            href="/locations/yablonovskiy"
-            className="rounded-full border border-[var(--line)] bg-white px-4 py-2 text-sm text-[var(--muted)]"
-          >
-            Яблоновский
-          </Link>
-        </div>
-        <div className="mt-5">
-          <ContactButtons source={`bouquet_${bouquet.slug}_secondary`} />
-        </div>
-      </section>
-
-      {relatedBouquets.length > 0 ? (
-        <section className="space-y-8">
+      {relatedBouquets.length > 0 && (
+        <section className={styles.relatedSection}>
           <SectionHeading
             eyebrow="Похожие букеты"
-            title="Еще в этой категории"
-            description="Похожие позиции внутри той же категории, чтобы пользователь мог быстро сравнить варианты."
+            title="Ещё в этой категории"
           />
-          <div className="grid gap-6 xl:grid-cols-2">
+          <div className={styles.relatedGrid}>
             {relatedBouquets.map((item) => (
               <BouquetCard key={item.slug} bouquet={item} />
             ))}
           </div>
         </section>
-      ) : null}
+      )}
     </div>
   );
 }

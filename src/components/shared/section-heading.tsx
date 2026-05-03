@@ -1,3 +1,5 @@
+import styles from './section-heading.module.scss';
+
 interface SectionHeadingProps {
   eyebrow?: string;
   title: string;
@@ -10,18 +12,18 @@ export function SectionHeading({
   description,
 }: SectionHeadingProps) {
   return (
-    <div className="space-y-3">
+    <div className={styles.root}>
       {eyebrow ? (
-        <p className="text-xs uppercase tracking-[0.28em] text-[var(--muted)]">
+        <p className={styles.eyebrow}>
           {eyebrow}
         </p>
       ) : null}
-      <div className="space-y-2">
-        <h2 className="text-3xl font-semibold tracking-tight text-[var(--text)] sm:text-4xl">
+      <div className={styles.body}>
+        <h2 className={styles.title}>
           {title}
         </h2>
         {description ? (
-          <p className="max-w-2xl text-base leading-7 text-[var(--muted)]">
+          <p className={styles.description}>
             {description}
           </p>
         ) : null}

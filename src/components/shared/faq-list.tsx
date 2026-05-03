@@ -1,4 +1,5 @@
 import type { FaqItem } from '@/lib/content/schemas';
+import styles from './faq-list.module.scss';
 
 interface FaqListProps {
   items: FaqItem[];
@@ -6,16 +7,16 @@ interface FaqListProps {
 
 export function FaqList({ items }: FaqListProps) {
   return (
-    <div className="grid gap-4">
+    <div className={styles.list}>
       {items.map((item) => (
         <details
           key={item.question}
-          className="rounded-[24px] border border-[var(--line)] bg-[var(--card)] p-5"
+          className={styles.item}
         >
-          <summary className="cursor-pointer list-none text-base font-semibold text-[var(--text)]">
+          <summary className={styles.question}>
             {item.question}
           </summary>
-          <p className="mt-3 text-sm leading-6 text-[var(--muted)]">
+          <p className={styles.answer}>
             {item.answer}
           </p>
         </details>

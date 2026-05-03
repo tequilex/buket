@@ -1,0 +1,75 @@
+.empty {
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 1.5rem;
+  color: var(--fg2);
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+}
+
+.list {
+  display: grid;
+  gap: 24px;
+  margin-top: 48px;
+}
+
+.item {
+  background: var(--card);
+  padding: 28px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.stars {
+  color: var(--accent);
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+
+.text {
+  color: var(--fg2);
+  font-size: 15px;
+  line-height: 1.65;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--accent);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.author {
+  color: var(--fg);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.details {
+  color: var(--fg2);
+  font-size: 12px;
+}
+
+@media (min-width: 768px) {
+  .list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

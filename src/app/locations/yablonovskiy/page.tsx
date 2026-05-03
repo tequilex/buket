@@ -5,6 +5,7 @@ import { ContactButtons } from '@/components/cta/contact-buttons';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { bouquets, getLocationBySlug } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
+import styles from '@/app/internal-page.module.scss';
 
 const location = getLocationBySlug('yablonovskiy');
 
@@ -26,60 +27,60 @@ export default function YablonovskiyLocationPage() {
   }
 
   return (
-    <div className="page-shell space-y-12 py-10 sm:py-14">
-      <section className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+    <div className={styles.page}>
+      <section className={styles.split}>
         <SectionHeading
           eyebrow="Локация"
           title={location.title}
           description={location.shortDescription}
         />
 
-        <div className="rounded-[28px] border border-[var(--line)] bg-[var(--surface)] p-6">
-          <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
+        <div className={styles.surfacePanel}>
+          <p className={styles.panelEyebrow}>
             Как работаем по Яблоновскому
           </p>
-          <p className="mt-4 text-base leading-7 text-[var(--text)]">
+          <p className={styles.panelText}>
             {location.deliveryLead} Для Яблоновского важно заранее уточнять
             адрес, ориентир и удобный интервал, чтобы доставка прошла без
             задержек.
           </p>
-          <div className="mt-5">
+          <div className={styles.actionRow}>
             <ContactButtons source="location_yablonovskiy" />
           </div>
         </div>
       </section>
 
-      <section className="rounded-[28px] border border-[var(--line)] bg-[var(--card)] p-6">
-        <p className="text-xs uppercase tracking-[0.24em] text-[var(--muted)]">
+      <section className={styles.cardPanel}>
+        <p className={styles.panelEyebrow}>
           Что удобно выбрать
         </p>
-        <p className="mt-3 max-w-3xl text-base leading-7 text-[var(--text)]">
+        <p className={styles.panelText}>
           Для Яблоновского особенно удобно выбирать универсальные подарочные
           варианты, которые легко согласовать по составу и времени доставки.
         </p>
-        <div className="mt-5 flex flex-wrap gap-3">
+        <div className={styles.pillLinks}>
           <Link
             href="/catalog/myasnye"
-            className="rounded-full border border-[var(--line)] bg-[var(--surface)] px-4 py-2 text-sm text-[var(--muted)]"
+            className={styles.softPillLink}
           >
             Мясные
           </Link>
           <Link
             href="/catalog/fruktovye"
-            className="rounded-full border border-[var(--line)] bg-[var(--surface)] px-4 py-2 text-sm text-[var(--muted)]"
+            className={styles.softPillLink}
           >
             Фруктовые
           </Link>
           <Link
             href="/catalog/sladkie"
-            className="rounded-full border border-[var(--line)] bg-[var(--surface)] px-4 py-2 text-sm text-[var(--muted)]"
+            className={styles.softPillLink}
           >
             Сладкие
           </Link>
         </div>
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-2">
+      <section className={styles.bouquetGridStandard}>
         {localBouquets.map((bouquet) => (
           <BouquetCard key={bouquet.slug} bouquet={bouquet} />
         ))}

@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { BouquetEntry } from '@/lib/content/schemas';
+import styles from './hero-featured-carousel.module.scss';
 
 interface HeroFeaturedCarouselProps {
   bouquets: BouquetEntry[];
@@ -34,32 +35,32 @@ export function HeroFeaturedCarousel({
   return (
     <article
       data-testid="hero-featured-carousel"
-      className="w-full max-w-[31rem] min-w-0 justify-self-end overflow-hidden rounded-[28px] border border-[var(--line)] bg-[var(--card)] p-4 shadow-[var(--shadow-soft)]"
+      className={styles.root}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div className="space-y-2">
-          <p className="text-[11px] uppercase tracking-[0.24em] text-[var(--muted)]">
+      <div className={styles.header}>
+        <div className={styles.copy}>
+          <p className={styles.eyebrow}>
             Витрина
           </p>
-          <div className="space-y-1.5">
-            <h2 className="text-lg font-semibold tracking-tight text-[var(--text)] sm:text-xl">
+          <div className={styles.copyBody}>
+            <h2 className={styles.title}>
               Популярные букеты
             </h2>
-            <p className="max-w-[17rem] text-xs leading-5 text-[var(--muted)]">
+            <p className={styles.description}>
               Подборка букетов, с которых удобно начать выбор.
             </p>
           </div>
         </div>
-        <div className="hidden gap-2 sm:flex">
+        <div className={styles.controls}>
           <button
             type="button"
             aria-label="Показать предыдущие букеты"
             onClick={() => scrollTrack('prev')}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--background)] text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent-strong)]"
+            className={styles.controlButton}
           >
             <svg
               viewBox="0 0 24 24"
-              className="h-4 w-4"
+              className={styles.controlIcon}
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -76,11 +77,11 @@ export function HeroFeaturedCarousel({
             type="button"
             aria-label="Показать следующие букеты"
             onClick={() => scrollTrack('next')}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--background)] text-[var(--text)] transition hover:border-[var(--accent)] hover:text-[var(--accent-strong)]"
+            className={styles.controlButton}
           >
             <svg
               viewBox="0 0 24 24"
-              className="h-4 w-4"
+              className={styles.controlIcon}
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
@@ -96,44 +97,36 @@ export function HeroFeaturedCarousel({
         </div>
       </div>
 
-      <div data-testid="hero-featured-carousel-viewport" className="mt-4 overflow-hidden">
+      <div data-testid="hero-featured-carousel-viewport" className={styles.viewport}>
         <div
           ref={trackRef}
-          className="flex snap-x snap-mandatory gap-2.5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className={styles.track}
         >
           {bouquets.map((bouquet) => (
             <Link
               key={bouquet.slug}
               href={`/bouquets/${bouquet.slug}`}
-              className="group min-w-[10.5rem] max-w-[10.5rem] snap-start overflow-hidden rounded-[20px] border border-[var(--line)] bg-[var(--background)] transition hover:border-[var(--accent)] hover:shadow-[0_10px_24px_rgba(47,52,38,0.08)]"
+              className={styles.card}
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-[var(--surface)]">
+              <div className={styles.imageWrap}>
                 <Image
                   src={bouquet.images[0].src}
                   alt={bouquet.images[0].alt}
                   fill
-                  className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                  className={styles.image}
                   sizes="10.5rem"
                 />
               </div>
-              <div className="space-y-2 p-2.5">
-                <div className="space-y-1">
-                  <h3 className="text-[13px] font-semibold leading-5 text-[var(--text)]">
-                    {bouquet.name}
-                  </h3>
-                </div>
-                <div className="pt-0.5">
-                  <p className="text-sm font-semibold text-[var(--text)]">
-                    от {bouquet.priceFrom} ₽
-                  </p>
-                </div>
+              <div className={styles.cardBody}>
+                <h3 className={styles.cardTitle}>{bouquet.name}</h3>
+                <p className={styles.price}>от {bouquet.priceFrom} ₽</p>
               </div>
             </Link>
           ))}
         </div>
       </div>
 
-      <p className="mt-3 text-xs leading-5 text-[var(--muted)] sm:hidden">
+      <p className={styles.hint}>
         Свайпните, чтобы посмотреть больше вариантов.
       </p>
     </article>

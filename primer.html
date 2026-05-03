@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GASTRO BUKET — Съедобные букеты в Краснодаре</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Raleway:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<meta name="ext-resource-dependency" content="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js">
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--fg); transition: background 0.4s, color 0.4s; }
+
+/* THEME: Fresh Modern */
+body.theme-fresh {
+  --bg: #ffffff;
+  --bg2: oklch(0.97 0.01 145);
+  --bg3: oklch(0.94 0.02 145);
+  --fg: oklch(0.15 0.02 200);
+  --fg2: oklch(0.45 0.02 200);
+  --accent: oklch(0.55 0.18 145);
+  --accent2: oklch(0.62 0.18 42);
+  --accent-light: oklch(0.94 0.06 145);
+  --card: #ffffff;
+  --border: oklch(0.90 0.02 145);
+  --font-head: 'Montserrat', sans-serif;
+  --font-body: 'Montserrat', sans-serif;
+  --radius: 12px;
+  --shadow: 0 2px 16px oklch(0.55 0.18 145 / 0.12);
+  --hero-overlay: oklch(0.15 0.02 200 / 0.40);
+}
+
+/* LAYOUT */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--bg); border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px); background: oklch(from var(--bg) l c h / 0.92);
+  transition: all 0.3s;
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; gap: 32px;
+}
+.logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; color: var(--fg); }
+.logo-main { font-family: var(--font-head); font-size: 20px; font-weight: 700; letter-spacing: 0.08em; }
+.logo-sub { font-family: var(--font-body); font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--fg2); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a { font-size: 13px; letter-spacing: 0.06em; text-decoration: none; color: var(--fg2); transition: color 0.2s; font-weight: 500; }
+.nav-links a:hover { color: var(--accent); }
+.nav-cta {
+  background: var(--accent); color: white; border: none; cursor: pointer;
+  padding: 10px 22px; font-family: var(--font-body); font-size: 13px;
+  font-weight: 600; letter-spacing: 0.06em; border-radius: var(--radius);
+  transition: opacity 0.2s, transform 0.15s; white-space: nowrap;
+}
+.nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; position: relative;
+  overflow: hidden; margin-top: 0;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: url('assets/hero-bouquet.PNG') center/cover no-repeat;
+}
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: var(--hero-overlay);
+}
+.hero-content {
+  position: relative; z-index: 2; max-width: 620px;
+  padding: 120px 24px 80px;
+  margin-left: max(24px, calc((100vw - 1200px) / 2));
+}
+.hero-tag {
+  display: inline-block; background: var(--accent); color: white;
+  font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: var(--radius); margin-bottom: 24px;
+  font-weight: 600;
+}
+.hero-title {
+  font-family: var(--font-head); font-size: clamp(42px, 6vw, 76px);
+  line-height: 1.05; color: white; margin-bottom: 20px;
+  text-wrap: pretty;
+}
+.hero-title em { color: var(--accent); font-style: italic; }
+.hero-desc {
+  font-size: 17px; line-height: 1.65; color: oklch(1 0 0 / 0.85);
+  margin-bottom: 36px; font-weight: 300; max-width: 460px;
+}
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--accent); color: white; border: none; cursor: pointer;
+  padding: 16px 32px; font-family: var(--font-body); font-size: 15px;
+  font-weight: 600; border-radius: var(--radius); letter-spacing: 0.04em;
+  transition: opacity 0.2s, transform 0.15s; text-decoration: none; display: inline-block;
+}
+.btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+.btn-secondary {
+  background: transparent; color: white;
+  border: 2px solid oklch(1 0 0 / 0.6); cursor: pointer;
+  padding: 14px 30px; font-family: var(--font-body); font-size: 15px;
+  font-weight: 500; border-radius: var(--radius); letter-spacing: 0.04em;
+  transition: all 0.2s; text-decoration: none; display: inline-block;
+}
+.btn-secondary:hover { border-color: white; background: oklch(1 0 0 / 0.1); }
+.hero-stats {
+  position: absolute; bottom: 40px; right: max(24px, calc((100vw - 1200px) / 2));
+  z-index: 2; display: flex; gap: 32px;
+}
+.hero-stat { text-align: center; }
+.hero-stat-num { font-family: var(--font-head); font-size: 32px; font-weight: 700; color: white; line-height: 1; }
+.hero-stat-label { font-size: 11px; color: oklch(1 0 0 / 0.7); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 4px; }
+
+/* SECTIONS */
+section { padding: 96px 0; }
+.section-label {
+  font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); font-weight: 600; margin-bottom: 12px;
+}
+.section-title {
+  font-family: var(--font-head); font-size: clamp(32px, 4vw, 52px);
+  line-height: 1.1; margin-bottom: 16px; text-wrap: pretty;
+}
+.section-desc { font-size: 16px; line-height: 1.7; color: var(--fg2); max-width: 540px; }
+
+/* CATALOG */
+#catalog { background: var(--bg2); }
+.catalog-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 24px; }
+.cat-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+.cat-tab {
+  padding: 8px 18px; border-radius: 99px; border: 1.5px solid var(--border);
+  background: transparent; cursor: pointer; font-family: var(--font-body);
+  font-size: 13px; font-weight: 500; color: var(--fg2); transition: all 0.2s;
+}
+.cat-tab.active { background: var(--accent); border-color: var(--accent); color: white; }
+.cat-tab:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+.products-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px;
+}
+.product-card {
+  background: var(--card); border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow); transition: transform 0.25s, box-shadow 0.25s;
+  cursor: pointer; border: 1px solid var(--border);
+}
+.product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px oklch(0 0 0 / 0.15); }
+.product-img {
+  height: 220px; overflow: hidden; position: relative; background: var(--bg3);
+}
+.product-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.product-card:hover .product-img img { transform: scale(1.05); }
+.product-placeholder {
+  width: 100%; height: 100%; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px; position: relative;
+}
+.product-badge {
+  position: absolute; top: 12px; left: 12px; background: var(--accent);
+  color: white; font-size: 10px; font-weight: 700; padding: 4px 10px;
+  border-radius: 99px; letter-spacing: 0.08em; text-transform: uppercase;
+}
+.product-body { padding: 20px; }
+.product-name { font-family: var(--font-head); font-size: 19px; margin-bottom: 6px; line-height: 1.2; }
+.product-desc { font-size: 13px; color: var(--fg2); line-height: 1.5; margin-bottom: 16px; }
+.product-footer { display: flex; align-items: center; justify-content: space-between; }
+.product-price { font-size: 22px; font-weight: 700; color: var(--accent); font-family: var(--font-head); }
+.product-order {
+  background: var(--accent); color: white; border: none; cursor: pointer;
+  padding: 9px 18px; border-radius: var(--radius); font-family: var(--font-body);
+  font-size: 13px; font-weight: 600; transition: opacity 0.2s;
+}
+.product-order:hover { opacity: 0.85; }
+
+/* ABOUT */
+#about { background: var(--bg); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.about-image { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/5; background: var(--bg3); position: relative; }
+.about-image img { width: 100%; height: 100%; object-fit: cover; }
+.about-accent-block {
+  position: absolute; bottom: -1px; right: -1px; background: var(--accent);
+  padding: 20px 28px; border-radius: var(--radius) 0 0 0;
+}
+.about-accent-block .num { font-family: var(--font-head); font-size: 36px; font-weight: 700; color: white; line-height: 1; }
+.about-accent-block .txt { font-size: 12px; color: oklch(1 0 0 / 0.8); letter-spacing: 0.08em; margin-top: 2px; }
+.about-features { display: flex; flex-direction: column; gap: 28px; margin-top: 36px; }
+.feature { display: flex; gap: 16px; align-items: flex-start; }
+.feature-icon {
+  width: 44px; height: 44px; border-radius: var(--radius);
+  background: var(--accent-light); display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+}
+.feature-title { font-family: var(--font-head); font-size: 17px; margin-bottom: 4px; }
+.feature-desc { font-size: 14px; color: var(--fg2); line-height: 1.5; }
+
+/* HOW TO ORDER */
+#order { background: var(--bg2); }
+.steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-top: 56px; }
+.step { text-align: center; }
+.step-num {
+  width: 64px; height: 64px; border-radius: 50%; background: var(--accent);
+  color: white; font-family: var(--font-head); font-size: 26px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
+}
+.step-title { font-family: var(--font-head); font-size: 18px; margin-bottom: 10px; }
+.step-desc { font-size: 14px; color: var(--fg2); line-height: 1.55; }
+.steps-divider {
+  display: flex; align-items: center; justify-content: center; margin-top: -8px; 
+  color: var(--border);
+}
+.order-cta-block { margin-top: 60px; text-align: center; background: var(--accent); padding: 48px; border-radius: var(--radius); }
+.order-cta-block h3 { font-family: var(--font-head); font-size: 28px; color: white; margin-bottom: 10px; }
+.order-cta-block p { color: oklch(1 0 0 / 0.8); margin-bottom: 28px; font-size: 15px; }
+.btn-white {
+  background: white; color: var(--accent); border: none; cursor: pointer;
+  padding: 14px 32px; font-family: var(--font-body); font-size: 15px;
+  font-weight: 700; border-radius: var(--radius); transition: opacity 0.2s;
+  text-decoration: none; display: inline-block;
+}
+.btn-white:hover { opacity: 0.9; }
+
+/* REVIEWS */
+#reviews { background: var(--bg); }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.review-card {
+  background: var(--card); padding: 28px; border-radius: var(--radius);
+  border: 1px solid var(--border); box-shadow: var(--shadow);
+}
+.review-stars { color: var(--accent); font-size: 16px; margin-bottom: 14px; letter-spacing: 2px; }
+.review-text { font-size: 15px; line-height: 1.65; color: var(--fg2); margin-bottom: 20px; font-style: italic; }
+.review-author { display: flex; align-items: center; gap: 12px; }
+.review-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--accent-light); display: flex; align-items: center;
+  justify-content: center; font-family: var(--font-head); font-size: 16px;
+  color: var(--accent); font-weight: 700; flex-shrink: 0;
+}
+.review-name { font-weight: 600; font-size: 14px; }
+.review-date { font-size: 12px; color: var(--fg2); }
+
+/* CONTACTS */
+#contacts { background: var(--bg2); }
+.contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin-top: 48px; align-items: start; }
+.contact-items { display: flex; flex-direction: column; gap: 20px; }
+.contact-item { display: flex; gap: 16px; align-items: flex-start; }
+.contact-icon {
+  width: 44px; height: 44px; background: var(--accent-light); border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
+}
+.contact-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg2); margin-bottom: 4px; }
+.contact-value { font-size: 16px; font-weight: 500; }
+.contact-value a { color: var(--accent); text-decoration: none; }
+.map-placeholder {
+  border-radius: var(--radius); overflow: hidden; background: var(--bg3);
+  height: 320px; display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 12px; border: 1px solid var(--border);
+  font-family: monospace; font-size: 12px; color: var(--fg2); text-align: center;
+}
+.delivery-block { margin-top: 28px; background: var(--accent-light); padding: 24px; border-radius: var(--radius); border: 1px solid var(--border); }
+.delivery-title { font-family: var(--font-head); font-size: 17px; margin-bottom: 12px; color: var(--fg); }
+.delivery-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.delivery-list li { font-size: 14px; color: var(--fg2); display: flex; gap: 8px; align-items: center; }
+.delivery-list li::before { content: '→'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+/* FOOTER */
+footer {
+  background: var(--fg); color: var(--bg); padding: 40px 0;
+  text-align: center;
+}
+.footer-logo { font-family: var(--font-head); font-size: 24px; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 8px; }
+.footer-sub { font-size: 12px; opacity: 0.5; letter-spacing: 0.1em; }
+
+/* MODAL */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 200; background: oklch(0 0 0 / 0.55);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+  backdrop-filter: blur(4px);
+}
+.modal {
+  background: var(--bg); border-radius: var(--radius); padding: 40px;
+  max-width: 480px; width: 100%; box-shadow: var(--shadow); border: 1px solid var(--border);
+  position: relative; max-height: 90vh; overflow-y: auto;
+}
+.modal-close {
+  position: absolute; top: 16px; right: 16px; background: none; border: none;
+  cursor: pointer; font-size: 22px; color: var(--fg2); line-height: 1;
+}
+.modal-title { font-family: var(--font-head); font-size: 26px; margin-bottom: 8px; }
+.modal-sub { font-size: 14px; color: var(--fg2); margin-bottom: 28px; }
+.form-group { margin-bottom: 18px; }
+.form-label { font-size: 13px; font-weight: 600; color: var(--fg); margin-bottom: 6px; display: block; letter-spacing: 0.04em; }
+.form-input, .form-select, .form-textarea {
+  width: 100%; padding: 12px 14px; border: 1.5px solid var(--border);
+  border-radius: var(--radius); font-family: var(--font-body); font-size: 15px;
+  color: var(--fg); background: var(--bg2); outline: none;
+  transition: border-color 0.2s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent); }
+.form-textarea { resize: vertical; min-height: 80px; }
+.form-submit {
+  width: 100%; background: var(--accent); color: white; border: none;
+  padding: 15px; font-family: var(--font-body); font-size: 15px; font-weight: 700;
+  border-radius: var(--radius); cursor: pointer; transition: opacity 0.2s; letter-spacing: 0.04em;
+}
+.form-submit:hover { opacity: 0.88; }
+.success-screen { text-align: center; padding: 20px 0; }
+.success-icon { font-size: 56px; margin-bottom: 16px; }
+.success-title { font-family: var(--font-head); font-size: 26px; margin-bottom: 10px; }
+.success-text { font-size: 15px; color: var(--fg2); line-height: 1.6; }
+
+/* TWEAKS PANEL */
+.tweaks-panel {
+  position: fixed; bottom: 24px; right: 24px; z-index: 300;
+  background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px;
+  padding: 20px; box-shadow: 0 8px 40px oklch(0 0 0 / 0.18);
+  min-width: 220px; display: none; flex-direction: column; gap: 14px;
+}
+.tweaks-panel.visible { display: flex; }
+.tweaks-title { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg2); margin-bottom: 2px; }
+.tweaks-row { display: flex; flex-direction: column; gap: 6px; }
+.tweaks-label { font-size: 12px; font-weight: 600; color: var(--fg); }
+.theme-btns { display: flex; gap: 6px; }
+.theme-btn {
+  flex: 1; padding: 7px 8px; border-radius: 6px; border: 1.5px solid var(--border);
+  font-size: 11px; font-weight: 600; cursor: pointer; background: var(--bg2);
+  color: var(--fg2); transition: all 0.2s; font-family: var(--font-body);
+}
+.theme-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .about-grid, .contacts-grid { grid-template-columns: 1fr; gap: 40px; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .hero-stats { position: static; padding: 0 24px 60px; flex-direction: row; justify-content: flex-start; }
+  .hero-content { padding: 100px 24px 40px; }
+  .modal { padding: 28px 20px; }
+}
+</style>
+<template id="__bundler_thumbnail"><svg viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="80" fill="#f0faf4"/><circle cx="60" cy="36" r="22" fill="#27ae60" opacity="0.2"/><text x="60" y="42" text-anchor="middle" font-size="24">🌿</text><text x="60" y="66" text-anchor="middle" font-size="9" fill="#27ae60" font-family="sans-serif">GASTRO BUKET</text></svg></template>
+</head>
+<body class="theme-fresh">
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+const PRODUCTS = [
+  { id:1, cat:'fish', name:'Букет из раков', desc:'Варёные раки с дольками лимона и зеленью, в крафт-обёртке', price:2500, badge:'Хит', img:'assets/hero-bouquet.PNG' },
+  { id:2, cat:'fish', name:'Красная рыба', desc:'Слабосолёная сёмга с лимоном и каперсами', price:3500, badge:null, img:null },
+  { id:3, cat:'meat', name:'Колбасный микс', desc:'Охотничьи колбаски, сыр, вяленые томаты', price:2200, badge:null, img:null },
+  { id:4, cat:'meat', name:'Мясной ассорти', desc:'Хамон, прошутто, сыры, оливки и крекеры', price:3200, badge:'Новинка', img:null },
+  { id:5, cat:'fruit', name:'Тропический', desc:'Манго, ананас, клубника, виноград, мята', price:2000, badge:null, img:null },
+  { id:6, cat:'fruit', name:'Ягодный рай', desc:'Клубника, малина, голубика, шоколад', price:2800, badge:null, img:null },
+  { id:7, cat:'sweet', name:'Шоколадный', desc:'Конфеты ручной работы, трюфели, шоколад', price:2500, badge:null, img:null },
+  { id:8, cat:'sweet', name:'Конфетный', desc:'Любимые советские конфеты с декором', price:1900, badge:null, img:null },
+];
+
+const CATS = [
+  { id:'all', label:'Все' },
+  { id:'fish', label:'Рыба и морепродукты' },
+  { id:'meat', label:'Мясные' },
+  { id:'fruit', label:'Фруктовые' },
+  { id:'sweet', label:'Сладкие' },
+];
+
+const REVIEWS = [
+  { name:'Анна К.', date:'Март 2025', text:'Заказывала букет из раков на день рождения мужа. Он был в восторге! Очень красивая упаковка, раки свежие. Будем заказывать ещё!', stars:5, initial:'А' },
+  { name:'Михаил Т.', date:'Февраль 2025', text:'Взял мясной ассорти на корпоратив — коллеги оценили по достоинству! Оригинальная идея, всё очень вкусно. Доставили вовремя.', stars:5, initial:'М' },
+  { name:'Елена С.', date:'Январь 2025', text:'Фруктовый букет для мамы — просто бомба! Свежайшие фрукты, красивое оформление. Спасибо за творческий подход!', stars:5, initial:'Е' },
+];
+
+function PlaceholderImg({ category }) {
+  const colors = { fish:'#e8956d,#f5c842', meat:'#c0392b,#8B4513', fruit:'#27ae60,#f39c12', sweet:'#8e44ad,#f39c12' };
+  const labels = { fish:'Рыбный букет', meat:'Мясной букет', fruit:'Фруктовый букет', sweet:'Сладкий букет' };
+  const [c1,c2] = (colors[category]||'#999,#ccc').split(',');
+  return (
+    <svg width="100%" height="100%" viewBox="0 0 260 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id={`p${category}`} x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <rect width="20" height="20" fill={c1} opacity="0.15"/>
+          <line x1="0" y1="0" x2="20" y2="20" stroke={c1} strokeWidth="1" opacity="0.3"/>
+        </pattern>
+      </defs>
+      <rect width="260" height="220" fill={`url(#p${category})`}/>
+      <text x="130" y="100" textAnchor="middle" fill={c1} fontSize="48" opacity="0.4">❧</text>
+      <text x="130" y="148" textAnchor="middle" fill={c1} fontSize="12" fontFamily="monospace" opacity="0.6">{labels[category]||'Букет'}</text>
+    </svg>
+  );
+}
+
+function ProductCard({ p, onOrder }) {
+  return (
+    <div className="product-card" onClick={() => onOrder(p)}>
+      <div className="product-img">
+        {p.img ? <img src={p.img} alt={p.name}/> : <div className="product-placeholder"><PlaceholderImg category={p.cat}/></div>}
+        {p.badge && <span className="product-badge">{p.badge}</span>}
+      </div>
+      <div className="product-body">
+        <div className="product-name">{p.name}</div>
+        <div className="product-desc">{p.desc}</div>
+        <div className="product-footer">
+          <span className="product-price">{p.price.toLocaleString('ru')} ₽</span>
+          <button className="product-order" onClick={e => { e.stopPropagation(); onOrder(p); }}>Заказать</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function OrderModal({ product, onClose }) {
+  const [step, setStep] = useState(0);
+  const [form, setForm] = useState({ name:'', phone:'', date:'', address:'', comment:'' });
+  const [done, setDone] = useState(false);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setDone(true);
+  };
+
+  if (done) return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>✕</button>
+        <div className="success-screen">
+          <div className="success-icon">🎉</div>
+          <div className="success-title">Заявка принята!</div>
+          <p className="success-text">Мы перезвоним вам в течение 15 минут для уточнения деталей. Спасибо за заказ!</p>
+          <br/>
+          <button className="btn-primary" style={{marginTop:16}} onClick={onClose}>Отлично!</button>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}>✕</button>
+        <div className="modal-title">Оформить заказ</div>
+        <div className="modal-sub">{product ? `«${product.name}» — ${product.price.toLocaleString('ru')} ₽` : 'Индивидуальный букет'}</div>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label className="form-label">Ваше имя</label>
+            <input className="form-input" placeholder="Как вас зовут?" required value={form.name} onChange={e=>setForm({...form,name:e.target.value})}/>
+          </div>
+          <div className="form-group">
+            <label className="form-label">Телефон</label>
+            <input className="form-input" placeholder="+7 (___) ___-__-__" required value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})}/>
+          </div>
+          <div className="form-group">
+            <label className="form-label">Дата вручения</label>
+            <input className="form-input" type="date" required value={form.date} onChange={e=>setForm({...form,date:e.target.value})}/>
+          </div>
+          <div className="form-group">
+            <label className="form-label">Адрес доставки</label>
+            <input className="form-input" placeholder="г. Краснодар / пгт. Яблоновский…" value={form.address} onChange={e=>setForm({...form,address:e.target.value})}/>
+          </div>
+          <div className="form-group">
+            <label className="form-label">Пожелания</label>
+            <textarea className="form-textarea" placeholder="Индивидуальные пожелания, повод…" value={form.comment} onChange={e=>setForm({...form,comment:e.target.value})}/>
+          </div>
+          <button type="submit" className="form-submit">Отправить заявку</button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [activeCat, setActiveCat] = useState('all');
+  const [modal, setModal] = useState(null);
+  const [theme, setTheme] = useState('fresh');
+  const [tweaksVisible, setTweaksVisible] = useState(false);
+
+  useEffect(() => {
+    document.body.className = `theme-${theme}`;
+    localStorage.setItem('gb_theme', theme);
+  }, [theme]);
+
+  // Tweaks postMessage protocol
+  useEffect(() => {
+    const handler = e => {
+      if (e.data?.type === '__activate_edit_mode') setTweaksVisible(true);
+      if (e.data?.type === '__deactivate_edit_mode') setTweaksVisible(false);
+    };
+    window.addEventListener('message', handler);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
+  const filtered = activeCat === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.cat === activeCat);
+
+  const scrollTo = id => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  return (
+    <>
+      {/* NAV */}
+      <nav>
+        <div className="container nav-inner">
+          <a href="#" className="logo" onClick={e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})}}>
+            <span className="logo-main">GASTRO BUKET</span>
+            <span className="logo-sub">Искусство вкусных подарков</span>
+          </a>
+          <ul className="nav-links">
+            {[['catalog','Каталог'],['about','О нас'],['order','Как заказать'],['reviews','Отзывы'],['contacts','Контакты']].map(([id,label])=>(
+              <li key={id}><a href={`#${id}`} onClick={e=>{e.preventDefault();scrollTo(id)}}>{label}</a></li>
+            ))}
+          </ul>
+          <button className="nav-cta" onClick={()=>setModal({})}>Заказать букет</button>
+        </div>
+      </nav>
+
+      {/* HERO */}
+      <section className="hero" id="home">
+        <div className="hero-bg"/>
+        <div className="hero-overlay"/>
+        <div className="hero-content">
+          <div className="hero-tag">пгт. Яблоновский · Краснодар</div>
+          <h1 className="hero-title">Букеты,<br/>которые <em>можно съесть</em></h1>
+          <p className="hero-desc">Раки, рыба, мясо, фрукты и сладости — в красивой упаковке. Подарите вкус вместо цветов.</p>
+          <div className="hero-btns">
+            <button className="btn-primary" onClick={()=>scrollTo('catalog')}>Смотреть каталог</button>
+            <button className="btn-secondary" onClick={()=>setModal({})}>Заказать сейчас</button>
+          </div>
+        </div>
+        <div className="hero-stats">
+          <div className="hero-stat"><div className="hero-stat-num">500+</div><div className="hero-stat-label">Букетов</div></div>
+          <div className="hero-stat"><div className="hero-stat-num">4</div><div className="hero-stat-label">Категории</div></div>
+          <div className="hero-stat"><div className="hero-stat-num">2–5к</div><div className="hero-stat-label">Рублей</div></div>
+        </div>
+      </section>
+
+      {/* CATALOG */}
+      <section id="catalog">
+        <div className="container">
+          <div className="catalog-header">
+            <div>
+              <div className="section-label">Наши букеты</div>
+              <h2 className="section-title">Каталог</h2>
+            </div>
+            <div className="cat-tabs">
+              {CATS.map(c=>(
+                <button key={c.id} className={`cat-tab${activeCat===c.id?' active':''}`} onClick={()=>setActiveCat(c.id)}>{c.label}</button>
+              ))}
+            </div>
+          </div>
+          <div className="products-grid">
+            {filtered.map(p=><ProductCard key={p.id} p={p} onOrder={()=>setModal(p)}/>)}
+          </div>
+        </div>
+      </section>
+
+      {/* ABOUT */}
+      <section id="about">
+        <div className="container">
+          <div className="about-grid">
+            <div className="about-image">
+              <img src="assets/hero-bouquet.PNG" alt="Наши букеты"/>
+              <div className="about-accent-block">
+                <div className="num">5★</div>
+                <div className="txt">Рейтинг</div>
+              </div>
+            </div>
+            <div>
+              <div className="section-label">Наша история</div>
+              <h2 className="section-title">Мы делаем<br/>съедобное искусство</h2>
+              <p className="section-desc">Каждый букет — это ручная работа с любовью. Мы в пгт. Яблоновский собираем букеты из свежих продуктов для ваших близких в Краснодаре и окрестностях.</p>
+              <div className="about-features">
+                {[
+                  ['🦞','Только свежее','Раки, рыба, мясо и фрукты — всегда свежие, от проверенных поставщиков'],
+                  ['🎨','Ручная работа','Каждый букет собирается вручную по вашему заказу, с учётом пожеланий'],
+                  ['🚚','Быстрая доставка','Доставляем по Яблоновскому, Краснодару и пригородам. В день заказа.'],
+                ].map(([icon,title,desc])=>(
+                  <div key={title} className="feature">
+                    <div className="feature-icon">{icon}</div>
+                    <div>
+                      <div className="feature-title">{title}</div>
+                      <div className="feature-desc">{desc}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* HOW TO ORDER */}
+      <section id="order">
+        <div className="container">
+          <div style={{textAlign:'center'}}>
+            <div className="section-label">Просто и быстро</div>
+            <h2 className="section-title">Как сделать заказ</h2>
+          </div>
+          <div className="steps-grid">
+            {[
+              ['1','Выберите букет','Выберите из каталога или опишите пожелания — мы поможем'],
+              ['2','Свяжитесь с нами','Напишите в WhatsApp или оставьте заявку — ответим за 15 минут'],
+              ['3','Подтвердите детали','Уточним дату, адрес, повод — и соберём букет специально для вас'],
+              ['4','Получите подарок','Доставим свежим и красиво упакованным в нужное время'],
+            ].map(([n,t,d])=>(
+              <div key={n} className="step">
+                <div className="step-num">{n}</div>
+                <div className="step-title">{t}</div>
+                <div className="step-desc">{d}</div>
+              </div>
+            ))}
+          </div>
+          <div className="order-cta-block">
+            <h3>Готовы сделать заказ?</h3>
+            <p>Позвоните или напишите — ответим быстро и поможем выбрать</p>
+            <a className="btn-white" href="https://wa.me/79991234567" target="_blank">Написать в WhatsApp</a>
+          </div>
+        </div>
+      </section>
+
+      {/* REVIEWS */}
+      <section id="reviews">
+        <div className="container">
+          <div className="section-label">Нам доверяют</div>
+          <h2 className="section-title">Отзывы покупателей</h2>
+          <div className="reviews-grid">
+            {REVIEWS.map(r=>(
+              <div key={r.name} className="review-card">
+                <div className="review-stars">{'★'.repeat(r.stars)}</div>
+                <div className="review-text">«{r.text}»</div>
+                <div className="review-author">
+                  <div className="review-avatar">{r.initial}</div>
+                  <div>
+                    <div className="review-name">{r.name}</div>
+                    <div className="review-date">{r.date}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACTS */}
+      <section id="contacts">
+        <div className="container">
+          <div className="section-label">Мы рядом</div>
+          <h2 className="section-title">Контакты и доставка</h2>
+          <div className="contacts-grid">
+            <div>
+              <div className="contact-items">
+                {[
+                  ['📍','Адрес','пгт. Яблоновский, Краснодарский край'],
+                  ['📱','Телефон / WhatsApp',<a href="tel:+79991234567">+7 (999) 123-45-67</a>],
+                  ['🕐','Режим работы','Ежедневно с 9:00 до 21:00'],
+                  ['📦','Доставка','Яблоновский, Краснодар и пригороды'],
+                ].map(([icon,label,val])=>(
+                  <div key={label} className="contact-item">
+                    <div className="contact-icon">{icon}</div>
+                    <div>
+                      <div className="contact-label">{label}</div>
+                      <div className="contact-value">{val}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="delivery-block">
+                <div className="delivery-title">Условия доставки</div>
+                <ul className="delivery-list">
+                  <li>Доставка по Яблоновскому — от 200 ₽</li>
+                  <li>Доставка по Краснодару — от 350 ₽</li>
+                  <li>Самовывоз — бесплатно</li>
+                  <li>Доставка в день заказа при заказе до 15:00</li>
+                  <li>Можно заказать заранее на любую дату</li>
+                </ul>
+              </div>
+            </div>
+            <div>
+              <div className="map-placeholder">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="20" r="10" stroke="currentColor" strokeWidth="2"/><circle cx="24" cy="20" r="3" fill="currentColor"/><path d="M24 36 C12 28 8 22 8 20 C8 12.3 15.3 6 24 6 C32.7 6 40 12.3 40 20 C40 22 36 28 24 36Z" stroke="currentColor" strokeWidth="2" fill="none"/></svg>
+                <span style={{fontSize:13}}>пгт. Яблоновский<br/>Краснодарский край</span>
+                <span style={{opacity:0.5}}>карта / место на карте</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer>
+        <div className="container">
+          <div className="footer-logo">GASTRO BUKET</div>
+          <div className="footer-sub">Искусство вкусных подарков · пгт. Яблоновский, Краснодар</div>
+        </div>
+      </footer>
+
+      {/* ORDER MODAL */}
+      {modal !== null && <OrderModal product={modal.id ? modal : null} onClose={()=>setModal(null)}/>}
+
+      {/* TWEAKS */}
+      <div className={`tweaks-panel${tweaksVisible?' visible':''}`}>
+        <div className="tweaks-title">Tweaks</div>
+        <div className="tweaks-row">
+          <div className="tweaks-label">Тема</div>
+          <div className="theme-btns">
+            {[['craft','Крафт'],['dark','Люкс'],['fresh','Свежий']].map(([t,l])=>(
+              <button key={t} className={`theme-btn${theme===t?' active':''}`} onClick={()=>{
+                setTheme(t);
+                window.parent.postMessage({type:'__edit_mode_set_keys',edits:{theme:t}},'*');
+              }}>{l}</button>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

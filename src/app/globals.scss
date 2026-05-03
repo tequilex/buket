@@ -1,0 +1,73 @@
+:root {
+  /* Новая палитра Fresh Modern */
+  --bg: #ffffff;
+  --bg2: oklch(0.97 0.01 145);
+  --bg3: oklch(0.94 0.02 145);
+  --fg: oklch(0.15 0.02 200);
+  --fg2: oklch(0.45 0.02 200);
+  --accent: oklch(0.55 0.18 145);
+  --accent2: oklch(0.62 0.18 42);
+  --accent-light: oklch(0.94 0.06 145);
+  --card: #ffffff;
+  --border: oklch(0.90 0.02 145);
+  --shadow: 0 2px 16px oklch(0.55 0.18 145 / 0.12);
+  --radius: 12px;
+
+  /* Алиасы — старые имена переменных, чтобы внутренние страницы не сломались */
+  --background: var(--bg);
+  --surface: var(--bg2);
+  --text: var(--fg);
+  --muted: var(--fg2);
+  --line: var(--border);
+  --shadow-soft: var(--shadow);
+  --accent-strong: oklch(0.45 0.18 145);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+  font-size: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-montserrat), 'Segoe UI', sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+img {
+  display: block;
+}
+
+::selection {
+  background: oklch(0.55 0.18 145 / 0.2);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}

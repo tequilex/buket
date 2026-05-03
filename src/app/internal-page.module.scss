@@ -1,0 +1,283 @@
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 20px 3.5rem;
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: 4rem 24px 5rem;
+    gap: 3rem;
+  }
+}
+
+.section {
+  display: grid;
+  gap: 2rem;
+}
+
+.split {
+  display: grid;
+  gap: 2rem;
+}
+
+.infoGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.cardPanel {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+}
+
+.surfacePanel {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg2);
+  padding: 1.75rem;
+}
+
+.emptyState {
+  border: 1.5px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 2rem;
+  color: var(--fg2);
+  font-size: 1rem;
+  line-height: 1.75rem;
+}
+
+.panelEyebrow {
+  color: var(--fg2);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.panelTitle {
+  margin: 0;
+  color: var(--fg);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.panelText {
+  margin-top: 0.75rem;
+  color: var(--fg);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.mutedText {
+  margin-top: 0.75rem;
+  color: var(--fg2);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.pillLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.pillLink {
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  padding: 0.5rem 1rem;
+  color: var(--fg2);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 160ms ease, border-color 160ms ease;
+
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+}
+
+.softPillLink {
+  border: 1.5px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg2);
+  padding: 0.5rem 1rem;
+  color: var(--fg2);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 160ms ease, border-color 160ms ease;
+
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+}
+
+.categoryGrid {
+  display: grid;
+  gap: 16px;
+}
+
+.categoryCard {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: transform 180ms ease, border-color 180ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+}
+
+.categoryTitle {
+  margin-top: 0.75rem;
+  color: var(--fg);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.categoryDescription {
+  margin-top: 0.75rem;
+  color: var(--fg2);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.bouquetGridDense {
+  display: grid;
+  gap: 24px;
+}
+
+.bouquetGridStandard {
+  display: grid;
+  gap: 24px;
+}
+
+.stepsGrid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+  list-style: none;
+}
+
+.stepCard {
+  border-radius: var(--radius);
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  padding: 1.25rem 1.5rem;
+  color: var(--fg);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+.articleList {
+  display: grid;
+  gap: 1rem;
+}
+
+.articleCard {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 1.5rem;
+}
+
+.articleTitle {
+  color: var(--fg);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.articleDescription {
+  margin-top: 0.75rem;
+  color: var(--fg2);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.actionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.primaryButton {
+  border-radius: var(--radius);
+  background: var(--accent);
+  padding: 0.75rem 1.5rem;
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  transition: opacity 160ms ease, transform 160ms ease;
+
+  &:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+  }
+}
+
+.secondaryButton {
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  padding: 0.75rem 1.5rem;
+  color: var(--fg);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: border-color 160ms ease;
+
+  &:hover {
+    border-color: var(--accent);
+  }
+}
+
+@media (min-width: 640px) {
+  .bouquetGridDense,
+  .bouquetGridStandard,
+  .categoryGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .split {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+
+  .infoGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stepsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .categoryGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .bouquetGridDense {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1536px) {
+  .bouquetGridDense {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

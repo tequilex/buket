@@ -2,17 +2,19 @@
 
 import { trackCtaClick } from '@/lib/analytics/metrica';
 import siteConfig from '@/data/site-config';
+import styles from './contact-buttons.module.scss';
 
 interface ContactButtonsProps {
   source: string;
   compact?: boolean;
+  variant?: 'default' | 'hero';
   className?: string;
 }
 
 function ChannelIcon({ channelId, label }: { channelId: string; label: string }) {
   const sharedProps = {
     'aria-label': `Иконка ${label}`,
-    className: 'h-4 w-4 shrink-0',
+    className: styles.icon,
     viewBox: '0 0 24 24',
     fill: 'none',
     xmlns: 'http://www.w3.org/2000/svg',
@@ -78,32 +80,35 @@ function ChannelIcon({ channelId, label }: { channelId: string; label: string })
   );
 }
 
-function getChannelClassName(channelId: string, compact: boolean) {
-  const sizeClass = compact
-    ? 'min-h-11 px-3.5 py-2.5 text-sm'
-    : 'min-h-12 px-4.5 py-3 text-sm';
+function getChannelClassName(channelId: string, compact: boolean, variant: 'default' | 'hero') {
+  if (variant === 'hero') {
+    return [styles.button, styles.heroBtn, compact ? styles.compact : ''].filter(Boolean).join(' ');
+  }
+
+  const classNames = [styles.button, compact ? styles.compact : ''];
 
   if (channelId === 'whatsapp') {
-    return `${sizeClass} inline-flex items-center gap-2 rounded-full bg-[#2f8f57] font-medium text-white shadow-[0_10px_24px_rgba(47,143,87,0.22)] transition hover:bg-[#25754a]`;
+    classNames.push(styles.whatsapp);
+  } else if (channelId === 'telegram') {
+    classNames.push(styles.telegram);
+  } else {
+    classNames.push(styles.avito);
   }
 
-  if (channelId === 'telegram') {
-    return `${sizeClass} inline-flex items-center gap-2 rounded-full border border-[#b9d8e8] bg-[#eef7fb] font-medium text-[#185b7d] transition hover:border-[#8cbfd8] hover:bg-[#e4f2f9]`;
-  }
-
-  return `${sizeClass} inline-flex items-center gap-2 rounded-full border border-[#d9d5ef] bg-[#f5f2ff] font-medium text-[#5b4a96] transition hover:border-[#c3bbe8] hover:bg-[#eee9ff]`;
+  return classNames.filter(Boolean).join(' ');
 }
 
 export function ContactButtons({
   source,
   compact = false,
+  variant = 'default',
   className,
 }: ContactButtonsProps) {
   return (
     <div
       className={[
-        'flex flex-wrap gap-3',
-        compact ? 'justify-center' : 'justify-start',
+        styles.container,
+        compact ? styles.compactContainer : '',
         className,
       ]
         .filter(Boolean)
@@ -115,7 +120,7 @@ export function ContactButtons({
           href={channel.href}
           target="_blank"
           rel="noreferrer"
-          className={getChannelClassName(channel.id, compact)}
+          className={getChannelClassName(channel.id, compact, variant)}
           onClick={() => trackCtaClick(channel.id, source)}
         >
           <ChannelIcon channelId={channel.id} label={channel.label} />
