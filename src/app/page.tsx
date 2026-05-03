@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
 import { ContactButtons } from '@/components/cta/contact-buttons';
@@ -21,10 +22,16 @@ export default function HomePage() {
     <div>
       {/* HERO */}
       <section className={styles.hero}>
-        <div
-          className={styles.heroBg}
-          style={{ backgroundImage: "url('/images/bouquets/IMG_9631.PNG')" }}
-        />
+        <div className={styles.heroBg}>
+          <Image
+            src="/images/bouquets/1.webp"
+            alt="Съедобные букеты с доставкой"
+            fill
+            priority
+            style={{ objectFit: 'cover' }}
+            sizes="100vw"
+          />
+        </div>
         <div className={styles.heroOverlay} />
         <div className={styles.heroContent}>
           <div className={styles.heroTag}>пгт. Яблоновский · Краснодар</div>
@@ -93,8 +100,13 @@ export default function HomePage() {
         <div className="container">
           <div className={styles.aboutGrid}>
             <div className={styles.aboutImage}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/bouquets/IMG_9632.PNG" alt="Наши букеты — ручная работа" />
+              <Image 
+                src="/images/bouquets/9.webp" 
+                alt="Наши букеты — ручная работа" 
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
               <div className={styles.aboutBadge}>
                 <span className={styles.aboutBadgeNum}>5★</span>
                 <span className={styles.aboutBadgeTxt}>Рейтинг</span>

@@ -9,12 +9,18 @@ export function buildMetadata(input: {
   title: string;
   description: string;
   path: string;
+  imageUrl?: string;
 }): Metadata {
   return {
     title: normalizeTitle(input.title),
     description: input.description,
     alternates: {
       canonical: `${getBaseUrl()}${input.path}`,
+    },
+    openGraph: {
+      title: normalizeTitle(input.title),
+      description: input.description,
+      images: input.imageUrl ? [{ url: input.imageUrl }] : [],
     },
   };
 }

@@ -43,6 +43,7 @@ export async function generateMetadata({
     title: bouquet.seoTitle,
     description: bouquet.seoDescription,
     path: `/bouquets/${bouquet.slug}`,
+    imageUrl: bouquet.images[0]?.src,
   });
 }
 

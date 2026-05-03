@@ -6,7 +6,7 @@ import { bouquets, categories } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
 import styles from '@/app/internal-page.module.scss';
 
-const featuredBouquets = bouquets.filter((bouquet) => bouquet.featured).slice(0, 4);
+const featuredBouquets = bouquets.filter((bouquet) => bouquet.featured).slice(0, 16);
 
 export function generateMetadata(): Metadata {
   return buildMetadata({

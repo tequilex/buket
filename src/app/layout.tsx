@@ -63,7 +63,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         {hasMetrica ? (
           <Script
             id="yandex-metrica-init"
-            strategy="beforeInteractive"
+            strategy="afterInteractive"
           >
             {buildMetricaInitScript(metricaId)}
           </Script>
