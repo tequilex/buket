@@ -23,10 +23,11 @@ const siteUrl = getBaseUrl();
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: 'Gastro Buket',
+    default: 'Съедобные букеты с доставкой в Краснодаре и Яблоновском | Gastro Buket',
     template: '%s | Gastro Buket',
   },
-  description: 'Съедобные букеты в Краснодаре и Яблоновском',
+  description:
+    'Авторские съедобные букеты из фруктов, мяса, рыбы и сладостей. Доставка по Краснодару и Яблоновскому в день заказа. Состав букета согласуется индивидуально.',
   icons: {
     icon: [
       {
@@ -40,8 +41,9 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: 'Gastro Buket',
-    description: 'Съедобные букеты в Краснодаре и Яблоновском',
+    title: 'Съедобные букеты с доставкой в Краснодаре и Яблоновском | Gastro Buket',
+    description:
+      'Авторские съедобные букеты из фруктов, мяса, рыбы и сладостей. Доставка по Краснодару и Яблоновскому в день заказа.',
     url: siteUrl,
     siteName: 'Gastro Buket',
     locale: 'ru_RU',
