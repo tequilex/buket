@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const channelIdSchema = z.enum(['whatsapp', 'telegram', 'avito']);
+export const channelIdSchema = z.enum(['whatsapp', 'max', 'avito']);
 export const categorySlugSchema = z.enum([
   'myasnye',
   'rybnye',

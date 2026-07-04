@@ -44,7 +44,7 @@ export default function DeliveryPage() {
         </p>
         <ol className={styles.stepsGrid}>
           <li className={styles.stepCard}>1. Выбираете букет на сайте или присылаете пример того, что нравится.</li>
-          <li className={styles.stepCard}>2. Пишете в WhatsApp, Telegram или Avito и уточняете детали заказа.</li>
+          <li className={styles.stepCard}>2. Пишете в WhatsApp, max или Avito и уточняете детали заказа.</li>
           <li className={styles.stepCard}>3. Согласуем состав, стоимость, время и адрес доставки.</li>
         </ol>
         <div className={styles.actionRow}>

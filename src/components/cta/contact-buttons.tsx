@@ -3,6 +3,7 @@
 import { trackCtaClick } from '@/lib/analytics/metrica';
 import siteConfig from '@/data/site-config';
 import styles from './contact-buttons.module.scss';
+import Maxlogo from './maxlogo';
 
 interface ContactButtonsProps {
   source: string;
@@ -38,25 +39,9 @@ function ChannelIcon({ channelId, label }: { channelId: string; label: string })
     );
   }
 
-  if (channelId === 'telegram') {
+  if (channelId === 'max') {
     return (
-      <svg {...sharedProps}>
-        <path
-          d="M21 4 3.8 10.63c-.72.29-.7 1.33.03 1.58l4.35 1.47 1.63 5.04c.22.7 1.12.85 1.56.27l2.5-3.3 4.9 3.6c.6.44 1.45.11 1.6-.63L22.5 5.2C22.66 4.47 21.73 3.72 21 4Z"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="m8.18 13.68 9.9-7.03-7.15 8.5"
-          stroke="currentColor"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    );
+      null    );
   }
 
   return (
@@ -89,8 +74,8 @@ function getChannelClassName(channelId: string, compact: boolean, variant: 'defa
 
   if (channelId === 'whatsapp') {
     classNames.push(styles.whatsapp);
-  } else if (channelId === 'telegram') {
-    classNames.push(styles.telegram);
+  } else if (channelId === 'max') {
+    classNames.push(styles.max);
   } else {
     classNames.push(styles.avito);
   }

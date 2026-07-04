@@ -11,7 +11,7 @@ export function SiteFooter() {
           </p>
           <p className={styles.description}>
             Съедобные букеты с доставкой по Краснодару и Яблоновскому. Быстрый
-            заказ через WhatsApp, Telegram и Avito.
+            заказ через WhatsApp, max и Avito.
           </p>
         </div>
 

@@ -112,7 +112,7 @@
 Use these shapes consistently across content files:
 
 ```ts
-export type ChannelId = 'whatsapp' | 'telegram' | 'avito';
+export type ChannelId = 'whatsapp' | 'max' | 'avito';
 export type CategorySlug = 'myasnye' | 'rybnye' | 'sladkie' | 'fruktovye';
 export type LocationSlug = 'krasnodar' | 'yablonovskiy';
 
@@ -479,7 +479,7 @@ declare global {
   }
 }
 
-export function trackCtaClick(channel: 'whatsapp' | 'telegram' | 'avito', source: string) {
+export function trackCtaClick(channel: 'whatsapp' | 'max' | 'avito', source: string) {
   if (typeof window === 'undefined' || typeof window.ym !== 'function') {
     return;
   }
@@ -539,7 +539,7 @@ test('renders all configured lead channels', () => {
   render(<ContactButtons source="hero" />);
 
   expect(screen.getByRole('link', { name: /whatsapp/i })).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: /telegram/i })).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: /max/i })).toBeInTheDocument();
   expect(screen.getByRole('link', { name: /avito/i })).toBeInTheDocument();
 });
 ```
@@ -841,7 +841,7 @@ Expected: FAIL because the helper does not exist
 `/contacts` must emphasize:
 
 - WhatsApp
-- Telegram
+- max
 - Avito
 - service areas
 - no public address in V1

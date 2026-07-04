@@ -8,7 +8,7 @@ export function generateMetadata(): Metadata {
   return buildMetadata({
     title: 'Контакты и заказ съедобных букетов',
     description:
-      'Контакты для заказа съедобных букетов в Краснодаре и Яблоновском: WhatsApp, Telegram, Avito и быстрый ответ по доставке.',
+      'Контакты для заказа съедобных букетов в Краснодаре и Яблоновском: WhatsApp, max, Avito и быстрый ответ по доставке.',
     path: '/contacts',
   });
 }
@@ -19,13 +19,13 @@ export default function ContactsPage() {
       <SectionHeading
         eyebrow="Контакты"
         title="Как быстро связаться и оформить заказ"
-        description="Работаем через WhatsApp, Telegram и Avito, чтобы быстро согласовать состав, бюджет, дату и адрес доставки."
+        description="Работаем через WhatsApp, max и Avito, чтобы быстро согласовать состав, бюджет, дату и адрес доставки."
       />
 
       <section className={styles.split}>
         <div className={styles.cardPanel}>
           <p className={styles.panelText}>
-            Лучше всего писать сразу в WhatsApp, Telegram или Avito: так можно
+            Лучше всего писать сразу в WhatsApp, max или Avito: так можно
             быстро согласовать состав, бюджет, дату и адрес доставки.
           </p>
           <div className={styles.actionRow}>

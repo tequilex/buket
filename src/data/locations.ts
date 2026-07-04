@@ -5,7 +5,7 @@ const rawLocations: LocationEntry[] = [
     slug: 'krasnodar',
     title: 'Съедобные букеты в Краснодаре',
     shortDescription:
-      'Доставка по Краснодару с быстрым заказом через WhatsApp, Telegram и Avito.',
+      'Доставка по Краснодару с быстрым заказом через WhatsApp, max и Avito.',
     deliveryLead:
       'По Краснодару можно согласовать доставку день в день или ближайшее удобное окно.',
     seoTitle: 'Съедобные букеты в Краснодаре с доставкой | Gastro Buket',

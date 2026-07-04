@@ -437,7 +437,7 @@ Replace the `<section className={styles.hero}>` block with:
       </h1>
       <p className={styles.heroDescription}>
         Мясные, рыбные, сладкие и фруктовые букеты с аккуратной
-        подарочной подачей. Удобно заказать через WhatsApp, Telegram или
+        подарочной подачей. Удобно заказать через WhatsApp, max или
         Avito и быстро согласовать детали доставки.
       </p>
     </div>

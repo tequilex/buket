@@ -17,7 +17,7 @@ const rawReviews: ReviewEntry[] = [
     author: 'Елена В.',
     text: 'Уже второй раз заказываю. Первый раз брала маленький, теперь взяла большой — разница ощутимая, смотрится очень богато. Состав свежий, ягоды вкусные.',
     location: 'yablonovskiy',
-    sourceLabel: 'Telegram',
+    sourceLabel: 'max',
   },
   {
     author: 'Дарья П.',
@@ -35,7 +35,7 @@ const rawReviews: ReviewEntry[] = [
     author: 'Ольга Т.',
     text: 'Заказывала для корпоратива — три букета сразу. Всё доставили в одно время, всё свежее и красивое. Коллектив остался в восторге, особенно шоколадный букет.',
     location: 'yablonovskiy',
-    sourceLabel: 'Telegram',
+    sourceLabel: 'max',
   },
   {
     author: 'Артём Н.',

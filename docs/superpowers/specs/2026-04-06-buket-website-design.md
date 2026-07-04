@@ -3,7 +3,7 @@
 ## Summary
 
 Build a mobile-first website-vitrine for edible bouquets that serves local customers in `Krasnodar` and `Yablonovskiy`.
-The site is a commercial catalog, not a full ecommerce store: users browse bouquets, read delivery details, and contact the business through `WhatsApp`, `Telegram`, or `Avito`.
+The site is a commercial catalog, not a full ecommerce store: users browse bouquets, read delivery details, and contact the business through `WhatsApp`, `max`, or `Avito`.
 
 The product goal is to launch a credible local brand site with strong local SEO foundations, fast mobile conversion, and a content model simple enough to maintain directly in code with `JSON/TS` and `MDX`.
 
@@ -31,7 +31,7 @@ The product goal is to launch a credible local brand site with strong local SEO 
 - Contacts page.
 - FAQ.
 - Reviews block and/or reviews page using real customer feedback.
-- Configurable contact channels for `WhatsApp`, `Telegram`, and `Avito`.
+- Configurable contact channels for `WhatsApp`, `max`, and `Avito`.
 - Blog architecture ready for future use, without requiring launch content.
 - Technical SEO foundations.
 - Yandex Metrica events for lead actions.
@@ -90,7 +90,7 @@ Design implications:
 1. User searches for something like `edible bouquets Krasnodar`.
 2. User lands on a local landing page or a category page.
 3. User understands delivery coverage and available bouquet types.
-4. User moves into WhatsApp, Telegram, or Avito.
+4. User moves into WhatsApp, max, or Avito.
 
 ### Journey 3: Occasion-driven search
 
@@ -198,7 +198,7 @@ The site is designed around direct messaging rather than forms or checkout.
 ### Lead Channels
 
 - WhatsApp
-- Telegram
+- max
 - Avito
 
 ### Rules
@@ -354,7 +354,7 @@ Yandex Metrica is required in V1.
 Track at least:
 
 - click on WhatsApp CTA
-- click on Telegram CTA
+- click on max CTA
 - click on Avito CTA
 - click from homepage hero
 - click from bouquet detail page
@@ -443,7 +443,7 @@ V1 is ready to launch when:
 - all planned pages render correctly
 - `10-12` bouquet pages exist with real content
 - category pages and local pages are populated
-- WhatsApp, Telegram, and Avito CTAs work from all key entry points
+- WhatsApp, max, and Avito CTAs work from all key entry points
 - FAQ and reviews are present
 - technical SEO files are in place
 - Metrica events are wired
