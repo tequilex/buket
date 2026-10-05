@@ -1,5 +1,7 @@
+import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
+import { JsonLd } from '@/components/seo/json-ld';
 import { OrderButton } from '@/components/order/order-button';
 import { FaqList } from '@/components/shared/faq-list';
 import { ReviewList } from '@/components/shared/review-list';
@@ -20,6 +22,19 @@ import {
   getShortCategoryTitle,
   reviews,
 } from '@/lib/content/catalog';
+import { buildMetadata } from '@/lib/seo/metadata';
+import {
+  buildFaqJsonLd,
+  buildItemListJsonLd,
+  buildLocalBusinessJsonLd,
+} from '@/lib/seo/structured-data';
+
+export const metadata: Metadata = buildMetadata({
+  title: 'Съедобные букеты с доставкой в Краснодаре и Яблоновском',
+  description:
+    'Авторские съедобные букеты из фруктов, мяса, рыбы и сладостей. Доставка по Краснодару и Яблоновскому в день заказа. Состав букета согласуется индивидуально.',
+  path: '/',
+});
 
 const featuredBouquets = bouquets.filter((bouquet) => bouquet.featured).slice(0, 4);
 const entryPrice = Math.min(...bouquets.map((bouquet) => bouquet.priceFrom));
@@ -105,6 +120,13 @@ function Section({
 export default function HomePage() {
   return (
     <div>
+      <JsonLd id="home-business" data={buildLocalBusinessJsonLd()} />
+      <JsonLd id="home-faq" data={buildFaqJsonLd(faqs)} />
+      <JsonLd
+        id="home-featured"
+        data={buildItemListJsonLd(featuredBouquets, 'Хиты продаж')}
+      />
+
       {/* ГЕРОЙ */}
       <div className="bg-dark py-22 text-on-dark">
         <div className="page-container grid grid-cols-[1.05fr_0.95fr] items-start gap-10 max-[900px]:grid-cols-1 max-[900px]:gap-6.5">

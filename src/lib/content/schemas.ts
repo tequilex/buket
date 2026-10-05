@@ -17,6 +17,23 @@ export const contactChannelSchema = z.object({
   disabled: z.boolean().optional(),
 });
 
+/**
+ * Почтовый адрес для карточки организации. Необязателен: пока он не заполнен,
+ * LocalBusiness отдаётся без адреса — это валидно, но расширенный сниппет по
+ * такой разметке не выдаётся. Заполнять только реальными данными.
+ */
+export const postalAddressSchema = z.object({
+  street: z.string().min(1),
+  locality: z.string().min(1),
+  region: z.string().min(1),
+  postalCode: z.string().min(1),
+});
+
+export const geoSchema = z.object({
+  latitude: z.number(),
+  longitude: z.number(),
+});
+
 export const siteConfigSchema = z.object({
   siteName: z.string().min(1),
   siteDescription: z.string().min(1),
@@ -24,6 +41,10 @@ export const siteConfigSchema = z.object({
   phone: z.string().min(1),
   serviceLocations: z.array(locationSlugSchema).min(1),
   channels: z.array(contactChannelSchema).length(3),
+  address: postalAddressSchema.optional(),
+  geo: geoSchema.optional(),
+  /** Формат schema.org: «Mo-Fr 09:00-20:00». */
+  openingHours: z.array(z.string().min(1)).optional(),
 });
 
 export const categorySchema = z.object({
@@ -35,6 +56,8 @@ export const categorySchema = z.object({
 
 export const locationSchema = z.object({
   slug: locationSlugSchema,
+  /** Голое название населённого пункта — для areaServed в разметке. */
+  city: z.string().min(1),
   title: z.string().min(1),
   shortDescription: z.string().min(1),
   deliveryLead: z.string().min(1),
@@ -91,6 +114,8 @@ export type ChannelId = z.infer<typeof channelIdSchema>;
 export type CategorySlug = z.infer<typeof categorySlugSchema>;
 export type LocationSlug = z.infer<typeof locationSlugSchema>;
 export type ContactChannel = z.infer<typeof contactChannelSchema>;
+export type PostalAddress = z.infer<typeof postalAddressSchema>;
+export type Geo = z.infer<typeof geoSchema>;
 export type SiteConfig = z.infer<typeof siteConfigSchema>;
 export type CategoryEntry = z.infer<typeof categorySchema>;
 export type LocationEntry = z.infer<typeof locationSchema>;

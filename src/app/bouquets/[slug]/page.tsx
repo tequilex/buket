@@ -21,7 +21,7 @@ import {
   getShortCategoryTitle,
 } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
-import { buildBouquetProductJsonLd } from '@/lib/seo/structured-data';
+import { buildBouquetProductJsonLd, buildFaqJsonLd } from '@/lib/seo/structured-data';
 
 interface BouquetPageProps {
   params: Promise<{ slug: string }>;
@@ -72,6 +72,7 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
         id={`bouquet-product-${bouquet.slug}`}
         data={buildBouquetProductJsonLd(bouquet)}
       />
+      <JsonLd id={`bouquet-faq-${bouquet.slug}`} data={buildFaqJsonLd(faqs)} />
 
       <div className="bg-dark pt-6.5 pb-22 text-on-dark">
         <div className="page-container flex flex-col gap-6.5">

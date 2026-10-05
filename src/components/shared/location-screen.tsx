@@ -1,4 +1,5 @@
 import { BouquetCard } from '@/components/catalog/bouquet-card';
+import { JsonLd } from '@/components/seo/json-ld';
 import { FaqList } from '@/components/shared/faq-list';
 import { PageHeader } from '@/components/shared/page-header';
 import { SectionHeading } from '@/components/shared/section-heading';
@@ -10,6 +11,7 @@ import {
   faqs,
   getShortCategoryTitle,
 } from '@/lib/content/catalog';
+import { buildFaqJsonLd, buildItemListJsonLd } from '@/lib/seo/structured-data';
 import type { CategorySlug, LocationEntry } from '@/lib/content/schemas';
 
 interface LocationScreenProps {
@@ -28,6 +30,12 @@ export function LocationScreen({ location, note, categorySlugs }: LocationScreen
 
   return (
     <div>
+      <JsonLd
+        id={`location-items-${location.slug}`}
+        data={buildItemListJsonLd(localBouquets, location.title)}
+      />
+      <JsonLd id={`location-faq-${location.slug}`} data={buildFaqJsonLd(faqs)} />
+
       <PageHeader
         crumbs={[
           { label: 'Главная', href: '/' },

@@ -4,34 +4,27 @@ import {
   categories,
   occasions,
 } from '@/lib/content/catalog';
-import { getAllBlogPosts } from '@/lib/content/blog';
-import { getBaseUrl } from '@/lib/utils';
+import { absoluteUrl } from '@/lib/utils';
 
 export const dynamic = 'force-static';
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = getBaseUrl();
-  const blogPosts = await getAllBlogPosts();
-
-  return [
-    { url: `${baseUrl}/` },
-    { url: `${baseUrl}/catalog` },
-    { url: `${baseUrl}/delivery` },
-    { url: `${baseUrl}/contacts` },
-    { url: `${baseUrl}/blog` },
-    { url: `${baseUrl}/locations/krasnodar` },
-    { url: `${baseUrl}/locations/yablonovskiy` },
-    ...categories.map((category) => ({
-      url: `${baseUrl}/catalog/${category.slug}`,
-    })),
-    ...bouquets.map((bouquet) => ({
-      url: `${baseUrl}/bouquets/${bouquet.slug}`,
-    })),
-    ...occasions.map((occasion) => ({
-      url: `${baseUrl}/occasions/${occasion.slug}`,
-    })),
-    ...blogPosts.map((post) => ({
-      url: `${baseUrl}/blog/${post.slug}`,
-    })),
+/**
+ * Карта сайта. Адреса строятся через absoluteUrl: без слеша на конце каждый
+ * из них отвечает 308, и Яндекс выбрасывает такие ссылки как редиректы.
+ */
+export default function sitemap(): MetadataRoute.Sitemap {
+  const paths = [
+    '/',
+    '/catalog',
+    '/delivery',
+    '/contacts',
+    '/blog',
+    '/locations/krasnodar',
+    '/locations/yablonovskiy',
+    ...categories.map((category) => `/catalog/${category.slug}`),
+    ...bouquets.map((bouquet) => `/bouquets/${bouquet.slug}`),
+    ...occasions.map((occasion) => `/occasions/${occasion.slug}`),
   ];
+
+  return paths.map((path) => ({ url: absoluteUrl(path) }));
 }

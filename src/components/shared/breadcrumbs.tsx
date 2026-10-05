@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { JsonLd } from '@/components/seo/json-ld';
+import { buildBreadcrumbJsonLd } from '@/lib/seo/structured-data';
 
 interface BreadcrumbItem {
   label: string;
@@ -12,7 +14,13 @@ interface BreadcrumbsProps {
   onDark?: boolean;
 }
 
-/** Заглавный след с разрядкой и разделителем «/». */
+/**
+ * Заглавный след с разрядкой и разделителем «/».
+ *
+ * Здесь же отдаётся BreadcrumbList: компонент рендерится ровно один раз на
+ * страницу, поэтому разметка не дублируется, а ни одна страница со следом не
+ * остаётся без неё.
+ */
 export function Breadcrumbs({ items, onDark = false }: BreadcrumbsProps) {
   const currentColor = onDark ? 'text-on-dark' : 'text-ink';
   const restColor = onDark ? 'text-mute-on-dark' : 'text-mute';
@@ -23,6 +31,12 @@ export function Breadcrumbs({ items, onDark = false }: BreadcrumbsProps) {
       aria-label="Хлебные крошки"
       className="flex flex-wrap items-center gap-2 type-label"
     >
+      <JsonLd
+        id="breadcrumbs-jsonld"
+        data={buildBreadcrumbJsonLd(
+          items.map((item) => ({ name: item.label, path: item.href })),
+        )}
+      />
       {items.map((item, index) => {
         const last = index === items.length - 1;
 

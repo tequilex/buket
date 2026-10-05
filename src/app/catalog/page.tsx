@@ -3,8 +3,10 @@ import { BouquetCard } from '@/components/catalog/bouquet-card';
 import { PageHeader } from '@/components/shared/page-header';
 import { CtaBand } from '@/components/ui/cta-band';
 import { FilterChip } from '@/components/ui/filter-chip';
+import { JsonLd } from '@/components/seo/json-ld';
 import { bouquets, categories, getShortCategoryTitle } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { buildItemListJsonLd } from '@/lib/seo/structured-data';
 
 function plural(count: number) {
   if (count === 1) return 'букет';
@@ -23,6 +25,11 @@ export function generateMetadata(): Metadata {
 export default function CatalogPage() {
   return (
     <div>
+      <JsonLd
+        id="catalog-items"
+        data={buildItemListJsonLd(bouquets, 'Каталог съедобных букетов')}
+      />
+
       <PageHeader
         crumbs={[{ label: 'Главная', href: '/' }, { label: 'Каталог' }]}
         eyebrow="Весь каталог"

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
+import { JsonLd } from '@/components/seo/json-ld';
 import { PageHeader } from '@/components/shared/page-header';
 import { CtaBand } from '@/components/ui/cta-band';
 import { FilterChip } from '@/components/ui/filter-chip';
@@ -11,6 +12,7 @@ import {
   getShortCategoryTitle,
 } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { buildItemListJsonLd } from '@/lib/seo/structured-data';
 
 interface CategoryPageProps {
   params: Promise<{ category: string }>;
@@ -71,6 +73,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <div>
+      <JsonLd
+        id={`category-items-${categoryEntry.slug}`}
+        data={buildItemListJsonLd(categoryBouquets, categoryEntry.title)}
+      />
+
       <PageHeader
         crumbs={[
           { label: 'Главная', href: '/' },

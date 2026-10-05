@@ -3,6 +3,7 @@ import { locationSchema, type LocationEntry } from '@/lib/content/schemas';
 const rawLocations: LocationEntry[] = [
   {
     slug: 'krasnodar',
+    city: 'Краснодар',
     title: 'Съедобные букеты в Краснодаре',
     shortDescription:
       'Доставка по Краснодару с быстрым заказом через WhatsApp, max и Avito.',
@@ -14,6 +15,7 @@ const rawLocations: LocationEntry[] = [
   },
   {
     slug: 'yablonovskiy',
+    city: 'Яблоновский',
     title: 'Съедобные букеты в Яблоновском',
     shortDescription:
       'Доставка по Яблоновскому и соседним районам с быстрым заказом через мессенджеры.',

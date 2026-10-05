@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ContactChannels } from '@/components/cta/contact-channels';
+import { JsonLd } from '@/components/seo/json-ld';
 import { FaqList } from '@/components/shared/faq-list';
 import { PageHeader } from '@/components/shared/page-header';
 import { SectionHeading } from '@/components/shared/section-heading';
@@ -7,6 +8,7 @@ import { CtaBand } from '@/components/ui/cta-band';
 import { StepCard } from '@/components/ui/step-card';
 import { faqs, locations } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { buildFaqJsonLd } from '@/lib/seo/structured-data';
 
 const steps = [
   {
@@ -38,6 +40,8 @@ export function generateMetadata(): Metadata {
 export default function DeliveryPage() {
   return (
     <div>
+      <JsonLd id="delivery-faq" data={buildFaqJsonLd(faqs)} />
+
       <PageHeader
         crumbs={[{ label: 'Главная', href: '/' }, { label: 'Доставка' }]}
         eyebrow="Доставка"

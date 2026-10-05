@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
+import { JsonLd } from '@/components/seo/json-ld';
 import { FaqList } from '@/components/shared/faq-list';
 import { PageHeader } from '@/components/shared/page-header';
 import { SectionHeading } from '@/components/shared/section-heading';
@@ -8,6 +9,7 @@ import { CtaBand } from '@/components/ui/cta-band';
 import { Tag } from '@/components/ui/tag';
 import { getBouquetBySlug, getOccasionBySlug, occasions } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
+import { buildFaqJsonLd, buildItemListJsonLd } from '@/lib/seo/structured-data';
 
 interface OccasionPageProps {
   params: Promise<{ slug: string }>;
@@ -52,6 +54,17 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
 
   return (
     <div>
+      <JsonLd
+        id={`occasion-items-${occasion.slug}`}
+        data={buildItemListJsonLd(relatedBouquets, occasion.title)}
+      />
+      {occasion.faqItems ? (
+        <JsonLd
+          id={`occasion-faq-${occasion.slug}`}
+          data={buildFaqJsonLd(occasion.faqItems)}
+        />
+      ) : null}
+
       <PageHeader
         crumbs={[
           { label: 'Главная', href: '/' },
