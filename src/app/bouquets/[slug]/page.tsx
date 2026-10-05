@@ -7,6 +7,7 @@ import { Breadcrumbs } from '@/components/shared/breadcrumbs';
 import { SectionHeading } from '@/components/shared/section-heading';
 import { Spec } from '@/components/shared/spec';
 import { CtaBand } from '@/components/ui/cta-band';
+import { InlineLink } from '@/components/ui/inline-link';
 import { FaqList } from '@/components/shared/faq-list';
 import { Photo } from '@/components/ui/photo';
 import { PriceStamp } from '@/components/ui/price-stamp';
@@ -141,9 +142,9 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
               </div>
 
               <div className="w-full">
-                <Spec label="Размер" value={bouquet.weightOrSize} />
-                <Spec label="Доставка" value={bouquet.deliveryNote} />
-                <Spec label="Состав" value="Согласуется индивидуально до сборки" />
+                <Spec onDark label="Размер" value={bouquet.weightOrSize} />
+                <Spec onDark label="Доставка" value={bouquet.deliveryNote} />
+                <Spec onDark label="Состав" value="Согласуется индивидуально до сборки" />
               </div>
 
               <div className="flex flex-wrap gap-2">
@@ -162,8 +163,45 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
         </div>
       </div>
 
+      <div className="page-container py-22">
+        <div className="flex flex-wrap items-end justify-between gap-6.5">
+          <SectionHeading eyebrow="Про этот букет" title="Состав, цена, сроки" />
+          <p className="max-w-[46ch] text-sm text-mute text-pretty">
+            В основе — {bouquet.composition.join(', ')}. Это базовый набор, от которого
+            отталкиваемся: состав согласуется до сборки и меняется под вкус, повод и
+            бюджет.
+          </p>
+        </div>
+
+        <div className="mt-10 grid grid-cols-3 gap-2 max-[900px]:grid-cols-1">
+          <div className="flex flex-col gap-3 bg-card p-4.5">
+            <h3 className="type-heading-md text-ink">Что можно поменять</h3>
+            <p className="text-sm text-mute text-pretty">
+              Убрать строку — нормально. Аллергия, не ест острое, не любит рыбу —
+              скажите заранее. До закупки поменять позицию легко, после уже нет.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 bg-card p-4.5">
+            <h3 className="type-heading-md text-ink">Сезонные позиции</h3>
+            <p className="text-sm text-mute text-pretty">
+              Ягоды, фрукты и морская часть зависят от того, что удалось взять свежим в
+              день закупки. Точный набор подтверждаем перед сборкой.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 bg-card p-4.5">
+            <h3 className="type-heading-md text-ink">Цена и доставка</h3>
+            <p className="text-sm text-mute text-pretty">
+              {bouquet.priceFrom} ₽ — за базовый состав этого размера. Больше позиций —
+              дороже, меньше — дешевле. Везём по Краснодару и Яблоновскому,{' '}
+              <InlineLink href="/delivery">условия доставки</InlineLink>.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {relatedBouquets.length > 0 ? (
-        <div className="page-container flex flex-col gap-10 py-22">
+        <div className="bg-band py-22">
+         <div className="page-container flex flex-col gap-10">
           <SectionHeading
             eyebrow={category ? `${category.title}` : 'Каталог'}
             title="Похожие составы"
@@ -177,14 +215,13 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
               />
             ))}
           </div>
+         </div>
         </div>
       ) : null}
 
-      <div className="bg-band py-22">
-        <div className="page-container flex flex-col gap-10">
-          <SectionHeading eyebrow="Вопросы" title="Коротко о главном" />
-          <FaqList items={faqs} />
-        </div>
+      <div className="page-container flex flex-col gap-10 py-22">
+        <SectionHeading eyebrow="Вопросы" title="Коротко о главном" />
+        <FaqList items={faqs} />
       </div>
 
       <CtaBand
