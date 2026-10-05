@@ -9,7 +9,6 @@ import { Tag } from '@/components/ui/tag';
 import {
   categories,
   getBouquetsByCategory,
-  getShortCategoryTitle,
 } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { buildItemListJsonLd } from '@/lib/seo/structured-data';
@@ -82,7 +81,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         crumbs={[
           { label: 'Главная', href: '/' },
           { label: 'Каталог', href: '/catalog' },
-          { label: getShortCategoryTitle(categoryEntry.title) },
+          { label: categoryEntry.shortTitle },
         ]}
         eyebrow={`Состав ${String(index + 1).padStart(2, '0')}`}
         title={categoryEntry.title}
@@ -99,7 +98,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
                 href={`/catalog/${entry.slug}`}
                 active={entry.slug === categoryEntry.slug}
               >
-                {getShortCategoryTitle(entry.title)}
+                {entry.shortTitle}
               </FilterChip>
             ))}
           </div>
@@ -111,6 +110,14 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <div className="grid grid-cols-4 gap-2 max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1">
           {categoryBouquets.map((bouquet) => (
             <BouquetCard key={bouquet.slug} bouquet={bouquet} />
+          ))}
+        </div>
+
+        <div className="grid grid-cols-3 gap-10 pt-10 max-[900px]:grid-cols-1 max-[900px]:gap-6.5">
+          {categoryEntry.about.map((paragraph) => (
+            <p key={paragraph.slice(0, 24)} className="text-sm text-mute text-pretty">
+              {paragraph}
+            </p>
           ))}
         </div>
 

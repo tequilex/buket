@@ -19,7 +19,6 @@ import {
   getBouquetBySlug,
   getBouquetsByCategory,
   getDisplayName,
-  getShortCategoryTitle,
 } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { buildBouquetProductJsonLd, buildFaqJsonLd } from '@/lib/seo/structured-data';
@@ -85,7 +84,7 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
               ...(category
                 ? [
                     {
-                      label: getShortCategoryTitle(category.title),
+                      label: category.shortTitle,
                       href: `/catalog/${category.slug}`,
                     },
                   ]

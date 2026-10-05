@@ -31,7 +31,7 @@ export function PageHeader({
     <div className="bg-dark pt-6.5 pb-10 text-on-dark">
       <div className="page-container flex flex-col gap-6.5">
         <Breadcrumbs onDark items={crumbs} />
-        <SectionHeading tone="dark" eyebrow={eyebrow} title={title} lead={lead} />
+        <SectionHeading as="h1" tone="dark" eyebrow={eyebrow} title={title} lead={lead} />
         {children}
       </div>
     </div>

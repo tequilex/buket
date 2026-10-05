@@ -9,7 +9,6 @@ import {
   bouquets,
   categories,
   faqs,
-  getShortCategoryTitle,
 } from '@/lib/content/catalog';
 import { buildFaqJsonLd, buildItemListJsonLd } from '@/lib/seo/structured-data';
 import type { CategorySlug, LocationEntry } from '@/lib/content/schemas';
@@ -57,7 +56,7 @@ export function LocationScreen({ location, note, categorySlugs }: LocationScreen
 
             return (
               <Tag key={slug} href={`/catalog/${slug}`}>
-                {getShortCategoryTitle(category.title)}
+                {category.shortTitle}
               </Tag>
             );
           })}

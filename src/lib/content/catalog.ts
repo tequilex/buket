@@ -32,11 +32,6 @@ export function getDisplayName(name: string): string {
   return name.replace(/^Букет\s+[«"“](.+)[»"”]$/u, '$1');
 }
 
-/** Короткое имя категории для панелей: «Мясные букеты» → «Мясные». */
-export function getShortCategoryTitle(title: string): string {
-  return title.replace(/\s+букеты$/iu, '');
-}
-
 export function getBouquetBySlug(slug: string): BouquetEntry | undefined {
   return bouquets.find((bouquet) => bouquet.slug === slug);
 }

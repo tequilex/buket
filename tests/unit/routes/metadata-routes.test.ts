@@ -16,7 +16,9 @@ test('catalog and support routes return route-specific metadata', async () => {
   expect(catalog.title).toBe('Каталог съедобных букетов');
   expect(catalog.alternates?.canonical).toBe('http://localhost:3000/catalog/');
 
-  expect(category.title).toBe('Мясные букеты в Краснодаре и Яблоновском');
+  expect(category.title).toBe(
+    'Мужские букеты из колбасы и сыра в Краснодаре и Яблоновском',
+  );
   expect(category.alternates?.canonical).toBe('http://localhost:3000/catalog/myasnye/');
 
   expect(delivery.title).toBe('Доставка съедобных букетов по Краснодару и Яблоновскому');

@@ -19,7 +19,6 @@ import {
   bouquets,
   categories,
   faqs,
-  getShortCategoryTitle,
   reviews,
 } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -216,7 +215,7 @@ export default function HomePage() {
               <CategoryPanel
                 key={category.slug}
                 number={String(index + 1).padStart(2, '0')}
-                title={getShortCategoryTitle(category.title)}
+                title={category.shortTitle}
                 composition={category.shortDescription}
                 price={Math.min(...categoryBouquets.map((bouquet) => bouquet.priceFrom))}
                 href={`/catalog/${category.slug}`}

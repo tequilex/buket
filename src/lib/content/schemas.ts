@@ -50,8 +50,12 @@ export const siteConfigSchema = z.object({
 export const categorySchema = z.object({
   slug: categorySlugSchema,
   title: z.string().min(1),
+  /** Короткая метка для фильтров и крошек: «Мясные». */
+  shortTitle: z.string().min(1),
   shortDescription: z.string().min(1),
   heroDescription: z.string().min(1),
+  /** Развёрнутый текст категории: состав, кому подходит, что учесть. */
+  about: z.array(z.string().min(1)).min(1),
 });
 
 export const locationSchema = z.object({

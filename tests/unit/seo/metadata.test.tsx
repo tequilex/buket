@@ -1,3 +1,5 @@
+import { renderToStaticMarkup } from 'react-dom/server';
+import { PageHeader } from '@/components/shared/page-header';
 import { buildMetadata } from '@/lib/seo/metadata';
 import { absoluteUrl, assetUrl } from '@/lib/utils';
 
@@ -61,4 +63,18 @@ test('absoluteUrl adds a trailing slash, assetUrl never does', () => {
   expect(absoluteUrl('/catalog')).toBe('http://localhost:3000/catalog/');
   expect(absoluteUrl('/catalog/')).toBe('http://localhost:3000/catalog/');
   expect(assetUrl('/og-default.jpg')).toBe('http://localhost:3000/og-default.jpg');
+});
+
+/**
+ * Регрессия. SectionHeading всегда отдавал h2, а PageHeader построен на нём —
+ * из-за этого каталог, категории, доставка, локации и поводы месяцами выходили
+ * вообще без h1. Шапка страницы обязана быть первым уровнем.
+ */
+test('PageHeader renders the page title as h1', () => {
+  const markup = renderToStaticMarkup(
+    <PageHeader crumbs={[{ label: 'Главная', href: '/' }]} title="Заголовок" />,
+  );
+
+  expect(markup).toContain('<h1');
+  expect(markup).not.toContain('<h2');
 });

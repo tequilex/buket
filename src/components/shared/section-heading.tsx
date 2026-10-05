@@ -8,6 +8,8 @@ interface SectionHeadingProps {
   lead?: string;
   /** На какой поверхности стоит — переключает цвета типографики. */
   tone?: 'cream' | 'dark' | 'green';
+  /** Уровень заголовка. h1 — только в шапке страницы, по одному на документ. */
+  as?: 'h1' | 'h2';
   className?: string;
 }
 
@@ -17,6 +19,7 @@ export function SectionHeading({
   title,
   lead,
   tone = 'cream',
+  as: Heading = 'h2',
   className,
 }: SectionHeadingProps) {
   const onDark = tone === 'dark' || tone === 'green';
@@ -33,9 +36,11 @@ export function SectionHeading({
           {eyebrow}
         </span>
       ) : null}
-      <h2 className={['type-heading-xl', onDark ? 'text-on-dark' : 'text-ink'].join(' ')}>
+      <Heading
+        className={['type-heading-xl', onDark ? 'text-on-dark' : 'text-ink'].join(' ')}
+      >
         {title}
-      </h2>
+      </Heading>
       {lead ? (
         <p
           className={[
