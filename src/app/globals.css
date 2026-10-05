@@ -1,0 +1,257 @@
+/* Gastro Buket — Tailwind v4 theme, направление «Афиша»
+ *
+ * Копируется как src/app/globals.css, globals.scss удаляется.
+ * Tailwind v4 не нужен конфиг: утилиты генерируются из @theme.
+ *
+ *   npm remove sass
+ *   npm install tailwindcss @tailwindcss/postcss postcss
+ *
+ * postcss.config.mjs:
+ *   export default { plugins: { "@tailwindcss/postcss": {} } };
+ *
+ * Токены повторяют tokens/*.css этой системы один в один.
+ */
+
+@import "tailwindcss";
+
+@theme {
+  /* ---- шрифты --------------------------------------------------------- */
+  /* Подключить через next/font в layout.tsx и отдать сюда как переменные. */
+  --font-display: var(--font-oswald), Impact, "Arial Narrow", sans-serif;
+  --font-core: var(--font-inter), -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-core);
+
+  /* ---- цвет: база ----------------------------------------------------- */
+  --color-graphite-900: #12110d;
+  --color-graphite-800: #1b1a16;
+  --color-graphite-700: #26241e;
+  --color-cream-100: #f3eee4;
+  --color-cream-200: #e6dfd1;
+  --color-cream-300: #ddd5c6;
+  --color-white: #ffffff;
+  --color-green-600: #12823f;
+  --color-green-700: #0e6b33;
+  --color-stone-600: #7d7768;
+  --color-stone-400: #a9a292;
+  --color-stone-300: #3a352c;
+  --color-danger-600: #a3231b;
+
+  /* ---- цвет: смысловые ------------------------------------------------ */
+  /* bg-page, bg-dark, text-mute-on-dark, border-cream и т.д. */
+  --color-page: var(--color-cream-100);
+  --color-band: var(--color-cream-200);
+  --color-card: var(--color-white);
+  --color-dark: var(--color-graphite-800);
+  --color-dark-raised: var(--color-graphite-700);
+  --color-primary: var(--color-green-600);
+  --color-primary-pressed: var(--color-green-700);
+
+  --color-ink: var(--color-graphite-900);
+  --color-body: var(--color-stone-300);
+  --color-mute: var(--color-stone-600);
+  --color-on-dark: var(--color-cream-100);
+  --color-mute-on-dark: var(--color-stone-400);
+  --color-error: var(--color-danger-600);
+
+  --color-cream: var(--color-cream-300);        /* border-cream */
+  --color-cream-soft: var(--color-cream-200);
+  --color-dark-line: rgb(243 238 228 / 0.14);   /* border-dark-line */
+  --color-dark-line-strong: rgb(243 238 228 / 0.35);
+  --color-fill-on-dark: rgb(255 255 255 / 0.09);
+
+  /* ---- типографика ---------------------------------------------------- */
+  /* Дисплейные роли всегда идут с uppercase — utility ниже. */
+  /* Дисплейный ярус масштабируется плавно — как --fs-display-* в tokens/typography.css. */
+  --text-display-xl: clamp(44px, 8vw, 104px);
+  --text-display-xl--line-height: 0.92;
+  --text-display-xl--letter-spacing: -0.01em;
+  --text-display-xl--font-weight: 700;
+
+  --text-display-lg: clamp(34px, 5vw, 54px);
+  --text-display-lg--line-height: 0.95;
+  --text-display-lg--letter-spacing: -0.01em;
+  --text-display-lg--font-weight: 700;
+
+  --text-heading-xl: clamp(26px, 3vw, 34px);
+  --text-heading-xl--line-height: 1;
+  --text-heading-xl--letter-spacing: -0.01em;
+  --text-heading-xl--font-weight: 700;
+
+  --text-heading-lg: 23px;
+  --text-heading-lg--line-height: 1.05;
+  --text-heading-lg--font-weight: 700;
+
+  --text-heading-md: 20px;
+  --text-heading-md--line-height: 1.1;
+  --text-heading-md--font-weight: 600;
+
+  --text-body: 16px;
+  --text-body--line-height: 1.5;
+
+  --text-sm: 14px;
+  --text-sm--line-height: 1.55;
+
+  --text-caption: 13px;
+  --text-caption--line-height: 1.5;
+
+  --text-stamp: 19px;
+  --text-stamp--line-height: 1;
+  --text-stamp--font-weight: 700;
+
+  --text-numeral: 52px;
+  --text-numeral--line-height: 0.8;
+  --text-numeral--font-weight: 700;
+
+  /* разрядка: tracking-eyebrow / -label / -button / -ticker */
+  --tracking-eyebrow: 0.18em;
+  --tracking-label: 0.16em;
+  --tracking-button: 0.06em;
+  --tracking-ticker: 0.16em;
+  --tracking-mark: 0.08em;
+
+  /* ---- ритм ----------------------------------------------------------- */
+  /* p-1=4 p-2=8 p-3=12 p-4=16 p-6=24 p-10=40 p-22=88 */
+  --spacing: 4px;
+  --container-page: 1320px;
+
+  /* ---- форма ---------------------------------------------------------- */
+  /* Радиусов нет. rounded-* в этом проекте не применяется вообще. */
+  --radius-none: 0px;
+  --radius-pill: 9999px; /* только аватар */
+
+  /* ---- тень ----------------------------------------------------------- */
+  /* Единственная — под модалкой. shadow-modal, больше нигде. */
+  --shadow-modal: 0 24px 60px rgb(18 17 13 / 0.45);
+
+  /* ---- соотношения фото ----------------------------------------------- */
+  --aspect-panel: 3 / 4;
+  --aspect-card: 4 / 5;
+  --aspect-wide: 16 / 10;
+
+  /* ---- движение ------------------------------------------------------- */
+  --ease-linear: linear;
+  --animate-ticker: ticker 34s linear infinite;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-core);
+    font-size: var(--text-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Заголовки не несут собственного размера — каждый набирается на месте. */
+  h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+
+  a { color: var(--color-ink); text-decoration: none; }
+  a:hover { color: var(--color-primary); }
+
+  img { display: block; }
+
+  ::selection { background: color-mix(in srgb, var(--color-primary) 25%, transparent); }
+
+  /* Фокус — зелёное кольцо. Синего в системе нет. */
+  :focus-visible { outline: 3px solid var(--color-primary); outline-offset: 0; }
+}
+
+/* Утилиты, которых Tailwind не даёт из коробки. */
+
+/* Контейнер страницы: page-container.
+   Поля 20px на мобильном и 32px от планшета — --container-gutter-mobile. */
+@utility page-container {
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: --spacing(5);
+
+  @media (width >= 48rem) {
+    padding-inline: --spacing(8);
+  }
+}
+
+/* Дисплейный ярус: display-xl / display-lg / heading-xl … всегда заглавными */
+@utility type-display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 8vw, 104px);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+@utility type-display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+@utility type-heading-xl {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+@utility type-heading-lg {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-lg);
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+@utility type-heading-md {
+  font-family: var(--font-display);
+  font-size: var(--text-heading-md);
+  font-weight: 600;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+/* Служебные роли заглавными с разрядкой */
+@utility type-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+@utility type-label {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+@utility type-button {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: var(--tracking-button);
+  text-transform: uppercase;
+}
+
+/* Защитный градиент под подписью на фотографии */
+@utility scrim-panel {
+  background: linear-gradient(to top, rgb(27 26 22 / 0.94), rgb(27 26 22 / 0));
+}
+
+/* Фото под текстом: затемнение и наезд при наведении */
+@utility photo-tinted {
+  filter: brightness(0.82);
+  transition: filter 250ms linear, transform 500ms linear;
+}
+@utility photo-tinted-hover {
+  filter: brightness(0.95);
+  transform: scale(1.03);
+}

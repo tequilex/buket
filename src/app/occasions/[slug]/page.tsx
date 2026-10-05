@@ -1,17 +1,13 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
-import { Breadcrumbs } from '@/components/shared/breadcrumbs';
 import { FaqList } from '@/components/shared/faq-list';
+import { PageHeader } from '@/components/shared/page-header';
 import { SectionHeading } from '@/components/shared/section-heading';
-import {
-  getBouquetBySlug,
-  getOccasionBySlug,
-  occasions,
-} from '@/lib/content/catalog';
+import { CtaBand } from '@/components/ui/cta-band';
+import { Tag } from '@/components/ui/tag';
+import { getBouquetBySlug, getOccasionBySlug, occasions } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
-import styles from '@/app/internal-page.module.scss';
 
 interface OccasionPageProps {
   params: Promise<{ slug: string }>;
@@ -52,68 +48,51 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
 
   const relatedBouquets = occasion.relatedBouquetSlugs
     .map((bouquetSlug) => getBouquetBySlug(bouquetSlug))
-    .filter((item) => Boolean(item));
+    .filter((item) => item !== undefined);
 
   return (
-    <div className={styles.page}>
-      <Breadcrumbs
-        items={[
+    <div>
+      <PageHeader
+        crumbs={[
           { label: 'Главная', href: '/' },
-          { label: 'Поводы', href: '/catalog' },
+          { label: 'Каталог', href: '/catalog' },
           { label: occasion.title },
         ]}
+        eyebrow="Повод"
+        title={occasion.title}
+        lead={occasion.intro}
       />
 
-      <section className={styles.split}>
-        <SectionHeading
-          eyebrow="Повод"
-          title={occasion.title}
-          description={occasion.intro}
-        />
-
-        <div className={styles.surfacePanel}>
-          <p className={styles.panelEyebrow}>
-            Полезные переходы
-          </p>
-          <div className={styles.pillLinks}>
-            <Link
-              href="/catalog"
-              className={styles.pillLink}
-            >
-              Весь каталог
-            </Link>
-            <Link
-              href="/locations/krasnodar"
-              className={styles.pillLink}
-            >
-              Краснодар
-            </Link>
-            <Link
-              href="/locations/yablonovskiy"
-              className={styles.pillLink}
-            >
-              Яблоновский
-            </Link>
-          </div>
+      <div className="page-container flex flex-col gap-10 py-22">
+        <div className="grid grid-cols-4 gap-2 max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1">
+          {relatedBouquets.map((bouquet) => (
+            <BouquetCard key={bouquet.slug} bouquet={bouquet} />
+          ))}
         </div>
-      </section>
 
-      <section className={styles.bouquetGridStandard}>
-        {relatedBouquets.map((bouquet) =>
-          bouquet ? <BouquetCard key={bouquet.slug} bouquet={bouquet} /> : null,
-        )}
-      </section>
+        <div className="flex flex-wrap gap-2">
+          <Tag href="/catalog">Весь каталог</Tag>
+          <Tag href="/locations/krasnodar">Краснодар</Tag>
+          <Tag href="/locations/yablonovskiy">Яблоновский</Tag>
+        </div>
+      </div>
 
       {occasion.faqItems ? (
-        <section className={styles.section}>
-          <SectionHeading
-            eyebrow="FAQ"
-            title="Что часто уточняют перед заказом"
-            description="Небольшой FAQ для конкретного повода, чтобы снимать типовые вопросы без лишней переписки."
-          />
-          <FaqList items={occasion.faqItems} />
-        </section>
+        <div className="bg-band py-22">
+          <div className="page-container flex flex-col gap-10">
+            <SectionHeading eyebrow="Вопросы" title="Что уточняют перед заказом" />
+            <FaqList items={occasion.faqItems} />
+          </div>
+        </div>
       ) : null}
+
+      <CtaBand
+        eyebrow="Готовы собрать"
+        title="Скажите повод — предложим состав"
+        text="Напишите в удобный канал. Спросим три вещи: кому, на когда и какой бюджет."
+        cta="Написать"
+        ctaSource={`occasion_${occasion.slug}`}
+      />
     </div>
   );
 }

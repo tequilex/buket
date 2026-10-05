@@ -4,6 +4,7 @@ const siteConfig = siteConfigSchema.parse({
   siteName: 'Gastro Buket',
   siteDescription:
     'Съедобные букеты с доставкой по Краснодару и Яблоновскому.',
+  phone: '+7 918 270-58-54',
   serviceLocations: ['krasnodar', 'yablonovskiy'],
   channels: [
     {

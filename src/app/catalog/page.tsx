@@ -1,12 +1,15 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
-import { SectionHeading } from '@/components/shared/section-heading';
-import { bouquets, categories } from '@/lib/content/catalog';
+import { PageHeader } from '@/components/shared/page-header';
+import { CtaBand } from '@/components/ui/cta-band';
+import { FilterChip } from '@/components/ui/filter-chip';
+import { bouquets, categories, getShortCategoryTitle } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
-import styles from '@/app/internal-page.module.scss';
 
-const featuredBouquets = bouquets.filter((bouquet) => bouquet.featured).slice(0, 16);
+function plural(count: number) {
+  if (count === 1) return 'букет';
+  return count < 5 ? 'букета' : 'букетов';
+}
 
 export function generateMetadata(): Metadata {
   return buildMetadata({
@@ -19,45 +22,45 @@ export function generateMetadata(): Metadata {
 
 export default function CatalogPage() {
   return (
-    <div className={styles.page}>
-      <SectionHeading
-        eyebrow="Каталог"
-        title="Съедобные букеты по составу"
-        description="Основной каталог по составу: мясные, рыбные, сладкие и фруктовые букеты для разных поводов и настроения подарка."
+    <div>
+      <PageHeader
+        crumbs={[{ label: 'Главная', href: '/' }, { label: 'Каталог' }]}
+        eyebrow="Весь каталог"
+        title="Все съедобные букеты"
+        lead="Десять готовых букетов. Состав любого согласуем до сборки — можно вычеркнуть строку или собрать под бюджет."
       />
 
-      <section className={styles.categoryGrid}>
-        {categories.map((category) => (
-          <Link
-            key={category.slug}
-            href={`/catalog/${category.slug}`}
-            className={styles.categoryCard}
-          >
-            <p className={styles.panelEyebrow}>
-              Категория
-            </p>
-            <h2 className={styles.categoryTitle}>
-              {category.title}
-            </h2>
-            <p className={styles.categoryDescription}>
-              {category.heroDescription}
-            </p>
-          </Link>
-        ))}
-      </section>
+      <div className="page-container flex flex-col gap-6.5 pt-10 pb-22">
+        <div className="flex flex-wrap items-center justify-between gap-4.5">
+          <div className="flex flex-wrap gap-2">
+            <FilterChip active href="/catalog">
+              Все
+            </FilterChip>
+            {categories.map((category) => (
+              <FilterChip key={category.slug} href={`/catalog/${category.slug}`}>
+                {getShortCategoryTitle(category.title)}
+              </FilterChip>
+            ))}
+          </div>
+          <span className="type-label text-mute">
+            {bouquets.length} {plural(bouquets.length)}
+          </span>
+        </div>
 
-      <section className={styles.section}>
-        <SectionHeading
-          eyebrow="Хиты"
-          title="С чего начать выбор"
-          description="Несколько букетов, которые помогают быстро понять формат, подачу и примерный бюджет."
-        />
-        <div className={styles.bouquetGridDense}>
-          {featuredBouquets.map((bouquet) => (
+        <div className="grid grid-cols-4 gap-2 max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1">
+          {bouquets.map((bouquet) => (
             <BouquetCard key={bouquet.slug} bouquet={bouquet} />
           ))}
         </div>
-      </section>
+      </div>
+
+      <CtaBand
+        eyebrow="Не выбрали"
+        title="Опишите повод — соберём под него"
+        text="Скажите, кому и на когда. Предложим состав в пределах бюджета."
+        cta="Написать"
+        ctaSource="catalog"
+      />
     </div>
   );
 }

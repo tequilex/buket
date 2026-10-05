@@ -21,6 +21,22 @@ export {
   reviews,
 };
 
+/** tel: для того же номера, что показан в разметке. */
+export const phoneHref = `tel:${siteConfig.phone.replace(/[^\d+]/gu, '')}`;
+
+/**
+ * Имя для дисплейного яруса: «Букет "Мужской хит"» → «Мужской хит».
+ * В данных и в разметке `name` и `seoTitle` остаются полными.
+ */
+export function getDisplayName(name: string): string {
+  return name.replace(/^Букет\s+[«"“](.+)[»"”]$/u, '$1');
+}
+
+/** Короткое имя категории для панелей: «Мясные букеты» → «Мясные». */
+export function getShortCategoryTitle(title: string): string {
+  return title.replace(/\s+букеты$/iu, '');
+}
+
 export function getBouquetBySlug(slug: string): BouquetEntry | undefined {
   return bouquets.find((bouquet) => bouquet.slug === slug);
 }

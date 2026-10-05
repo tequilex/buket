@@ -1,10 +1,30 @@
 import type { Metadata } from 'next';
-import { ContactButtons } from '@/components/cta/contact-buttons';
+import { ContactChannels } from '@/components/cta/contact-channels';
 import { FaqList } from '@/components/shared/faq-list';
+import { PageHeader } from '@/components/shared/page-header';
 import { SectionHeading } from '@/components/shared/section-heading';
+import { CtaBand } from '@/components/ui/cta-band';
+import { StepCard } from '@/components/ui/step-card';
 import { faqs, locations } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
-import styles from '@/app/internal-page.module.scss';
+
+const steps = [
+  {
+    n: '01',
+    title: 'Выбрали',
+    text: 'Букет из каталога или пример того, что нравится — подойдёт и то и другое.',
+  },
+  {
+    n: '02',
+    title: 'Написали',
+    text: 'WhatsApp, max или Avito. Отвечаем за 15 минут в рабочее время.',
+  },
+  {
+    n: '03',
+    title: 'Согласовали',
+    text: 'Состав, стоимость, дату, адрес и удобный интервал доставки.',
+  },
+];
 
 export function generateMetadata(): Metadata {
   return buildMetadata({
@@ -17,48 +37,53 @@ export function generateMetadata(): Metadata {
 
 export default function DeliveryPage() {
   return (
-    <div className={styles.page}>
-      <SectionHeading
+    <div>
+      <PageHeader
+        crumbs={[{ label: 'Главная', href: '/' }, { label: 'Доставка' }]}
         eyebrow="Доставка"
-        title="Как устроена доставка и заказ"
-        description="Коротко рассказываем, как оформить заказ, согласовать состав и выбрать удобное время доставки."
+        title="Возим сами, в день заказа"
+        lead="Букет собирается под конкретный заказ, поэтому дату и интервал согласуем в переписке — обычно это пять минут."
       />
 
-      <section className={styles.infoGrid}>
-        {locations.map((location) => (
-          <article
-            key={location.slug}
-            className={styles.cardPanel}
-          >
-            <h2 className={styles.panelTitle}>{location.title}</h2>
-            <p className={styles.mutedText}>
-              {location.deliveryLead}
-            </p>
-          </article>
-        ))}
-      </section>
-
-      <section className={styles.surfacePanel}>
-        <p className={styles.panelEyebrow}>
-          Как проходит заказ
-        </p>
-        <ol className={styles.stepsGrid}>
-          <li className={styles.stepCard}>1. Выбираете букет на сайте или присылаете пример того, что нравится.</li>
-          <li className={styles.stepCard}>2. Пишете в WhatsApp, max или Avito и уточняете детали заказа.</li>
-          <li className={styles.stepCard}>3. Согласуем состав, стоимость, время и адрес доставки.</li>
-        </ol>
-        <div className={styles.actionRow}>
-          <ContactButtons source="delivery_page" />
+      <div className="page-container flex flex-col gap-10 py-22">
+        <div className="grid grid-cols-2 gap-2 max-[900px]:grid-cols-1">
+          {locations.map((location) => (
+            <article key={location.slug} className="bg-card p-5">
+              <h2 className="type-heading-lg text-ink">{location.title}</h2>
+              <p className="mt-3 text-mute text-pretty">{location.deliveryLead}</p>
+            </article>
+          ))}
         </div>
-      </section>
+      </div>
 
-      <section className={styles.section}>
-        <SectionHeading
-          eyebrow="FAQ"
-          title="Что чаще всего спрашивают перед доставкой"
-        />
+      <div className="bg-primary py-22">
+        <div className="page-container">
+          <SectionHeading
+            tone="green"
+            eyebrow="Как проходит заказ"
+            title="Три шага до доставки"
+          />
+          <div className="mt-10 grid grid-cols-3 gap-2 max-[900px]:grid-cols-1">
+            {steps.map((step) => (
+              <StepCard key={step.n} n={step.n} title={step.title} text={step.text} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="page-container flex flex-col gap-10 py-22">
+        <SectionHeading eyebrow="Вопросы" title="Коротко о главном" />
         <FaqList items={faqs} />
-      </section>
+        <ContactChannels source="delivery_page" />
+      </div>
+
+      <CtaBand
+        eyebrow="Готовы собрать"
+        title="Скажите адрес и дату — посчитаем доставку"
+        text="Напишите в удобный канал. Спросим три вещи: кому, на когда и какой бюджет."
+        cta="Написать"
+        ctaSource="delivery"
+      />
     </div>
   );
 }

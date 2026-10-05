@@ -1,39 +1,30 @@
-import Link from 'next/link';
-import styles from '@/app/internal-page.module.scss';
+import { Button } from '@/components/ui/button';
+import { Tag } from '@/components/ui/tag';
 
 export default function NotFound() {
   return (
-    <div className={styles.page}>
-      <div className={styles.cardPanel}>
-        <p className={styles.panelEyebrow}>
-          404
-        </p>
-        <h1 className={styles.categoryTitle}>
-          Такой страницы нет
+    <div className="flex min-h-[70vh] items-center bg-dark py-22 text-on-dark">
+      <div className="page-container flex flex-col items-start gap-6.5">
+        <span className="type-eyebrow text-primary">404</span>
+        <h1 className="type-display-lg text-on-dark">
+          Такой страницы
+          <br />
+          нет
         </h1>
-        <p className={styles.panelText}>
-          Вернитесь на главную, откройте каталог или проверьте доставку по
-          Краснодару и Яблоновскому.
+        <p className="max-w-[46ch] text-mute-on-dark text-pretty">
+          Вернитесь на главную или откройте каталог — десять букетов на месте.
         </p>
-        <div className={styles.actionRow}>
-          <Link
-            href="/"
-            className={styles.primaryButton}
-          >
-            На главную
-          </Link>
-          <Link
-            href="/catalog"
-            className={styles.secondaryButton}
-          >
+        <Button href="/">На главную</Button>
+        <div className="flex flex-wrap gap-2">
+          <Tag onDark href="/catalog">
             Каталог
-          </Link>
-          <Link
-            href="/delivery"
-            className={styles.secondaryButton}
-          >
+          </Tag>
+          <Tag onDark href="/delivery">
             Доставка
-          </Link>
+          </Tag>
+          <Tag onDark href="/contacts">
+            Контакты
+          </Tag>
         </div>
       </div>
     </div>

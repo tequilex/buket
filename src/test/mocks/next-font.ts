@@ -1,3 +1,7 @@
-export function Montserrat() {
-  return { variable: '--font-montserrat', className: 'montserrat' };
+export function Oswald() {
+  return { variable: '--font-oswald', className: 'oswald' };
+}
+
+export function Inter() {
+  return { variable: '--font-inter', className: 'inter' };
 }

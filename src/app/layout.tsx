@@ -1,22 +1,29 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import { Montserrat } from 'next/font/google';
+import { Oswald, Inter } from 'next/font/google';
 import Script from 'next/script';
 
-const montserrat = Montserrat({
+const oswald = Oswald({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['500', '600', '700'],
+  variable: '--font-oswald',
+  display: 'swap',
+});
+
+const inter = Inter({
   subsets: ['latin', 'cyrillic'],
   weight: ['400', '500', '600', '700'],
-  variable: '--font-montserrat',
+  variable: '--font-inter',
   display: 'swap',
 });
 import { YandexMetricaPageView } from '@/components/analytics/yandex-metrica-page-view';
 import { MobileContactBar } from '@/components/layout/mobile-contact-bar';
+import { OrderModalProvider } from '@/components/order/order-modal';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { SiteHeader } from '@/components/layout/site-header';
 import { buildMetricaInitScript } from '@/lib/analytics/metrica';
 import { getBaseUrl } from '@/lib/utils';
-import styles from './layout.module.scss';
-import './globals.scss';
+import './globals.css';
 
 const siteUrl = getBaseUrl();
 
@@ -60,7 +67,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   const hasMetrica = Number.isFinite(metricaId) && metricaId > 0;
 
   return (
-    <html lang="ru" className={montserrat.variable}>
+    <html lang="ru" className={`${oswald.variable} ${inter.variable}`}>
       <body>
         {hasMetrica ? (
           <Script
@@ -83,12 +90,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
           </noscript>
         ) : null}
-        <div className={styles.appRoot}>
-          <SiteHeader />
-          <main className={styles.main}>{children}</main>
-          <SiteFooter />
-          <MobileContactBar />
-        </div>
+        <OrderModalProvider>
+          <div className="min-h-screen bg-page text-ink">
+            <SiteHeader />
+            <main className="pt-0 pb-24 md:pb-0">{children}</main>
+            <SiteFooter />
+            <MobileContactBar />
+          </div>
+        </OrderModalProvider>
       </body>
     </html>
   );

@@ -1,194 +1,316 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
-import { ContactButtons } from '@/components/cta/contact-buttons';
+import { OrderButton } from '@/components/order/order-button';
 import { FaqList } from '@/components/shared/faq-list';
 import { ReviewList } from '@/components/shared/review-list';
 import { SectionHeading } from '@/components/shared/section-heading';
-import { bouquets, categories, faqs, reviews } from '@/lib/content/catalog';
-import styles from './page.module.scss';
+import { Button } from '@/components/ui/button';
+import { CategoryPanel } from '@/components/ui/category-panel';
+import { CtaBand } from '@/components/ui/cta-band';
+import { Icon, type IconName } from '@/components/ui/icon';
+import { Photo } from '@/components/ui/photo';
+import { PriceStamp } from '@/components/ui/price-stamp';
+import { StatBlock } from '@/components/ui/stat-block';
+import { StepCard } from '@/components/ui/step-card';
+import { Ticker } from '@/components/ui/ticker';
+import {
+  bouquets,
+  categories,
+  faqs,
+  getShortCategoryTitle,
+  reviews,
+} from '@/lib/content/catalog';
 
 const featuredBouquets = bouquets.filter((bouquet) => bouquet.featured).slice(0, 4);
+const entryPrice = Math.min(...bouquets.map((bouquet) => bouquet.priceFrom));
+/** Кадр категории. Витринная величина, в данных её нет. */
+const categoryImages: Record<string, string> = {
+  myasnye: '/images/bouquets/9.webp',
+  rybnye: '/images/bouquets/11.webp',
+  sladkie: '/images/bouquets/3.webp',
+  fruktovye: '/images/bouquets/10.webp',
+};
+
+const ingredients = [
+  'Раки',
+  'Колбасы',
+  'Сушёная рыба',
+  'Сыр',
+  'Креветки',
+  'Мармелад',
+  'Зефир',
+  'Гранат',
+  'Орехи',
+  'Шоколад',
+  'Цитрусы',
+];
 
 const orderSteps = [
-  { n: '1', title: 'Выберите букет', desc: 'Выберите из каталога или опишите пожелания — мы поможем' },
-  { n: '2', title: 'Свяжитесь с нами', desc: 'Напишите в WhatsApp или оставьте заявку — ответим за 15 минут' },
-  { n: '3', title: 'Подтвердите детали', desc: 'Уточним дату, адрес, повод — и соберём букет специально для вас' },
-  { n: '4', title: 'Получите подарок', desc: 'Доставим свежим и красиво упакованным в нужное время' },
+  {
+    n: '01',
+    title: 'Выбрали',
+    text: 'Ткните в букет из каталога или опишите словами, что нужно и на какой повод.',
+  },
+  {
+    n: '02',
+    title: 'Написали',
+    text: 'WhatsApp, max или Avito — как удобнее. Отвечаем за 15 минут в рабочее время.',
+  },
+  {
+    n: '03',
+    title: 'Согласовали',
+    text: 'Состав, размер, дату, адрес. Скажем прямо, если чего-то нет в наличии.',
+  },
+  {
+    n: '04',
+    title: 'Привезли',
+    text: 'В день заказа по Краснодару и Яблоновскому, свежим и упакованным.',
+  },
 ];
+
+const advantages: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: 'fish',
+    title: 'Только свежее',
+    text: 'Раки, рыба, мясо и фрукты покупаем под конкретный заказ у проверенных поставщиков.',
+  },
+  {
+    icon: 'palette',
+    title: 'Ручная работа',
+    text: 'Каждый букет собирается руками под ваш повод, бюджет и вкус получателя.',
+  },
+  {
+    icon: 'truck',
+    title: 'Доставка в день заказа',
+    text: 'Яблоновский, Краснодар и пригороды. Время и интервал согласуем в переписке.',
+  },
+];
+
+function Section({
+  children,
+  id,
+  band = false,
+}: {
+  children: ReactNode;
+  id?: string;
+  band?: boolean;
+}) {
+  return (
+    <section id={id} className={band ? 'bg-band py-22' : 'py-22'}>
+      <div className="page-container flex flex-col gap-10">{children}</div>
+    </section>
+  );
+}
 
 export default function HomePage() {
   return (
     <div>
-      {/* HERO */}
-      <section className={styles.hero}>
-        <div className={styles.heroBg}>
-          <Image
-            src="/images/bouquets/hero.webp"
-            alt="Съедобные букеты с доставкой"
-            fill
-            priority
-            style={{ objectFit: 'cover' }}
-            sizes="100vw"
-          />
-        </div>
-        <div className={styles.heroOverlay} />
-        <div className={styles.heroContent}>
-          <div className={styles.heroTag}>пгт. Яблоновский · Краснодар</div>
-          <div className={styles.heroBody}>
-            <h1 className={styles.heroTitle}>
-              Съедобные букеты с доставкой в <em>Краснодаре и Яблоновском</em>
+      {/* ГЕРОЙ */}
+      <div className="bg-dark py-22 text-on-dark">
+        <div className="page-container grid grid-cols-[1.05fr_0.95fr] items-start gap-10 max-[900px]:grid-cols-1 max-[900px]:gap-6.5">
+          <div className="flex flex-col items-start justify-center">
+            <span className="type-eyebrow text-primary">
+              Съедобные букеты ручной сборки
+            </span>
+            <h1 className="mt-4.5 type-display-xl text-on-dark">
+              Букеты,
+              <br />
+              которые <span className="text-primary">съедают</span>
             </h1>
-            <p className={styles.heroDescription}>
-              Мясные, рыбные, сладкие и фруктовые букеты с аккуратной
-              подарочной подачей. Удобно заказать через WhatsApp, max или
-              Avito и быстро согласовать детали доставки.
+            <p className="my-6.5 max-w-[44ch] text-mute-on-dark text-pretty">
+              Раки, колбасы, сушёная рыба, сыр, мармелад. Собираем вручную в Яблоновском
+              и привозим по Краснодару в день заказа.
             </p>
-          </div>
-          <div className={styles.heroBtns}>
-            <Link href="/catalog" className={styles.btnPrimary}>Смотреть каталог</Link>
-            <ContactButtons source="hero" variant="hero" />
-          </div>
-        </div>
-        <div className={styles.heroStats}>
-          <div className={styles.heroStat}>
-            <span className={styles.heroStatNum}>500+</span>
-            <span className={styles.heroStatLabel}>Заказов</span>
-          </div>
-          <div className={styles.heroStat}>
-            <span className={styles.heroStatNum}>4</span>
-            <span className={styles.heroStatLabel}>Категории</span>
-          </div>
-          <div className={styles.heroStat}>
-            <span className={styles.heroStatNum}>3–5к</span>
-            <span className={styles.heroStatLabel}>Рублей</span>
-          </div>
-        </div>
-      </section>
-
-      {/* КАТАЛОГ */}
-      <section className={styles.catalogSection}>
-        <div className="container">
-          <SectionHeading
-            eyebrow="Каталог"
-            title="Подберите букет по составу"
-            description="Мясные, рыбные, сладкие и фруктовые букеты собраны по категориям, чтобы выбрать подходящий подарок было проще."
-          />
-          <div className={styles.categoryGrid}>
-            {categories.map((category) => (
-              <Link
-                key={category.slug}
-                href={`/catalog/${category.slug}`}
-                className={styles.categoryLink}
-              >
-                <p className={styles.categoryEyebrow}>Категория</p>
-                <h2 className={styles.categoryTitle}>{category.title}</h2>
-                <p className={styles.categoryDescription}>{category.shortDescription}</p>
-              </Link>
-            ))}
-          </div>
-          <div className={styles.featuredGrid}>
-            {featuredBouquets.map((bouquet) => (
-              <BouquetCard key={bouquet.slug} bouquet={bouquet} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* О НАС */}
-      <section className={styles.aboutSection}>
-        <div className="container">
-          <div className={styles.aboutGrid}>
-            <div className={styles.aboutImage}>
-              <Image 
-                src="/images/bouquets/9.webp" 
-                alt="Наши букеты — ручная работа" 
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div className={styles.aboutBadge}>
-                <span className={styles.aboutBadgeNum}>5★</span>
-                <span className={styles.aboutBadgeTxt}>Рейтинг</span>
-              </div>
+            <div className="flex flex-wrap gap-3">
+              <Button href="/catalog">Смотреть каталог</Button>
+              <OrderButton variant="outline-dark" source="hero">
+                Собрать под повод
+              </OrderButton>
             </div>
-            <div className={styles.aboutCopy}>
-              <p className={styles.sectionLabel}>Наша история</p>
-              <h2 className={styles.sectionTitle}>Мы делаем съедобное искусство</h2>
-              <p className={styles.sectionDesc}>
-                Каждый букет — это ручная работа с любовью. Мы в пгт. Яблоновский собираем
-                букеты из свежих продуктов для ваших близких в Краснодаре и окрестностях.
-              </p>
-              <div className={styles.aboutFeatures}>
-                {[
-                  { icon: '🦞', title: 'Только свежее', desc: 'Раки, рыба, мясо и фрукты — всегда свежие, от проверенных поставщиков' },
-                  { icon: '🎨', title: 'Ручная работа', desc: 'Каждый букет собирается вручную по вашему заказу, с учётом пожеланий' },
-                  { icon: '🚚', title: 'Быстрая доставка', desc: 'Доставляем по Яблоновскому, Краснодару и пригородам. В день заказа.' },
-                ].map(({ icon, title, desc }) => (
-                  <div key={title} className={styles.feature}>
-                    <div className={styles.featureIcon}>{icon}</div>
-                    <div>
-                      <p className={styles.featureTitle}>{title}</p>
-                      <p className={styles.featureDesc}>{desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="mt-10 flex w-full gap-10 border-t border-dark-line pt-6.5">
+              <StatBlock tone="dark" value="500+" label="Заказов" />
+              <StatBlock tone="dark" value="4" label="Состава" />
+              <StatBlock tone="dark" value="3–5к" label="Рублей" />
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* КАК ЗАКАЗАТЬ */}
-      <section className={styles.orderSection}>
-        <div className="container">
-          <div className={styles.orderIntro}>
-            <SectionHeading
-              eyebrow="Просто и быстро"
-              title="Как сделать заказ"
-              description="Вы выбираете букет на сайте, а детали заказа и доставки удобно согласовать в мессенджере."
+          <div className="relative grid grid-cols-[1.32fr_1fr] gap-2 self-start">
+            <PriceStamp
+              value={`${entryPrice} ₽`}
+              size="lg"
+              className="absolute top-0 right-0"
+            />
+            <Photo
+              src="/images/bouquets/hero.webp"
+              alt="Букет из раков с лимоном"
+              ratio="auto"
+              priority
+              sizes="(max-width: 900px) 60vw, 30vw"
+              className="row-span-2"
+            />
+            <Photo
+              src="/images/bouquets/5.webp"
+              alt="Мясной букет с колбасами"
+              ratio="square"
+              sizes="(max-width: 900px) 40vw, 20vw"
+            />
+            <Photo
+              src="/images/bouquets/6.webp"
+              alt="Рыбный букет из сушёной рыбы"
+              ratio="square"
+              sizes="(max-width: 900px) 40vw, 20vw"
             />
           </div>
-          <div className={styles.orderSteps}>
+        </div>
+      </div>
+
+      <Ticker items={ingredients} />
+
+      {/* КАТАЛОГ */}
+      <Section id="catalog">
+        <div className="flex flex-wrap items-end justify-between gap-10">
+          <SectionHeading
+            eyebrow="Четыре состава"
+            title={
+              <>
+                Выбирайте по вкусу
+                <br />
+                получателя
+              </>
+            }
+          />
+          <p className="max-w-[46ch] text-mute text-pretty">
+            Состав любого букета меняем: убираем лишнее, добавляем любимое, подгоняем под
+            бюджет.
+          </p>
+        </div>
+        <div className="grid grid-cols-4 gap-2 max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1">
+          {categories.map((category, index) => {
+            const categoryBouquets = bouquets.filter(
+              (bouquet) => bouquet.category === category.slug,
+            );
+
+            return (
+              <CategoryPanel
+                key={category.slug}
+                number={String(index + 1).padStart(2, '0')}
+                title={getShortCategoryTitle(category.title)}
+                composition={category.shortDescription}
+                price={Math.min(...categoryBouquets.map((bouquet) => bouquet.priceFrom))}
+                href={`/catalog/${category.slug}`}
+                src={categoryImages[category.slug]}
+                alt={`${category.title} в Краснодаре`}
+              />
+            );
+          })}
+        </div>
+      </Section>
+
+      {/* ХИТЫ */}
+      <Section band>
+        <div className="flex flex-wrap items-end justify-between gap-6.5">
+          <SectionHeading eyebrow="Хиты" title="Чаще всего берут" />
+          <Button variant="outline" href="/catalog">
+            Все {bouquets.length} букетов
+          </Button>
+        </div>
+        <div className="grid grid-cols-4 gap-2 max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1">
+          {featuredBouquets.map((bouquet) => (
+            <BouquetCard key={bouquet.slug} bouquet={bouquet} />
+          ))}
+        </div>
+      </Section>
+
+      {/* ИСТОРИЯ */}
+      <Section>
+        <div className="grid grid-cols-2 items-center gap-10 max-[900px]:grid-cols-1">
+          <Photo
+            src="/images/bouquets/9.webp"
+            alt="Сборка букета вручную"
+            ratio="card"
+            sizes="(max-width: 900px) 100vw, 50vw"
+          />
+          <div className="flex flex-col gap-6.5">
+            <SectionHeading
+              eyebrow="Наша история"
+              title={
+                <>
+                  Цветы стоят три дня.
+                  <br />
+                  Букет съедают
+                  <br />в тот же вечер
+                </>
+              }
+              lead="Мы начали собирать гастробукеты в Яблоновском, потому что устали дарить то, что через неделю выбрасывают. Оказалось, так думают многие."
+            />
+            <p className="max-w-[52ch] text-mute text-pretty">
+              Каждый букет собирается руками под конкретный заказ. Мы не держим готовые
+              букеты на складе — покупаем продукты под вас, поэтому и просим написать
+              заранее.
+            </p>
+            <div className="flex flex-wrap gap-10 border-t border-cream pt-4.5">
+              <StatBlock value="500+" label="Букетов собрано" />
+              <StatBlock value="2019" label="С этого года" />
+            </div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-2 max-[900px]:grid-cols-1">
+          {advantages.map((advantage) => (
+            <div key={advantage.title} className="flex flex-col gap-3 bg-card p-4.5">
+              <Icon name={advantage.icon} size={26} className="text-primary" />
+              <h3 className="type-heading-md text-ink">{advantage.title}</h3>
+              <p className="text-sm text-mute text-pretty">{advantage.text}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* ШАГИ */}
+      <div id="steps" className="bg-primary py-22">
+        <div className="page-container">
+          <SectionHeading
+            tone="green"
+            eyebrow="Просто и быстро"
+            title={
+              <>
+                Четыре шага
+                <br />
+                до вручения
+              </>
+            }
+          />
+          <div className="mt-10 grid grid-cols-4 gap-2 max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1">
             {orderSteps.map((step) => (
-              <div key={step.n} className={styles.orderCard}>
-                <div className={styles.orderStepNum}>{step.n}</div>
-                <p className={styles.orderStepTitle}>{step.title}</p>
-                <p className={styles.orderStepText}>{step.desc}</p>
-              </div>
+              <StepCard key={step.n} n={step.n} title={step.title} text={step.text} />
             ))}
           </div>
-          <div className={styles.orderCta}>
-            <h3 className={styles.orderCtaTitle}>Готовы сделать заказ?</h3>
-            <p className={styles.orderCtaDesc}>Позвоните или напишите — ответим быстро и поможем выбрать</p>
-            <Link href="/contacts" className={styles.btnWhite}>Написать нам</Link>
-          </div>
         </div>
-      </section>
-
-      {/* FAQ */}
-      <section className={styles.faqSection}>
-        <div className="container">
-          <SectionHeading
-            eyebrow="FAQ"
-            title="Частые вопросы"
-            description="Коротко отвечаем на частые вопросы по составу, доставке и оформлению заказа."
-          />
-          <FaqList items={faqs} />
-        </div>
-      </section>
+      </div>
 
       {/* ОТЗЫВЫ */}
-      <section className={styles.reviewsSection}>
-        <div className="container">
-          <SectionHeading
-            eyebrow="Отзывы"
-            title="Отзывы клиентов"
-            description="Здесь будут только реальные отзывы и фото после вручения, когда соберем первые материалы от покупателей."
-          />
-          <ReviewList items={reviews} />
+      <div className="bg-dark py-22">
+        <div className="page-container">
+          <SectionHeading tone="dark" eyebrow="Отзывы" title="Что говорят" />
+          <div className="mt-10">
+            <ReviewList items={reviews.slice(0, 6)} />
+          </div>
         </div>
-      </section>
+      </div>
+
+      {/* ВОПРОСЫ */}
+      <Section id="faq">
+        <SectionHeading eyebrow="Вопросы" title="Коротко о главном" />
+        <FaqList items={faqs} />
+      </Section>
+
+      <CtaBand
+        eyebrow="Готовы собрать"
+        title="Скажите повод — предложим состав"
+        text="Напишите в удобный канал. Спросим три вещи: кому, на когда и какой бюджет."
+        cta="Написать"
+        ctaSource="home"
+      />
     </div>
   );
 }

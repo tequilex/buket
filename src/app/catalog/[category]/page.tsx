@@ -1,11 +1,16 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { BouquetCard } from '@/components/catalog/bouquet-card';
-import { SectionHeading } from '@/components/shared/section-heading';
-import { categories, getBouquetsByCategory } from '@/lib/content/catalog';
+import { PageHeader } from '@/components/shared/page-header';
+import { CtaBand } from '@/components/ui/cta-band';
+import { FilterChip } from '@/components/ui/filter-chip';
+import { Tag } from '@/components/ui/tag';
+import {
+  categories,
+  getBouquetsByCategory,
+  getShortCategoryTitle,
+} from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
-import styles from '@/app/internal-page.module.scss';
 
 interface CategoryPageProps {
   params: Promise<{ category: string }>;
@@ -22,6 +27,11 @@ const contextualLocationLinks = [
   { href: '/locations/krasnodar', label: 'Краснодар' },
   { href: '/locations/yablonovskiy', label: 'Яблоновский' },
 ];
+
+function plural(count: number) {
+  if (count === 1) return 'букет';
+  return count < 5 ? 'букета' : 'букетов';
+}
 
 export async function generateStaticParams() {
   return categories.map((category) => ({ category: category.slug }));
@@ -57,51 +67,77 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   }
 
   const categoryBouquets = getBouquetsByCategory(categoryEntry.slug);
+  const index = categories.findIndex((entry) => entry.slug === categoryEntry.slug);
 
   return (
-    <div className={styles.page}>
-      <SectionHeading
-        eyebrow="Категория"
+    <div>
+      <PageHeader
+        crumbs={[
+          { label: 'Главная', href: '/' },
+          { label: 'Каталог', href: '/catalog' },
+          { label: getShortCategoryTitle(categoryEntry.title) },
+        ]}
+        eyebrow={`Состав ${String(index + 1).padStart(2, '0')}`}
         title={categoryEntry.title}
-        description={categoryEntry.heroDescription}
+        lead={categoryEntry.heroDescription}
       />
 
-      <div className={`${styles.surfacePanel} ${styles.infoGrid}`}>
-        <div>
-          <p className={styles.panelTitle}>Поводы</p>
-          <div className={styles.pillLinks}>
-            {contextualOccasionLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={styles.pillLink}
+      <div className="page-container flex flex-col gap-6.5 pt-10 pb-22">
+        <div className="flex flex-wrap items-center justify-between gap-4.5">
+          <div className="flex flex-wrap gap-2">
+            <FilterChip href="/catalog">Все</FilterChip>
+            {categories.map((entry) => (
+              <FilterChip
+                key={entry.slug}
+                href={`/catalog/${entry.slug}`}
+                active={entry.slug === categoryEntry.slug}
               >
-                {item.label}
-              </Link>
+                {getShortCategoryTitle(entry.title)}
+              </FilterChip>
             ))}
           </div>
+          <span className="type-label text-mute">
+            {categoryBouquets.length} {plural(categoryBouquets.length)}
+          </span>
         </div>
-        <div>
-          <p className={styles.panelTitle}>Где доставляем</p>
-          <div className={styles.pillLinks}>
-            {contextualLocationLinks.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={styles.pillLink}
-              >
-                {item.label}
-              </Link>
-            ))}
+
+        <div className="grid grid-cols-4 gap-2 max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1">
+          {categoryBouquets.map((bouquet) => (
+            <BouquetCard key={bouquet.slug} bouquet={bouquet} />
+          ))}
+        </div>
+
+        <div className="flex flex-col gap-4.5 bg-band p-5">
+          <div className="flex flex-col gap-3">
+            <p className="type-label text-mute">Поводы</p>
+            <div className="flex flex-wrap gap-2">
+              {contextualOccasionLinks.map((item) => (
+                <Tag key={item.href} href={item.href}>
+                  {item.label}
+                </Tag>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col gap-3">
+            <p className="type-label text-mute">Где доставляем</p>
+            <div className="flex flex-wrap gap-2">
+              {contextualLocationLinks.map((item) => (
+                <Tag key={item.href} href={item.href}>
+                  {item.label}
+                </Tag>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      <section className={styles.bouquetGridDense}>
-        {categoryBouquets.map((bouquet) => (
-          <BouquetCard key={bouquet.slug} bouquet={bouquet} />
-        ))}
-      </section>
+      <CtaBand
+        eyebrow="Не выбрали"
+        title="Опишите повод — соберём под него"
+        text="Скажите, кому и на когда. Предложим состав в пределах бюджета."
+        cta="Написать"
+        ctaSource={`catalog_${categoryEntry.slug}`}
+      />
     </div>
   );
 }

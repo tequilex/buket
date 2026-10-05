@@ -1,33 +1,55 @@
-import styles from './section-heading.module.scss';
+import type { ReactNode } from 'react';
 
 interface SectionHeadingProps {
+  /** Небольшая зелёная метка над заголовком. */
   eyebrow?: string;
-  title: string;
-  description?: string;
+  /** Набирается Oswald заглавными. Перенос строки — через <br /> в строке. */
+  title: ReactNode;
+  lead?: string;
+  /** На какой поверхности стоит — переключает цвета типографики. */
+  tone?: 'cream' | 'dark' | 'green';
+  className?: string;
 }
 
+/** Открытие раздела: зелёный надзаголовок, заголовок Oswald заглавными, приглушённый лид. */
 export function SectionHeading({
   eyebrow,
   title,
-  description,
+  lead,
+  tone = 'cream',
+  className,
 }: SectionHeadingProps) {
+  const onDark = tone === 'dark' || tone === 'green';
+
   return (
-    <div className={styles.root}>
+    <header className={['flex flex-col gap-3', className].filter(Boolean).join(' ')}>
       {eyebrow ? (
-        <p className={styles.eyebrow}>
+        <span
+          className={[
+            'type-eyebrow',
+            tone === 'green' ? 'text-[rgb(255_255_255_/_0.8)]' : 'text-primary',
+          ].join(' ')}
+        >
           {eyebrow}
+        </span>
+      ) : null}
+      <h2 className={['type-heading-xl', onDark ? 'text-on-dark' : 'text-ink'].join(' ')}>
+        {title}
+      </h2>
+      {lead ? (
+        <p
+          className={[
+            'max-w-[54ch] text-pretty',
+            tone === 'green'
+              ? 'text-[rgb(255_255_255_/_0.8)]'
+              : onDark
+                ? 'text-mute-on-dark'
+                : 'text-mute',
+          ].join(' ')}
+        >
+          {lead}
         </p>
       ) : null}
-      <div className={styles.body}>
-        <h2 className={styles.title}>
-          {title}
-        </h2>
-        {description ? (
-          <p className={styles.description}>
-            {description}
-          </p>
-        ) : null}
-      </div>
-    </div>
+    </header>
   );
 }

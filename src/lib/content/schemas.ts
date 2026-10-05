@@ -13,11 +13,15 @@ export const contactChannelSchema = z.object({
   id: channelIdSchema,
   label: z.string().min(1),
   href: z.string().url(),
+  /** Показывается приглушённым и неактивным — так сейчас работает max. */
+  disabled: z.boolean().optional(),
 });
 
 export const siteConfigSchema = z.object({
   siteName: z.string().min(1),
   siteDescription: z.string().min(1),
+  /** Номер для формы обратного звонка. Тот же, что в ссылке WhatsApp. */
+  phone: z.string().min(1),
   serviceLocations: z.array(locationSlugSchema).min(1),
   channels: z.array(contactChannelSchema).length(3),
 });

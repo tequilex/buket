@@ -4,21 +4,20 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
-import styles from './mobile-menu.module.scss';
-
-const navItems = [
-  { href: '/catalog', label: 'Каталог' },
-  { href: '/delivery', label: 'Доставка' },
-  { href: '/locations/krasnodar', label: 'Краснодар' },
-  { href: '/locations/yablonovskiy', label: 'Яблоновский' },
-  { href: '/contacts', label: 'Контакты' },
-];
+import { ContactChannels } from '@/components/cta/contact-channels';
+import { Icon } from '@/components/ui/icon';
+import { IconButton } from '@/components/ui/icon-button';
+import type { NavItem } from './nav-items';
 
 const noop = () => () => {};
-const useIsClient = () =>
-  useSyncExternalStore(noop, () => true, () => false);
+const useIsClient = () => useSyncExternalStore(noop, () => true, () => false);
 
-export function MobileMenu() {
+interface MobileMenuProps {
+  items: NavItem[];
+}
+
+/** Гамбургер и правая графитовая шторка. Прямые углы, плотное затемнение. */
+export function MobileMenu({ items }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
   const [lastPathname, setLastPathname] = useState('');
   const pathname = usePathname();
@@ -32,20 +31,20 @@ export function MobileMenu() {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [open]);
 
   const burger = (
-    <button
-      className={styles.burger}
-      onClick={() => setOpen((v) => !v)}
-      aria-label={open ? 'Закрыть меню' : 'Открыть меню'}
+    <IconButton
+      label={open ? 'Закрыть меню' : 'Открыть меню'}
       aria-expanded={open}
+      onDark
+      onClick={() => setOpen((value) => !value)}
     >
-      <span className={`${styles.line} ${open ? styles.lineTop : ''}`} />
-      <span className={`${styles.line} ${open ? styles.lineMid : ''}`} />
-      <span className={`${styles.line} ${open ? styles.lineBot : ''}`} />
-    </button>
+      <Icon name={open ? 'x' : 'menu'} size={22} />
+    </IconButton>
   );
 
   if (!isClient) return burger;
@@ -53,29 +52,43 @@ export function MobileMenu() {
   return (
     <>
       {burger}
-      {createPortal(
-        <>
-          {open && <div className={styles.backdrop} onClick={() => setOpen(false)} />}
-          <nav
-            className={`${styles.drawer} ${open ? styles.drawerOpen : ''}`}
-            aria-hidden={!open}
-          >
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`${styles.link} ${pathname === item.href ? styles.linkActive : ''}`}
+      {open
+        ? createPortal(
+            <div
+              className="fixed inset-0 z-70 bg-[rgb(18_17_13_/_0.72)]"
+              onClick={() => setOpen(false)}
+            >
+              <nav
+                className="absolute inset-y-0 right-0 flex w-[min(340px,88vw)] flex-col gap-6.5 bg-dark px-6.5 pt-4.5 pb-6.5"
+                onClick={(event) => event.stopPropagation()}
               >
-                {item.label}
-              </Link>
-            ))}
-            <Link href="/catalog" className={styles.cta}>
-              Заказать букет
-            </Link>
-          </nav>
-        </>,
-        document.body,
-      )}
+                <IconButton
+                  label="Закрыть"
+                  onDark
+                  className="self-end"
+                  onClick={() => setOpen(false)}
+                >
+                  <Icon name="x" size={20} />
+                </IconButton>
+
+                <div className="flex flex-col">
+                  {items.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="flex min-h-[44px] items-center border-b border-dark-line py-3 type-heading-md text-on-dark"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+
+                <ContactChannels source="mobile_menu" onDark />
+              </nav>
+            </div>,
+            document.body,
+          )
+        : null}
     </>
   );
 }

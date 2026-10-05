@@ -1,8 +1,13 @@
 import type { Metadata } from 'next';
-import { ContactButtons } from '@/components/cta/contact-buttons';
+import { ContactChannels } from '@/components/cta/contact-channels';
+import { PageHeader } from '@/components/shared/page-header';
 import { SectionHeading } from '@/components/shared/section-heading';
+import { Spec } from '@/components/shared/spec';
+import { CtaBand } from '@/components/ui/cta-band';
+import { Tag } from '@/components/ui/tag';
+import siteConfig from '@/data/site-config';
+import { phoneHref } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
-import styles from '@/app/internal-page.module.scss';
 
 export function generateMetadata(): Metadata {
   return buildMetadata({
@@ -15,35 +20,57 @@ export function generateMetadata(): Metadata {
 
 export default function ContactsPage() {
   return (
-    <div className={styles.page}>
-      <SectionHeading
+    <div>
+      <PageHeader
+        crumbs={[{ label: 'Главная', href: '/' }, { label: 'Контакты' }]}
         eyebrow="Контакты"
-        title="Как быстро связаться и оформить заказ"
-        description="Работаем через WhatsApp, max и Avito, чтобы быстро согласовать состав, бюджет, дату и адрес доставки."
+        title="Пишите в мессенджер"
+        lead="Корзины нет и не будет: заказ идёт перепиской. Так быстрее согласовать состав, бюджет, дату и адрес."
+      >
+        <ContactChannels source="contacts_page" onDark />
+
+        <div className="max-w-[54ch]">
+          <Spec
+            label="Телефон"
+            value={
+              <a
+                href={phoneHref}
+                // Цвет обязателен явно: базовое правило `a { color: ink }`
+                // перебивает text-on-dark, унаследованный от Spec.
+                className="text-on-dark underline decoration-primary underline-offset-[3px] hover:text-primary"
+              >
+                {siteConfig.phone}
+              </a>
+            }
+          />
+          <Spec label="Сборка" value="пгт. Яблоновский, вручную под конкретный заказ" />
+          <Spec label="Доставка" value="Краснодар и Яблоновский, в день заказа по согласованию" />
+          <Spec label="Ответ" value="За 15 минут в рабочее время" />
+          <Spec label="Состав" value="Согласуется индивидуально до сборки" />
+        </div>
+      </PageHeader>
+
+      <div className="page-container flex flex-col gap-10 py-22">
+        <SectionHeading
+          eyebrow="География"
+          title="Где мы работаем"
+          lead="Собираем в Яблоновском и возим по Краснодару. Время и стоимость доставки зависят от района и часа — считаем при заказе."
+        />
+        <div className="flex flex-wrap gap-2">
+          <Tag href="/locations/krasnodar">Краснодар</Tag>
+          <Tag href="/locations/yablonovskiy">Яблоновский</Tag>
+          <Tag href="/delivery">Доставка</Tag>
+          <Tag href="/catalog">Весь каталог</Tag>
+        </div>
+      </div>
+
+      <CtaBand
+        eyebrow="Готовы собрать"
+        title="Скажите повод — предложим состав"
+        text="Напишите в удобный канал. Спросим три вещи: кому, на когда и какой бюджет."
+        cta="Написать"
+        ctaSource="contacts"
       />
-
-      <section className={styles.split}>
-        <div className={styles.cardPanel}>
-          <p className={styles.panelText}>
-            Лучше всего писать сразу в WhatsApp, max или Avito: так можно
-            быстро согласовать состав, бюджет, дату и адрес доставки.
-          </p>
-          <div className={styles.actionRow}>
-            <ContactButtons source="contacts_page" />
-          </div>
-        </div>
-
-        <div className={styles.surfacePanel}>
-          <p className={styles.panelEyebrow}>
-            География
-          </p>
-          <p className={styles.panelText}>
-            Работаем по Краснодару и Яблоновскому. Сайт построен как удобная
-            витрина и быстрый канал для заказа с доставкой, поэтому связаться
-            проще всего напрямую в мессенджере.
-          </p>
-        </div>
-      </section>
     </div>
   );
 }
