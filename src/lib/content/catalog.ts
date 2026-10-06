@@ -1,7 +1,7 @@
 import siteConfig from '@/data/site-config';
 import { bouquets } from '@/data/bouquets';
 import { categories } from '@/data/categories';
-import { faqs } from '@/data/faqs';
+import { categoryFaqs, faqs } from '@/data/faqs';
 import { locations } from '@/data/locations';
 import { occasions } from '@/data/occasions';
 import { reviews } from '@/data/reviews';
@@ -18,6 +18,7 @@ export {
   bouquets,
   occasions,
   faqs,
+  categoryFaqs,
   reviews,
 };
 

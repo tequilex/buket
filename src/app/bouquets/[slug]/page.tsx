@@ -15,7 +15,7 @@ import { Tag } from '@/components/ui/tag';
 import {
   bouquets,
   categories,
-  faqs,
+  categoryFaqs,
   getBouquetBySlug,
   getBouquetsByCategory,
   getDisplayName,
@@ -72,7 +72,10 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
         id={`bouquet-product-${bouquet.slug}`}
         data={buildBouquetProductJsonLd(bouquet)}
       />
-      <JsonLd id={`bouquet-faq-${bouquet.slug}`} data={buildFaqJsonLd(faqs)} />
+      <JsonLd
+        id={`bouquet-faq-${bouquet.slug}`}
+        data={buildFaqJsonLd(categoryFaqs[bouquet.category])}
+      />
 
       <div className="bg-dark pt-6.5 pb-22 text-on-dark">
         <div className="page-container flex flex-col gap-6.5">
@@ -216,8 +219,8 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
       ) : null}
 
       <div className="page-container flex flex-col gap-10 py-22">
-        <SectionHeading eyebrow="Вопросы" title="Коротко о главном" />
-        <FaqList items={faqs} />
+        <SectionHeading eyebrow="Вопросы" title="Что спрашивают про этот состав" />
+        <FaqList items={categoryFaqs[bouquet.category]} />
       </div>
 
       <CtaBand
