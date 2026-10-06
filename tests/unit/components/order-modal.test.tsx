@@ -1,7 +1,6 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { OrderButton } from '@/components/order/order-button';
-import siteConfig from '@/data/site-config';
 import { renderWithOrderModal } from '@/test/render';
 
 test('the order button opens the modal with every channel', async () => {
@@ -18,25 +17,25 @@ test('the order button opens the modal with every channel', async () => {
   expect(screen.getByRole('link', { name: /whatsapp/i })).toBeInTheDocument();
   expect(screen.getByText('max')).toBeInTheDocument();
   expect(screen.getByRole('link', { name: /avito/i })).toBeInTheDocument();
-  expect(screen.getByLabelText('Телефон')).toHaveAttribute(
-    'placeholder',
-    siteConfig.phone,
-  );
 });
 
-test('the typed phone travels into the whatsapp message', async () => {
+/**
+ * Поля телефона в модалке быть не должно. Бэкенда у витрины нет, принять
+ * заявку некуда — поле обещало обратный звонок, которого не случилось бы:
+ * номер никуда не уходил, если человек не дожимал отправку уже в WhatsApp.
+ */
+test('the modal asks for nothing it cannot receive', async () => {
   const user = userEvent.setup();
   renderWithOrderModal(<OrderButton source="header">Написать</OrderButton>);
 
   await user.click(screen.getByRole('button', { name: 'Написать' }));
-  await user.type(screen.getByLabelText('Телефон'), '+7 900 000-00-00');
 
-  const submit = screen.getByRole('link', { name: /отправить заявку/i });
+  expect(screen.queryByLabelText('Телефон')).not.toBeInTheDocument();
+  expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
+  expect(screen.queryByText(/перезвоним/i)).not.toBeInTheDocument();
 
-  expect(submit).toHaveAttribute(
-    'href',
-    expect.stringContaining(encodeURIComponent('+7 900 000-00-00')),
-  );
+  // И никакой второй кнопки WhatsApp: она дублировала бы ссылку канала.
+  expect(screen.getAllByRole('link', { name: /whatsapp/i })).toHaveLength(1);
 });
 
 test('escape closes the modal', async () => {
