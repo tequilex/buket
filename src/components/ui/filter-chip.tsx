@@ -4,20 +4,23 @@ interface FilterChipProps {
   /** Выбран — инвертируется в графитовую заливку. */
   active?: boolean;
   href: string;
+  /** Счётчик букетов справа от названия. */
+  count?: number;
   children: string;
 }
 
 const base =
-  'inline-flex min-h-[44px] items-center whitespace-nowrap px-[18px] py-[13px] type-button ' +
-  'transition-[background-color] duration-140 ease-linear';
+  'inline-flex min-h-11 flex-none items-center gap-2 rounded-full border-2 px-[18px] py-[9px] ' +
+  'text-[15px] leading-none font-semibold whitespace-nowrap ' +
+  'transition-colors duration-150 ease-linear max-md:text-[14px] max-md:px-4';
 
 /**
- * Квадратный заглавный фильтр: волосяная рамка в покое, графитовая заливка в выборе.
+ * Пилюля-фильтр: белая с серой обводкой в покое, графитовая в выборе.
  *
  * В магазине у каждой категории свой маршрут и своя выдача, поэтому чипс —
  * это ссылка, а не кнопка состояния: фильтр остаётся в URL и индексируется.
  */
-export function FilterChip({ active = false, href, children }: FilterChipProps) {
+export function FilterChip({ active = false, href, count, children }: FilterChipProps) {
   return (
     <Link
       href={href}
@@ -25,11 +28,14 @@ export function FilterChip({ active = false, href, children }: FilterChipProps) 
       className={[
         base,
         active
-          ? 'bg-dark text-on-dark'
-          : 'text-ink shadow-[inset_0_0_0_1px_var(--color-cream)] hover:bg-card',
+          ? 'border-ink bg-ink text-white'
+          : 'border-cream bg-card text-ink hover:border-ink',
       ].join(' ')}
     >
       {children}
+      {typeof count === 'number' ? (
+        <span className="text-[13px] font-semibold opacity-60">{count}</span>
+      ) : null}
     </Link>
   );
 }

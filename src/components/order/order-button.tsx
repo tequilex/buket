@@ -9,22 +9,33 @@ interface OrderButtonProps {
   source: string;
   variant?: ButtonProps['variant'];
   size?: ButtonProps['size'];
+  shape?: ButtonProps['shape'];
+  arrow?: boolean;
   className?: string;
   children: ReactNode;
 }
 
-/** Зелёная кнопка, открывающая модалку заказа. Ссылок наружу не ведёт. */
+/** Кнопка, открывающая модалку заказа. Ссылок наружу не ведёт. */
 export function OrderButton({
   source,
   variant = 'primary',
   size = 'md',
+  shape = 'pill',
+  arrow = false,
   className,
   children,
 }: OrderButtonProps) {
   const { open } = useOrderModal();
 
   return (
-    <Button variant={variant} size={size} className={className} onClick={() => open(source)}>
+    <Button
+      variant={variant}
+      size={size}
+      shape={shape}
+      arrow={arrow}
+      className={className}
+      onClick={() => open(source)}
+    >
       {children}
     </Button>
   );

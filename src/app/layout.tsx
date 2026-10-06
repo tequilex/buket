@@ -1,19 +1,19 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
-import { Oswald, Inter } from 'next/font/google';
+import { Unbounded, Onest } from 'next/font/google';
 import Script from 'next/script';
 
-const oswald = Oswald({
+const unbounded = Unbounded({
   subsets: ['latin', 'cyrillic'],
-  weight: ['500', '600', '700'],
-  variable: '--font-oswald',
+  weight: ['500', '600', '700', '800'],
+  variable: '--font-unbounded',
   display: 'swap',
 });
 
-const inter = Inter({
+const onest = Onest({
   subsets: ['latin', 'cyrillic'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-inter',
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-onest',
   display: 'swap',
 });
 import { YandexMetricaPageView } from '@/components/analytics/yandex-metrica-page-view';
@@ -35,18 +35,8 @@ export const metadata: Metadata = {
   },
   description:
     'Авторские съедобные букеты из фруктов, мяса, рыбы и сладостей. Доставка по Краснодару и Яблоновскому в день заказа. Состав букета согласуется индивидуально.',
-  icons: {
-    icon: [
-      {
-        url: '/favicon.ico',
-        type: 'image/x-icon',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-  },
+  // Блок icons не нужен: Next сам находит favicon.ico, icon*.png и
+  // apple-icon.png в каталоге app и проставляет им верные sizes и type.
   openGraph: {
     title: 'Съедобные букеты с доставкой в Краснодаре и Яблоновском | Gastro Buket',
     description:
@@ -67,7 +57,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   const hasMetrica = Number.isFinite(metricaId) && metricaId > 0;
 
   return (
-    <html lang="ru" className={`${oswald.variable} ${inter.variable}`}>
+    <html lang="ru" className={`${unbounded.variable} ${onest.variable}`}>
       <body>
         {hasMetrica ? (
           <Script
@@ -91,9 +81,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
           </noscript>
         ) : null}
         <OrderModalProvider>
-          <div className="min-h-screen bg-page text-ink">
+          {/* Поля страницы 12px / 8px задают сами плитки — у оболочки их нет. */}
+          <div className="flex min-h-screen flex-col gap-3 bg-page text-ink max-md:gap-2">
             <SiteHeader />
-            <main className="pt-0 pb-24 md:pb-0">{children}</main>
+            <main className="flex flex-col gap-3 max-md:gap-2">{children}</main>
             <SiteFooter />
             <MobileContactBar />
           </div>

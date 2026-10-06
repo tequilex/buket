@@ -26,25 +26,29 @@ export default async function BlogPage() {
         lead="Раздел готов, статьи добавляем по мере появления действительно полезного материала."
       />
 
-      <div className="page-container py-22">
+      <div className="mx-3 mt-7 max-md:mx-2 max-md:mt-4">
         {posts.length === 0 ? (
-          <div className="bg-band p-8 text-mute">
+          <div className="rounded-2xl bg-card p-8 text-[15px] text-mute max-md:rounded-xl max-md:p-5 max-md:text-[14px]">
             Пока статей нет. Позже здесь появятся материалы о выборе съедобных букетов,
             идеях подарков и сезонных подборках.
           </div>
         ) : (
-          <div className="grid grid-cols-3 gap-2 max-[1000px]:grid-cols-2 max-[600px]:grid-cols-1">
+          <div className="grid grid-cols-3 gap-3 max-lg:grid-cols-2 max-md:grid-cols-1 max-md:gap-2">
             {posts.map((post) => (
               <Link
                 key={post.slug}
                 href={`/blog/${post.slug}`}
-                className="group flex flex-col gap-3 bg-card p-4.5"
+                className="group flex flex-col gap-3 rounded-2xl bg-card p-7 max-md:rounded-lg max-md:p-5"
               >
-                <h2 className="type-heading-lg text-ink">{post.title}</h2>
+                <h2 className="font-display text-[20px] leading-[1.15] font-bold text-ink">
+                  {post.title}
+                </h2>
                 {post.description ? (
-                  <p className="text-sm text-mute text-pretty">{post.description}</p>
+                  <p className="text-[15px] text-mute text-pretty max-md:text-[14px]">
+                    {post.description}
+                  </p>
                 ) : null}
-                <span className="mt-auto inline-flex items-center gap-2 pt-3 type-button text-primary transition-[gap] duration-140 ease-linear group-hover:gap-[13px]">
+                <span className="mt-auto pt-3 text-[15px] font-semibold text-ink">
                   Читать <span aria-hidden="true">→</span>
                 </span>
               </Link>

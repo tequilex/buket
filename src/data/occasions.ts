@@ -3,6 +3,7 @@ import { occasionSchema, type OccasionEntry } from '@/lib/content/schemas';
 const rawOccasions: OccasionEntry[] = [
   {
     slug: 'muzhskie',
+    shortTitle: 'Мужские',
     title: 'Мужские съедобные букеты',
     intro:
       'Подборка мясных и рыбных букетов для мужчин, которым нужен выразительный и небанальный подарок.',
@@ -24,6 +25,7 @@ const rawOccasions: OccasionEntry[] = [
   },
   {
     slug: '23-fevralya',
+    shortTitle: 'На 23 февраля',
     title: 'Съедобные букеты на 23 февраля',
     intro:
       'Букеты с плотным составом и мужской подачей для поздравления на 23 февраля дома, в офисе или на выезде.',
@@ -52,6 +54,7 @@ const rawOccasions: OccasionEntry[] = [
   },
   {
     slug: 'den-rozhdeniya',
+    shortTitle: 'На день рождения',
     title: 'Съедобные букеты на день рождения',
     intro:
       'Подборка мясных, сладких и фруктовых букетов, которые удобно дарить на день рождения взрослым и коллегам.',

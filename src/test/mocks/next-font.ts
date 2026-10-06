@@ -1,7 +1,7 @@
-export function Oswald() {
-  return { variable: '--font-oswald', className: 'oswald' };
+export function Unbounded() {
+  return { variable: '--font-unbounded', className: 'unbounded' };
 }
 
-export function Inter() {
-  return { variable: '--font-inter', className: 'inter' };
+export function Onest() {
+  return { variable: '--font-onest', className: 'onest' };
 }

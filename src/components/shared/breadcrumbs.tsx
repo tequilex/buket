@@ -10,26 +10,41 @@ interface BreadcrumbItem {
 
 interface BreadcrumbsProps {
   items: BreadcrumbItem[];
-  /** Инвертирует след для графитовых шапок разделов. */
-  onDark?: boolean;
+  /**
+   * yellow — крошки лежат на жёлтой/светлой плитке (ink с прозрачностью).
+   * dark — на графите. page — отдельной строкой на сером фоне.
+   */
+  tone?: 'yellow' | 'dark' | 'page';
+  className?: string;
 }
 
 /**
- * Заглавный след с разрядкой и разделителем «/».
+ * След 14px с разделителем «/».
  *
  * Здесь же отдаётся BreadcrumbList: компонент рендерится ровно один раз на
  * страницу, поэтому разметка не дублируется, а ни одна страница со следом не
  * остаётся без неё.
  */
-export function Breadcrumbs({ items, onDark = false }: BreadcrumbsProps) {
-  const currentColor = onDark ? 'text-on-dark' : 'text-ink';
-  const restColor = onDark ? 'text-mute-on-dark' : 'text-mute';
-  const slashColor = onDark ? 'text-dark-line-strong' : 'text-cream';
+export function Breadcrumbs({ items, tone = 'yellow', className }: BreadcrumbsProps) {
+  const current =
+    tone === 'dark' ? 'text-white' : tone === 'page' ? 'text-ink' : 'text-ink';
+  const rest =
+    tone === 'dark'
+      ? 'text-mute-on-dark hover:text-white'
+      : tone === 'page'
+        ? 'text-subtle hover:text-ink'
+        : 'text-ink/70 hover:text-ink';
+  const slash = tone === 'dark' ? 'text-subtle' : 'text-ink/50';
 
   return (
     <nav
       aria-label="Хлебные крошки"
-      className="flex flex-wrap items-center gap-2 type-label"
+      className={[
+        'flex flex-wrap items-center gap-2 text-[14px] font-medium max-md:text-[13px]',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
     >
       <JsonLd
         id="breadcrumbs-jsonld"
@@ -43,16 +58,19 @@ export function Breadcrumbs({ items, onDark = false }: BreadcrumbsProps) {
         return (
           <span key={`${item.label}-${index}`} className="flex items-center gap-2">
             {item.href && !last ? (
-              <Link href={item.href} className={restColor}>
+              <Link href={item.href} className={rest}>
                 {item.label}
               </Link>
             ) : (
-              <span aria-current={last ? 'page' : undefined} className={last ? currentColor : restColor}>
+              <span
+                aria-current={last ? 'page' : undefined}
+                className={last ? current : rest}
+              >
                 {item.label}
               </span>
             )}
             {last ? null : (
-              <span aria-hidden="true" className={slashColor}>
+              <span aria-hidden="true" className={slash}>
                 /
               </span>
             )}

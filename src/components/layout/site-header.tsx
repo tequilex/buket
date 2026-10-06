@@ -1,40 +1,60 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { OrderButton } from '@/components/order/order-button';
+import siteConfig from '@/data/site-config';
+import { phoneHref } from '@/lib/content/catalog';
+import { HeaderNav } from './header-nav';
 import { MobileMenu } from './mobile-menu';
 import { navItems } from './nav-items';
 
-/** Липкая графитовая шапка 72px: вордмарк со слоганом, навигация заглавными, одна зелёная кнопка. */
+/** Белая плавающая плашка 68px: логотип, навигация, телефон и жёлтая кнопка. */
 export function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 bg-dark text-on-dark">
-      <div className="page-container flex h-18 items-center gap-3 min-[1041px]:gap-10">
-        <Link href="/" className="flex-none whitespace-nowrap">
-          <span className="block font-display text-[18px] leading-none font-bold tracking-mark uppercase text-on-dark min-[420px]:text-[22px]">
-            Gastro Buket
+    <header className="px-3 pt-3 max-md:px-2 max-md:pt-2">
+      <div className="flex h-17 items-center gap-8 rounded-[20px] bg-card pr-3 pl-6 max-md:h-15 max-md:gap-2.5 max-md:rounded-md max-md:pr-2 max-md:pl-3.5">
+        <Link href="/" className="flex flex-1 items-center gap-2.5 md:flex-none">
+          <span className="flex size-12.5 flex-none items-center justify-center rounded-full bg-primary max-md:size-11">
+            <Image
+              src="/bouquet.svg"
+              alt=""
+              width={34}
+              height={45}
+              priority
+              className="h-11.25 w-auto max-md:h-10"
+            />
           </span>
-          <span className="mt-[3px] hidden text-[9px] leading-none tracking-[0.22em] uppercase text-mute-on-dark min-[420px]:block">
-            Яблоновский · Краснодар
+          <span className="flex flex-col leading-[1.1]">
+            <span className="font-display text-[16px] font-bold text-ink max-md:text-[15px]">
+              gastro buket
+            </span>
+            <span className="text-[12px] text-subtle max-md:hidden">
+              Яблоновский · Краснодар
+            </span>
           </span>
         </Link>
 
-        <nav className="flex flex-1 justify-center gap-6.5 whitespace-nowrap max-[1040px]:hidden">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-[13px] leading-none font-medium tracking-button uppercase text-on-dark hover:text-primary"
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <HeaderNav items={navItems} />
 
-        <div className="ml-auto flex flex-none items-center gap-2">
-          <OrderButton source="header">Написать</OrderButton>
-          <span className="hidden max-[1040px]:inline-flex">
-            <MobileMenu items={navItems} />
-          </span>
-        </div>
+        <a
+          href={phoneHref}
+          className="text-[15px] font-medium whitespace-nowrap max-lg:hidden"
+        >
+          {siteConfig.phone}
+        </a>
+
+        <OrderButton
+          source="header"
+          shape="soft"
+          className="max-md:min-h-11 max-md:px-3.5 max-md:text-[14px]"
+        >
+          Написать
+        </OrderButton>
+
+        {/* Навигация прячется раньше, чем сжимается шапка, — с 1024px её
+            заменяет бургер. */}
+        <span className="inline-flex lg:hidden">
+          <MobileMenu items={navItems} />
+        </span>
       </div>
     </header>
   );

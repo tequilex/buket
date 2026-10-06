@@ -1,136 +1,108 @@
-/* Gastro Buket — Tailwind v4 theme, направление «Афиша»
+/* Gastro Buket — Tailwind v4 theme, направление «Серый + жёлтый» (редизайн 2026)
  *
- * Копируется как src/app/globals.css, globals.scss удаляется.
- * Tailwind v4 не нужен конфиг: утилиты генерируются из @theme.
+ * Заменяет src/app/globals.css целиком.
+ * Смысловые имена токенов (page, band, card, dark, primary, ink, mute, on-dark …)
+ * сохранены — существующие классы bg-page / text-mute / bg-dark и т.д. продолжат
+ * работать, но перекрасятся. Меняются только значения + добавлены радиусы и тени.
  *
- *   npm remove sass
- *   npm install tailwindcss @tailwindcss/postcss postcss
- *
- * postcss.config.mjs:
- *   export default { plugins: { "@tailwindcss/postcss": {} } };
- *
- * Токены повторяют tokens/*.css этой системы один в один.
+ * ВАЖНО: primary теперь жёлтый (#ffd23f). Текст на нём — ink (#17181c), НЕ белый.
+ * Везде, где было `bg-primary text-white`, заменить на `bg-primary text-ink`.
  */
 
 @import "tailwindcss";
 
 @theme {
   /* ---- шрифты --------------------------------------------------------- */
-  /* Подключить через next/font в layout.tsx и отдать сюда как переменные. */
-  --font-display: var(--font-oswald), Impact, "Arial Narrow", sans-serif;
-  --font-core: var(--font-inter), -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+  /* layout.tsx: next/font/google → Unbounded (500–800) и Onest (400–800), subsets latin+cyrillic */
+  --font-display: var(--font-unbounded), "Arial Black", sans-serif;
+  --font-core: var(--font-onest), -apple-system, system-ui, "Segoe UI", sans-serif;
   --font-sans: var(--font-core);
 
   /* ---- цвет: база ----------------------------------------------------- */
-  --color-graphite-900: #12110d;
-  --color-graphite-800: #1b1a16;
-  --color-graphite-700: #26241e;
-  --color-cream-100: #f3eee4;
-  --color-cream-200: #e6dfd1;
-  --color-cream-300: #ddd5c6;
+  --color-graphite-900: #17181c;   /* ink, тёмные блоки */
+  --color-graphite-800: #2c2d33;   /* поднятые элементы на тёмном */
+  --color-graphite-700: #3a3b42;   /* линии на тёмном */
+  --color-gray-50: #f3f3f1;        /* фон страницы */
+  --color-gray-100: #ebebe7;       /* разделители на белом */
+  --color-gray-200: #e4e4e0;       /* границы чипов, серая плитка */
+  --color-gray-300: #d9d9d4;
   --color-white: #ffffff;
-  --color-green-600: #12823f;
-  --color-green-700: #0e6b33;
-  --color-stone-600: #7d7768;
-  --color-stone-400: #a9a292;
-  --color-stone-300: #3a352c;
-  --color-danger-600: #a3231b;
+  --color-yellow-400: #ffd23f;     /* акцент */
+  --color-yellow-500: #ffc800;     /* акцент: hover/pressed */
+  --color-yellow-100: #fff3bf;     /* мягкая жёлтая подложка */
+  --color-stone-700: #33353b;      /* основной текст абзацев */
+  --color-stone-600: #55575e;      /* вторичный текст */
+  --color-stone-500: #6c6e75;      /* подписи, крошки */
+  --color-stone-400: #8a8c93;      /* плейсхолдер, disabled */
+  --color-stone-300: #b9bac0;      /* вторичный текст на тёмном */
+  --color-danger-600: #e5484d;
 
   /* ---- цвет: смысловые ------------------------------------------------ */
-  /* bg-page, bg-dark, text-mute-on-dark, border-cream и т.д. */
-  --color-page: var(--color-cream-100);
-  --color-band: var(--color-cream-200);
+  --color-page: var(--color-gray-50);
+  --color-band: var(--color-gray-200);
   --color-card: var(--color-white);
-  --color-dark: var(--color-graphite-800);
-  --color-dark-raised: var(--color-graphite-700);
-  --color-primary: var(--color-green-600);
-  --color-primary-pressed: var(--color-green-700);
+  --color-dark: var(--color-graphite-900);
+  --color-dark-raised: var(--color-graphite-800);
+  --color-primary: var(--color-yellow-400);
+  --color-primary-pressed: var(--color-yellow-500);
+  --color-primary-soft: var(--color-yellow-100);
 
   --color-ink: var(--color-graphite-900);
-  --color-body: var(--color-stone-300);
+  --color-body: var(--color-stone-700);
   --color-mute: var(--color-stone-600);
-  --color-on-dark: var(--color-cream-100);
-  --color-mute-on-dark: var(--color-stone-400);
+  --color-subtle: var(--color-stone-500);
+  --color-placeholder: var(--color-stone-400);
+  --color-on-dark: var(--color-white);
+  --color-mute-on-dark: var(--color-stone-300);
   --color-error: var(--color-danger-600);
 
-  --color-cream: var(--color-cream-300);        /* border-cream */
-  --color-cream-soft: var(--color-cream-200);
-  --color-dark-line: rgb(243 238 228 / 0.14);   /* border-dark-line */
-  --color-dark-line-strong: rgb(243 238 228 / 0.35);
-  --color-fill-on-dark: rgb(255 255 255 / 0.09);
+  --color-cream: var(--color-gray-200);          /* border-cream → граница чипов/инпутов */
+  --color-cream-soft: var(--color-gray-100);     /* разделители строк */
+  --color-line: var(--color-gray-100);
+  --color-dark-line: var(--color-graphite-700);
+  --color-dark-line-strong: var(--color-graphite-700);
+  --color-fill-on-dark: var(--color-graphite-800);
 
   /* ---- типографика ---------------------------------------------------- */
-  /* Дисплейные роли всегда идут с uppercase — utility ниже. */
-  /* Дисплейный ярус масштабируется плавно — как --fs-display-* в tokens/typography.css. */
-  --text-display-xl: clamp(44px, 8vw, 104px);
-  --text-display-xl--line-height: 0.92;
-  --text-display-xl--letter-spacing: -0.01em;
-  --text-display-xl--font-weight: 700;
-
-  --text-display-lg: clamp(34px, 5vw, 54px);
-  --text-display-lg--line-height: 0.95;
-  --text-display-lg--letter-spacing: -0.01em;
-  --text-display-lg--font-weight: 700;
-
-  --text-heading-xl: clamp(26px, 3vw, 34px);
-  --text-heading-xl--line-height: 1;
-  --text-heading-xl--letter-spacing: -0.01em;
-  --text-heading-xl--font-weight: 700;
-
-  --text-heading-lg: 23px;
-  --text-heading-lg--line-height: 1.05;
-  --text-heading-lg--font-weight: 700;
-
-  --text-heading-md: 20px;
-  --text-heading-md--line-height: 1.1;
-  --text-heading-md--font-weight: 600;
-
+  /* Заглавных больше нет. Дисплей — Unbounded 700, отрицательный трекинг. */
+  --text-display-xl: clamp(34px, 5.5vw, 68px);
+  --text-display-lg: clamp(28px, 4.2vw, 54px);
+  --text-heading-xl: clamp(24px, 3.2vw, 44px);
+  --text-heading-lg: clamp(20px, 2.4vw, 30px);
+  --text-heading-md: 18px;
   --text-body: 16px;
-  --text-body--line-height: 1.5;
-
-  --text-sm: 14px;
-  --text-sm--line-height: 1.55;
-
+  --text-sm: 15px;
   --text-caption: 13px;
-  --text-caption--line-height: 1.5;
-
-  --text-stamp: 19px;
-  --text-stamp--line-height: 1;
-  --text-stamp--font-weight: 700;
-
-  --text-numeral: 52px;
-  --text-numeral--line-height: 0.8;
-  --text-numeral--font-weight: 700;
-
-  /* разрядка: tracking-eyebrow / -label / -button / -ticker */
-  --tracking-eyebrow: 0.18em;
-  --tracking-label: 0.16em;
-  --tracking-button: 0.06em;
-  --tracking-ticker: 0.16em;
-  --tracking-mark: 0.08em;
 
   /* ---- ритм ----------------------------------------------------------- */
-  /* p-1=4 p-2=8 p-3=12 p-4=16 p-6=24 p-10=40 p-22=88 */
   --spacing: 4px;
-  --container-page: 1320px;
+  --container-page: 1280px;
 
   /* ---- форма ---------------------------------------------------------- */
-  /* Радиусов нет. rounded-* в этом проекте не применяется вообще. */
-  --radius-none: 0px;
-  --radius-pill: 9999px; /* только аватар */
+  --radius-xs: 12px;    /* мелкие кнопки шапки, бейджи */
+  --radius-sm: 14px;    /* кнопка «Написать» в шапке */
+  --radius-md: 18px;    /* мобильные фото в карточках */
+  --radius-lg: 24px;    /* фото товара, мобильные карточки */
+  --radius-xl: 28px;    /* мобильные крупные блоки, подвал */
+  --radius-2xl: 36px;   /* белые секции, карточки контента (десктоп) */
+  --radius-3xl: 40px;   /* hero, призывы (десктоп) */
+  --radius-pill: 9999px;/* кнопки, чипы, теги, ценники */
 
   /* ---- тень ----------------------------------------------------------- */
-  /* Единственная — под модалкой. shadow-modal, больше нигде. */
-  --shadow-modal: 0 24px 60px rgb(18 17 13 / 0.45);
+  --shadow-modal: 0 30px 80px rgb(0 0 0 / 0.3);
+  --shadow-photo: 0 20px 50px rgb(90 70 0 / 0.2);   /* фото на жёлтом */
+  --shadow-sticker: 0 8px 24px rgb(0 0 0 / 0.12);   /* наклейки */
 
   /* ---- соотношения фото ----------------------------------------------- */
-  --aspect-panel: 3 / 4;
+  --aspect-panel: 3 / 4;   /* карточка букета */
   --aspect-card: 4 / 5;
-  --aspect-wide: 16 / 10;
+  --aspect-wide: 16 / 10;  /* карточка повода */
+  --aspect-source: 1232 / 2048; /* исходники букетов — для показа без обрезки */
 
   /* ---- движение ------------------------------------------------------- */
-  --ease-linear: linear;
-  --animate-ticker: ticker 34s linear infinite;
+  --animate-ticker: ticker 40s linear infinite;
+  --animate-ticker-fast: ticker 30s linear infinite;  /* мобильный */
+  --animate-spin-slow: spin 18s linear infinite;
 }
 
 @keyframes ticker {
@@ -150,108 +122,106 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  /* Заголовки не несут собственного размера — каждый набирается на месте. */
   h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
 
   a { color: var(--color-ink); text-decoration: none; }
-  a:hover { color: var(--color-primary); }
+  a:hover { color: #000; }
 
   img { display: block; }
 
-  ::selection { background: color-mix(in srgb, var(--color-primary) 25%, transparent); }
+  ::selection { background: var(--color-primary); color: var(--color-ink); }
 
-  /* Фокус — зелёное кольцо. Синего в системе нет. */
-  :focus-visible { outline: 3px solid var(--color-primary); outline-offset: 0; }
+  :focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; border-radius: 8px; }
 }
 
-/* Утилиты, которых Tailwind не даёт из коробки. */
-
-/* Контейнер страницы: page-container.
-   Поля 20px на мобильном и 32px от планшета — --container-gutter-mobile. */
+/* Контейнер: десктоп-макет 1280px с полями 12px по краям секций */
 @utility page-container {
   max-width: var(--container-page);
   margin-inline: auto;
-  padding-inline: --spacing(5);
+  padding-inline: --spacing(2);   /* 8px мобильный */
 
   @media (width >= 48rem) {
-    padding-inline: --spacing(8);
+    padding-inline: --spacing(3); /* 12px */
   }
 }
 
-/* Дисплейный ярус: display-xl / display-lg / heading-xl … всегда заглавными */
+/* Дисплей — без uppercase */
 @utility type-display-xl {
   font-family: var(--font-display);
-  font-size: clamp(44px, 8vw, 104px);
+  font-size: var(--text-display-xl);
   font-weight: 700;
-  line-height: 0.92;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 @utility type-display-lg {
   font-family: var(--font-display);
-  font-size: clamp(34px, 5vw, 54px);
+  font-size: var(--text-display-lg);
   font-weight: 700;
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 @utility type-heading-xl {
   font-family: var(--font-display);
-  font-size: clamp(26px, 3vw, 34px);
+  font-size: var(--text-heading-xl);
   font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
 }
 @utility type-heading-lg {
   font-family: var(--font-display);
   font-size: var(--text-heading-lg);
   font-weight: 700;
-  line-height: 1.05;
-  text-transform: uppercase;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 @utility type-heading-md {
   font-family: var(--font-display);
   font-size: var(--text-heading-md);
-  font-weight: 600;
-  line-height: 1.1;
-  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
-/* Служебные роли заглавными с разрядкой */
+/* Служебные роли: обычный регистр, без разрядки */
 @utility type-eyebrow {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 1;
-  letter-spacing: var(--tracking-eyebrow);
-  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--color-subtle);
 }
 @utility type-label {
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-}
-@utility type-button {
   font-size: 13px;
   font-weight: 600;
+  line-height: 1.3;
+}
+@utility type-button {
+  font-size: 15px;
+  font-weight: 600;
   line-height: 1;
-  letter-spacing: var(--tracking-button);
-  text-transform: uppercase;
 }
 
-/* Защитный градиент под подписью на фотографии */
-@utility scrim-panel {
-  background: linear-gradient(to top, rgb(27 26 22 / 0.94), rgb(27 26 22 / 0));
+/* Точечный фон жёлтых/тёмных блоков */
+@utility bg-dots {
+  background-image: radial-gradient(rgb(23 24 28 / 0.12) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+@utility bg-dots-dark {
+  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
 }
 
-/* Фото под текстом: затемнение и наезд при наведении */
-@utility photo-tinted {
-  filter: brightness(0.82);
-  transition: filter 250ms linear, transform 500ms linear;
+/* Контурные номера 01, 02 … на фото */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px currentColor;
 }
-@utility photo-tinted-hover {
-  filter: brightness(0.95);
-  transform: scale(1.03);
+
+/* Горизонтальные ленты на мобильном */
+@utility scroll-row {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  &::-webkit-scrollbar { display: none; }
 }

@@ -1,8 +1,15 @@
 import nextCoreWebVitals from 'eslint-config-next/core-web-vitals';
 
 const config = [
-  // Папка дизайн-системы — эталон, а не исходники проекта.
-  { ignores: ['Buket Design System/**', '.next/**', 'out/**'] },
+  // Папки дизайн-системы и хендофа — эталон, а не исходники проекта.
+  {
+    ignores: [
+      'Buket Design System/**',
+      'design_handoff_gastro_buket_redesign/**',
+      '.next/**',
+      'out/**',
+    ],
+  },
   ...(Array.isArray(nextCoreWebVitals) ? nextCoreWebVitals : [nextCoreWebVitals]),
 ];
 

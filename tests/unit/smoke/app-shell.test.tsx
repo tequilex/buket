@@ -12,13 +12,14 @@ test('renders the launch heading', () => {
 test('renders the catalog section in the homepage', () => {
   renderWithOrderModal(<HomePage />);
 
-  expect(screen.getByText(/Выбирайте по вкусу/)).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'Выберите основу' })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'Чаще всего берут' })).toBeInTheDocument();
 });
 
-test('header carries the wordmark, the nav and one green cta', () => {
+test('header carries the wordmark, the nav and one cta', () => {
   renderWithOrderModal(<SiteHeader />);
 
-  expect(screen.getByText('Gastro Buket')).toBeInTheDocument();
+  expect(screen.getAllByText('gastro buket').length).toBeGreaterThan(0);
   expect(screen.getByRole('link', { name: 'Каталог' })).toBeInTheDocument();
   expect(screen.getByRole('button', { name: 'Написать' })).toBeInTheDocument();
 });
@@ -26,8 +27,10 @@ test('header carries the wordmark, the nav and one green cta', () => {
 test('footer carries the wordmark block and the link columns', () => {
   render(<SiteFooter />);
 
-  expect(screen.getByText('Искусство вкусных подарков')).toBeInTheDocument();
-  expect(screen.getByRole('heading', { name: 'Каталог' })).toBeInTheDocument();
-  expect(screen.getByRole('heading', { name: 'Поводы' })).toBeInTheDocument();
-  expect(screen.getByRole('heading', { name: 'Связаться' })).toBeInTheDocument();
+  expect(
+    screen.getByText('Съедобные букеты ручной сборки. Яблоновский · Краснодар'),
+  ).toBeInTheDocument();
+  expect(screen.getByText('Каталог')).toBeInTheDocument();
+  expect(screen.getByText('Поводы')).toBeInTheDocument();
+  expect(screen.getByText('Связаться')).toBeInTheDocument();
 });

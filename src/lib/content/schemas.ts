@@ -100,6 +100,8 @@ export const faqItemSchema = z.object({
 export const occasionSchema = z.object({
   slug: z.string().min(1),
   title: z.string().min(1),
+  /** Короткая метка для пилюль и списка поводов: «На 23 февраля». */
+  shortTitle: z.string().min(1),
   intro: z.string().min(1),
   seoTitle: z.string().min(1),
   seoDescription: z.string().min(1),

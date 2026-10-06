@@ -7,16 +7,54 @@ interface SpecProps {
   onDark?: boolean;
 }
 
-/** Строка «метка — значение» с волосяной отбивкой. */
-export function Spec({ label, value, onDark = false }: SpecProps) {
-  const line = onDark ? 'border-dark-line' : 'border-cream';
-  const labelColor = onDark ? 'text-mute-on-dark' : 'text-mute';
-  const valueColor = onDark ? 'text-on-dark' : 'text-ink';
+interface SpecListProps {
+  onDark?: boolean;
+  className?: string;
+  children: ReactNode;
+}
 
+/** Таблица «метка — значение». Открывается жирной чертой сверху. */
+export function SpecList({ onDark = false, className, children }: SpecListProps) {
   return (
-    <div className={`flex gap-4.5 border-b ${line} py-3`}>
-      <span className={`min-w-27.5 flex-none type-label ${labelColor}`}>{label}</span>
-      <span className={`text-sm ${valueColor} text-pretty`}>{value}</span>
+    <div
+      className={[
+        'flex flex-col border-t-2',
+        onDark ? 'border-primary' : 'border-ink',
+        className,
+      ]
+        .filter(Boolean)
+        .join(' ')}
+    >
+      {children}
+    </div>
+  );
+}
+
+/** Строка таблицы: узкая колонка подписи и значение. */
+export function Spec({ label, value, onDark = false }: SpecProps) {
+  return (
+    <div
+      className={[
+        'grid grid-cols-[110px_1fr] gap-4 border-b py-3.5 max-md:grid-cols-[90px_1fr] max-md:gap-3 max-md:py-2.5',
+        onDark ? 'border-[#2e2f35]' : 'border-line',
+      ].join(' ')}
+    >
+      <span
+        className={[
+          'text-[14px]',
+          onDark ? 'text-[#9a9ca3]' : 'text-subtle',
+        ].join(' ')}
+      >
+        {label}
+      </span>
+      <span
+        className={[
+          'text-[15px] font-semibold text-pretty max-md:text-[14px]',
+          onDark ? 'text-white' : 'text-ink',
+        ].join(' ')}
+      >
+        {value}
+      </span>
     </div>
   );
 }

@@ -13,9 +13,17 @@ test('renders the ingredient ticker instead of a carousel', () => {
   expect(screen.getAllByText(/Раки/).length).toBeGreaterThan(0);
 });
 
-test('renders the hero photo grid', () => {
+test('renders both hero calls to action', () => {
   renderWithOrderModal(<HomePage />);
-  expect(screen.getByAltText('Букет из раков с лимоном')).toBeInTheDocument();
-  expect(screen.getByAltText('Мясной букет с колбасами')).toBeInTheDocument();
-  expect(screen.getByAltText('Рыбный букет из сушёной рыбы')).toBeInTheDocument();
+
+  expect(screen.getByRole('link', { name: 'Смотреть каталог' })).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Собрать под повод' })).toBeInTheDocument();
+});
+
+test('renders the bento cards next to the hero', () => {
+  renderWithOrderModal(<HomePage />);
+
+  expect(screen.getByText('Хит к пятнице')).toBeInTheDocument();
+  // «День в день» есть и в плашке доставки, и на мобильной наклейке в коллаже.
+  expect(screen.getAllByText('День в день').length).toBeGreaterThan(0);
 });

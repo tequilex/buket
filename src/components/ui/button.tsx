@@ -1,31 +1,41 @@
 import Link from 'next/link';
 import type { ComponentProps, ReactNode } from 'react';
 
-type ButtonVariant = 'primary' | 'outline' | 'outline-dark' | 'ghost';
+type ButtonVariant = 'primary' | 'dark' | 'outline' | 'outline-dark' | 'ghost' | 'white';
 type ButtonSize = 'md' | 'lg';
 
 const variants: Record<ButtonVariant, string> = {
-  primary: 'bg-primary text-white active:bg-primary-pressed',
-  outline: 'text-ink shadow-[inset_0_0_0_1px_var(--color-cream)] active:bg-card',
-  'outline-dark':
-    'text-on-dark shadow-[inset_0_0_0_1px_var(--color-dark-line-strong)] active:bg-[rgb(243_238_228_/_0.1)]',
-  ghost: 'text-primary active:bg-band',
+  primary: 'bg-primary text-ink hover:bg-primary-pressed',
+  dark: 'bg-ink text-white hover:bg-black hover:text-primary',
+  outline: 'border-2 border-ink text-ink hover:bg-ink hover:text-white',
+  'outline-dark': 'border-2 border-dark-line text-white hover:border-primary',
+  ghost: 'bg-page text-ink hover:bg-band',
+  white: 'bg-card text-ink hover:bg-primary',
 };
 
 const sizes: Record<ButtonSize, string> = {
-  md: 'min-h-[46px] px-[22px] py-[15px]',
-  lg: 'min-h-[56px] px-[30px] py-[18px]',
+  md: 'min-h-[46px] px-[22px] py-3 text-[15px] font-semibold',
+  lg: 'min-h-[56px] px-[30px] py-[18px] text-[17px] font-bold',
 };
 
 const base =
-  'inline-flex items-center justify-center gap-2 type-button whitespace-nowrap ' +
-  'cursor-pointer transition-[background-color] duration-140 ease-linear ' +
-  'disabled:bg-band disabled:text-mute-on-dark disabled:cursor-default';
+  'inline-flex items-center justify-center gap-3.5 whitespace-nowrap leading-none ' +
+  'cursor-pointer transition-colors duration-150 ease-linear ' +
+  'disabled:bg-band disabled:text-placeholder disabled:cursor-default';
+
+/** pill — везде. soft — только кнопка «Написать» в шапке (radius 14px). */
+const shapes = {
+  pill: 'rounded-full',
+  soft: 'rounded-sm max-md:rounded-xs',
+} as const;
 
 interface CommonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  shape?: keyof typeof shapes;
   iconAfter?: ReactNode;
+  /** Добавляет «→» справа — так набраны все кнопки-ссылки в макетах. */
+  arrow?: boolean;
   className?: string;
   children?: ReactNode;
 }
@@ -38,22 +48,30 @@ type ButtonAsLink = CommonProps &
 
 export type ButtonProps = ButtonAsButton | ButtonAsLink;
 
-/**
- * Квадратный заглавный контрол с разрядкой. Радиусов нет — их нет и в системе.
- */
+/** Пилюля-контрол: жёлтая, тёмная или с обводкой. Регистр обычный. */
 export function Button(props: ButtonProps) {
   const {
     variant = 'primary',
     size = 'md',
+    shape = 'pill',
     iconAfter,
+    arrow = false,
     className,
     children,
     ...rest
   } = props;
 
-  const classes = [base, variants[variant], sizes[size], className]
+  const classes = [base, shapes[shape], variants[variant], sizes[size], className]
     .filter(Boolean)
     .join(' ');
+
+  const content = (
+    <>
+      {children}
+      {iconAfter}
+      {arrow ? <span aria-hidden="true">→</span> : null}
+    </>
+  );
 
   if (typeof rest.href === 'string') {
     const { href, ...anchorProps } = rest as ComponentProps<'a'> & { href: string };
@@ -62,16 +80,14 @@ export function Button(props: ButtonProps) {
     if (isExternal) {
       return (
         <a {...anchorProps} href={href} className={classes}>
-          {children}
-          {iconAfter}
+          {content}
         </a>
       );
     }
 
     return (
       <Link {...anchorProps} href={href} className={classes}>
-        {children}
-        {iconAfter}
+        {content}
       </Link>
     );
   }
@@ -80,8 +96,7 @@ export function Button(props: ButtonProps) {
 
   return (
     <button {...buttonProps} className={classes}>
-      {children}
-      {iconAfter}
+      {content}
     </button>
   );
 }

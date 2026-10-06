@@ -3,28 +3,27 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { Icon } from './icon';
-import { IconButton } from './icon-button';
 
 interface ModalCardProps {
   title: string;
   subtitle?: string;
   onClose: () => void;
   footer?: ReactNode;
-  /** Максимальная ширина в px. По умолчанию 460. */
+  /** Максимальная ширина в px. По умолчанию 440. */
   width?: number;
   children?: ReactNode;
 }
 
 /**
- * Оверлей заказа — графитовый блок на плотном затемнении. Единственная
- * приподнятая поверхность системы и единственное место, где есть тень.
+ * Оверлей заказа — белая карточка на затемнении. Единственная приподнятая
+ * поверхность системы и единственное место, где есть крупная тень.
  */
 export function ModalCard({
   title,
   subtitle,
   onClose,
   footer,
-  width = 460,
+  width = 440,
   children,
 }: ModalCardProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -46,7 +45,7 @@ export function ModalCard({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-60 flex items-center justify-center bg-[rgb(18_17_13/0.72)] p-6.5"
+      className="fixed inset-0 z-60 flex items-center justify-center bg-[rgb(23_24_28/0.5)] p-6"
       onClick={onClose}
     >
       <div
@@ -57,22 +56,30 @@ export function ModalCard({
         tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
         style={{ maxWidth: width }}
-        className="relative flex max-h-full w-full flex-col gap-4.5 overflow-y-auto bg-dark px-6.5 pt-10 pb-6.5 text-on-dark shadow-modal outline-none"
+        className="relative flex max-h-full w-full flex-col gap-5 overflow-y-auto rounded-[32px] bg-card p-8 shadow-modal outline-none max-md:rounded-xl max-md:p-5"
       >
-        <IconButton
-          label="Закрыть"
-          onDark
-          size={40}
-          onClick={onClose}
-          className="absolute top-2 right-2"
-        >
-          <Icon name="x" size={20} />
-        </IconButton>
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-12.5 -right-12.5 size-37.5 rounded-full bg-primary"
+        />
 
-        <div className="flex flex-col gap-2">
-          <h2 className="type-heading-xl text-on-dark">{title}</h2>
+        <button
+          type="button"
+          aria-label="Закрыть"
+          onClick={onClose}
+          className="absolute top-4 right-4 flex size-10 cursor-pointer items-center justify-center rounded-full bg-ink text-white"
+        >
+          <Icon name="x" size={18} />
+        </button>
+
+        <div className="relative flex flex-col gap-2 pr-12">
+          <h2 className="font-display text-[26px] leading-[1.1] font-bold tracking-[-0.03em] text-ink max-md:text-[22px]">
+            {title}
+          </h2>
           {subtitle ? (
-            <p className="text-sm text-mute-on-dark text-pretty">{subtitle}</p>
+            <p className="text-[15px] text-mute text-pretty max-md:text-[14px]">
+              {subtitle}
+            </p>
           ) : null}
         </div>
 

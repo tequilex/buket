@@ -68,13 +68,8 @@ export function OrderModalProvider({ children }: { children: ReactNode }) {
           title="Заказать букет"
           subtitle="Напишите в удобный канал — ответим за 15 минут и согласуем состав."
           onClose={close}
-          footer={
-            <span className="text-caption text-mute-on-dark">
-              Состав любого букета согласуется индивидуально.
-            </span>
-          }
         >
-          <ContactChannels source={source} onDark />
+          <ContactChannels source={source} layout="stack" className="relative" />
 
           <TextInput
             label="Телефон"
@@ -83,7 +78,6 @@ export function OrderModalProvider({ children }: { children: ReactNode }) {
             autoComplete="tel"
             placeholder={siteConfig.phone}
             helper="Перезвоним, если так удобнее"
-            onDark
             value={phone}
             onChange={(event) => setPhone(event.target.value)}
           />
@@ -91,6 +85,7 @@ export function OrderModalProvider({ children }: { children: ReactNode }) {
           {/* Бэкенда у витрины нет: заявка уходит той же перепиской,
               только номер уже вписан в сообщение. */}
           <Button
+            variant="dark"
             href={buildOrderHref(phone)}
             target="_blank"
             rel="noreferrer"
