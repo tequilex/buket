@@ -57,8 +57,7 @@ export default function ContactsPage() {
           lead="Собираем в Яблоновском и возим по Краснодару. Время и стоимость доставки зависят от района и часа — считаем при заказе."
         />
         <div className="flex flex-wrap gap-2">
-          <Tag href="/locations/krasnodar">Краснодар</Tag>
-          <Tag href="/locations/yablonovskiy">Яблоновский</Tag>
+          <Tag href="/delivery">Доставка и самовывоз</Tag>
           <Tag href="/delivery">Доставка</Tag>
           <Tag href="/catalog">Весь каталог</Tag>
         </div>

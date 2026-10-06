@@ -6,7 +6,6 @@ import { Spec } from '@/components/shared/spec';
 import { CtaBand } from '@/components/ui/cta-band';
 import { StepCard } from '@/components/ui/step-card';
 import { Tag } from '@/components/ui/tag';
-import { locations } from '@/lib/content/catalog';
 import { buildMetadata } from '@/lib/seo/metadata';
 
 const steps = [
@@ -97,11 +96,7 @@ export default function DeliveryPage() {
               состава и от того, в котором часу вы написали.
             </p>
             <div className="flex flex-wrap gap-2 pt-1">
-              {locations.map((location) => (
-                <Tag key={location.slug} href={`/locations/${location.slug}`}>
-                  {location.city}
-                </Tag>
-              ))}
+              <Tag href="/catalog">Весь каталог</Tag>
             </div>
           </div>
         </div>

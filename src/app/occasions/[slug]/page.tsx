@@ -83,10 +83,22 @@ export default async function OccasionPage({ params }: OccasionPageProps) {
           ))}
         </div>
 
+        <div className="grid grid-cols-3 gap-10 max-[900px]:grid-cols-1 max-[900px]:gap-6.5">
+          {occasion.about.map((paragraph) => (
+            <p key={paragraph.slice(0, 24)} className="text-sm text-mute text-pretty">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-[0.8fr_1fr] items-start gap-10 bg-band p-5 max-[900px]:grid-cols-1 max-[900px]:gap-4.5">
+          <SectionHeading eyebrow="Сроки" title="Когда заказывать" />
+          <p className="text-sm text-mute text-pretty">{occasion.timing}</p>
+        </div>
+
         <div className="flex flex-wrap gap-2">
           <Tag href="/catalog">Весь каталог</Tag>
-          <Tag href="/locations/krasnodar">Краснодар</Tag>
-          <Tag href="/locations/yablonovskiy">Яблоновский</Tag>
+          <Tag href="/delivery">Доставка по Краснодару</Tag>
         </div>
       </div>
 

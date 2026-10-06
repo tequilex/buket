@@ -21,12 +21,6 @@ const contextualOccasionLinks = [
   { href: '/occasions/muzhskie', label: 'мужские букеты' },
   { href: '/occasions/23-fevralya', label: 'на 23 февраля' },
   { href: '/occasions/den-rozhdeniya', label: 'на день рождения' },
-  { href: '/occasions/podarok-kollege', label: 'подарок коллеге' },
-];
-
-const contextualLocationLinks = [
-  { href: '/locations/krasnodar', label: 'Краснодар' },
-  { href: '/locations/yablonovskiy', label: 'Яблоновский' },
 ];
 
 function plural(count: number) {
@@ -133,13 +127,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
             </div>
           </div>
           <div className="flex flex-col gap-3">
-            <p className="type-label text-mute">Где доставляем</p>
+            <p className="type-label text-mute">Доставка</p>
             <div className="flex flex-wrap gap-2">
-              {contextualLocationLinks.map((item) => (
-                <Tag key={item.href} href={item.href}>
-                  {item.label}
-                </Tag>
-              ))}
+              <Tag href="/delivery">Краснодар и Яблоновский</Tag>
             </div>
           </div>
         </div>

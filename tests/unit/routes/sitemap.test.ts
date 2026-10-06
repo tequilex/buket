@@ -6,7 +6,17 @@ test('sitemap includes the main commercial routes', () => {
 
   expect(urls).toContain('http://localhost:3000/');
   expect(urls).toContain('http://localhost:3000/catalog/');
-  expect(urls).toContain('http://localhost:3000/locations/krasnodar/');
+  expect(urls).toContain('http://localhost:3000/delivery/');
+});
+
+/**
+ * Блог — заглушка с текстом «Пока статей нет», то есть ровно та малоценная
+ * страница, за которую Яндекс исключает. В карту вернуть, когда появятся статьи.
+ */
+test('sitemap omits the empty blog stub', () => {
+  const urls = sitemap().map((item) => item.url);
+
+  expect(urls).not.toContain('http://localhost:3000/blog/');
 });
 
 /**

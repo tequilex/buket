@@ -147,14 +147,11 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
               </div>
 
               <div className="flex flex-wrap gap-2">
-                <Tag onDark href="/locations/krasnodar">
-                  Краснодар
-                </Tag>
-                <Tag onDark href="/locations/yablonovskiy">
-                  Яблоновский
-                </Tag>
                 <Tag onDark href="/delivery">
-                  Доставка
+                  Доставка по Краснодару
+                </Tag>
+                <Tag onDark href="/catalog">
+                  Весь каталог
                 </Tag>
               </div>
             </div>
