@@ -56,7 +56,12 @@ export function ModalCard({
         tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
         style={{ maxWidth: width }}
-        className="relative flex max-h-full w-full flex-col gap-5 overflow-y-auto rounded-[32px] bg-card p-8 shadow-modal outline-none max-md:rounded-xl max-md:p-5"
+        // Оболочка не прокручивается и обрезает декор: кружок висит на 50px
+        // правее края, а при overflow-y: auto соседняя ось перестаёт быть
+        // visible и тоже становится auto — отсюда и брался горизонтальный
+        // скролл. Крестик с кружком живут здесь, чтобы не уезжать вместе с
+        // содержимым, когда его много.
+        className="relative flex max-h-full w-full flex-col overflow-hidden rounded-[32px] bg-card shadow-modal outline-none max-md:rounded-xl"
       >
         <span
           aria-hidden="true"
@@ -67,24 +72,26 @@ export function ModalCard({
           type="button"
           aria-label="Закрыть"
           onClick={onClose}
-          className="absolute top-4 right-4 flex size-10 cursor-pointer items-center justify-center rounded-full bg-ink text-white"
+          className="absolute top-4 right-4 z-10 flex size-10 cursor-pointer items-center justify-center rounded-full bg-ink text-white"
         >
           <Icon name="x" size={18} />
         </button>
 
-        <div className="relative flex flex-col gap-2 pr-12">
-          <h2 className="font-display text-[26px] leading-[1.1] font-bold tracking-[-0.03em] text-ink max-md:text-[22px]">
-            {title}
-          </h2>
-          {subtitle ? (
-            <p className="text-[15px] text-mute text-pretty max-md:text-[14px]">
-              {subtitle}
-            </p>
-          ) : null}
-        </div>
+        <div className="relative flex flex-col gap-5 overflow-y-auto p-8 max-md:p-5">
+          <div className="flex flex-col gap-2 pr-12">
+            <h2 className="font-display text-[26px] leading-[1.1] font-bold tracking-[-0.03em] text-ink max-md:text-[22px]">
+              {title}
+            </h2>
+            {subtitle ? (
+              <p className="text-[15px] text-mute text-pretty max-md:text-[14px]">
+                {subtitle}
+              </p>
+            ) : null}
+          </div>
 
-        {children}
-        {footer}
+          {children}
+          {footer}
+        </div>
       </div>
     </div>,
     document.body,

@@ -49,3 +49,30 @@ test('escape closes the modal', async () => {
   await user.keyboard('{Escape}');
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 });
+
+/**
+ * Регрессия. Декоративный кружок висит на 50px правее края карточки, а при
+ * overflow-y: auto соседняя ось перестаёт быть visible и тоже становится
+ * auto — модалка получала горизонтальный скролл ровно на эти 50px.
+ * Оболочка обязана обрезать декор и не прокручиваться, прокрутка живёт
+ * во вложенном блоке.
+ */
+test('the modal shell clips decoration instead of scrolling sideways', async () => {
+  const user = userEvent.setup();
+  renderWithOrderModal(<OrderButton source="header">Написать</OrderButton>);
+
+  await user.click(screen.getByRole('button', { name: 'Написать' }));
+
+  const shell = screen.getByRole('dialog');
+
+  expect(shell.className).toContain('overflow-hidden');
+  expect(shell.className).not.toContain('overflow-y-auto');
+
+  const scroller = shell.querySelector('.overflow-y-auto');
+
+  expect(scroller).not.toBeNull();
+  // Крестик и кружок остаются в оболочке, иначе они уезжают с содержимым.
+  expect(scroller?.contains(screen.getByRole('button', { name: 'Закрыть' }))).toBe(
+    false,
+  );
+});
