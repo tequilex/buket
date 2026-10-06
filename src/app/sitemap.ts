@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import {
   bouquets,
   categories,
+  locations,
   occasions,
 } from '@/lib/content/catalog';
 import { absoluteUrl } from '@/lib/utils';
@@ -22,6 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/catalog',
     '/delivery',
     '/contacts',
+    ...locations.map((location) => `/locations/${location.slug}`),
     ...categories.map((category) => `/catalog/${category.slug}`),
     ...bouquets.map((bouquet) => `/bouquets/${bouquet.slug}`),
     ...occasions.map((occasion) => `/occasions/${occasion.slug}`),

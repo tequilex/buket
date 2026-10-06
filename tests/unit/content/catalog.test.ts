@@ -16,11 +16,13 @@ test('launch content covers the required catalog surface', () => {
 });
 
 /**
- * Страниц локаций больше нет: /locations/krasnodar/ дублировала главную и была
- * исключена Яндексом как малоценная, а по Яблоновскому спроса нет (28 запросов
- * по всей России). Сами данные остались — из них строится areaServed в разметке
- * организации.
+ * Регрессия. Страницы локаций однажды удалили как дубли главной — ошибочно:
+ * по GSC /locations/krasnodar/ собирала 740 показов за три месяца против 319
+ * у самой главной. Вывод строился на Вордстате по Яндексу и не подтвердился.
  */
-test('locations survive as data for areaServed, not as pages', () => {
+test('locations stay both as data for areaServed and as pages', () => {
   expect(locations.map((item) => item.city)).toEqual(['Краснодар', 'Яблоновский']);
+  for (const location of locations) {
+    expect(location.about.length).toBeGreaterThanOrEqual(3);
+  }
 });

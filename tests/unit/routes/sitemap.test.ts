@@ -7,6 +7,8 @@ test('sitemap includes the main commercial routes', () => {
   expect(urls).toContain('http://localhost:3000/');
   expect(urls).toContain('http://localhost:3000/catalog/');
   expect(urls).toContain('http://localhost:3000/delivery/');
+  expect(urls).toContain('http://localhost:3000/locations/krasnodar/');
+  expect(urls).toContain('http://localhost:3000/locations/yablonovskiy/');
 });
 
 /**

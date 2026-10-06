@@ -65,6 +65,8 @@ export const locationSchema = z.object({
   title: z.string().min(1),
   shortDescription: z.string().min(1),
   deliveryLead: z.string().min(1),
+  /** Развёрнутый текст локации: как возим именно сюда, что учесть. */
+  about: z.array(z.string().min(1)).min(1),
   seoTitle: z.string().min(1),
   seoDescription: z.string().min(1),
 });
