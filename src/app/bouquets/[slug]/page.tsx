@@ -121,7 +121,7 @@ export default async function BouquetPage({ params }: BouquetPageProps) {
             className="absolute top-4 right-4 max-md:top-3 max-md:right-3"
           />
           <div className="absolute bottom-6 left-6 max-md:hidden">
-            <RotatingBadge text="СОСТАВ ПОД ВАС · РУЧНАЯ СБОРКА · " />
+            <RotatingBadge text="СОСТАВ ПОД ВАС · СВЕЖЕЕ · " />
           </div>
         </div>
 

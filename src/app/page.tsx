@@ -171,7 +171,7 @@ export default function HomePage() {
         <div className="grid grid-cols-3 gap-3.5 px-7 max-md:scroll-row max-md:gap-2 max-md:px-4">
           {occasions.map((occasion) => {
             const count = occasion.relatedBouquetSlugs.length;
-            const cover = getBouquetBySlug(occasion.relatedBouquetSlugs[0]);
+            const cover = getBouquetBySlug(occasion.coverSlug);
 
             return (
               <Link

@@ -106,6 +106,11 @@ export const occasionSchema = z.object({
   seoTitle: z.string().min(1),
   seoDescription: z.string().min(1),
   relatedBouquetSlugs: z.array(z.string().min(1)).min(1),
+  /**
+   * Чей кадр идёт обложкой. Раньше брался первый из подборки, и у «мужских»
+   * с «23 февраля» выходило одно фото — у них совпадает первый букет.
+   */
+  coverSlug: z.string().min(1),
   /** Развёрнутый текст повода: что берут, на что смотреть, что учесть. */
   about: z.array(z.string().min(1)).min(1),
   /** Когда заказывать. Для сезонных поводов — главный блок страницы. */
