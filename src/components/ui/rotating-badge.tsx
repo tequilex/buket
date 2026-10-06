@@ -17,7 +17,7 @@ interface RotatingBadgeProps {
  * Вращение останавливается при `prefers-reduced-motion`.
  */
 export function RotatingBadge({
-  text = 'СВЕЖЕЕ · РУЧНАЯ СБОРКА · ',
+  text = 'ВСЕГДА СВЕЖЕЕ · РУЧНАЯ СБОРКА · ',
   size = 130,
   id: pathId = 'gb-badge-ring',
   className,
